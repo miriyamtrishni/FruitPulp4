@@ -64,6 +64,10 @@ app.post("/createUser", (req, res) =>{
     .catch(err => res.json(err))
 })
 
+    // Route to delete a user
+app.delete('/deleteUser/:id', async (req, res) => {
+    const id = req.params.id;
+
     try {
         // Find the user to be deleted
         const userToDelete = await UserModel.findById(id);
@@ -77,7 +81,6 @@ app.post("/createUser", (req, res) =>{
 
         // Delete the user from the users table
         await UserModel.findByIdAndDelete(id);
-
 
         res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
