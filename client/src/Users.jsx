@@ -6,8 +6,8 @@ import EmployeeReport from "./EmployeeReport";
 import DeletedEmployeesTable from "./DeletedEmployeesTable"; // Import the DeletedEmployeesTable component
 function Users() {
   const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");//search
+  const [searchResults, setSearchResults] = useState([]);//search
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((result) => setUsers(result.data)).catch((err) => console.log(err));
@@ -60,7 +60,7 @@ function Users() {
           </li>
           <li style={{ marginRight: "40px" }}>
             <Link
-              to="/" // Path to navigate to the deleted employees table
+              to="/" 
               style={{
                 color: "orange",
                 textDecoration: "none",
@@ -76,7 +76,7 @@ function Users() {
           </li>
           <li style={{ marginRight: "40px" }}>
             <Link
-              to="/attendance" // Path to navigate to the deleted employees table
+              to="/attendance" 
               style={{
                 color: "orange",
                 textDecoration: "none",
@@ -93,7 +93,7 @@ function Users() {
 
           <li style={{ marginRight: "40px" }}>
             <Link
-              to="/EmployeeDetailsReport" // Path to navigate to the deleted employees table
+              to="/EmployeeDetailsReport" 
               style={{
                 color: "orange",
                 textDecoration: "none",
@@ -151,6 +151,7 @@ function Users() {
               </tr>
             </thead>
             <tbody>
+              
               {(searchResults.length > 0 ? searchResults : users).map((user) => {
                 return (
                   <tr style={{ border: "1px solid" }} key={user._id}>
