@@ -8,6 +8,8 @@ import Users from './Users'
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+import DeletedEmployeesTable from './DeletedEmployeesTable'; // Import the new component
+import EmployeeReport from './EmployeeReport';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,11 @@ function App() {
             <Route path='/update/:id' element={<UpdateUser />}></Route>
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />
+            <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}
+            <Route path="/EmployeeDetailsReport" element={<EmployeeReport />} />
+       
+
+
           </Routes>
           
           </BrowserRouter>
