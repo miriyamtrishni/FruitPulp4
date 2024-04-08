@@ -183,6 +183,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
             doc.text(`NIC: ${user.nic}`);
             doc.text(`Gender: ${user.gender}`);
             doc.text(`Age: ${user.age}`);
+            doc.text(`Address: ${user.address}`);
             doc.text(`Email: ${user.email}`);
             doc.text(`Job Title: ${user.jobtitle}`);
             doc.text(`Salary: ${user.salary}\n\n`);
