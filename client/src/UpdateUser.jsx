@@ -35,7 +35,7 @@ function UpdateUser (){
         })
         .catch(err => console.log (err))
 
-    },[] )
+    },[id] )
 
 
 
@@ -123,7 +123,7 @@ function UpdateUser (){
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="address" style={{ width: "80px", marginRight: "10px" }}>Address</label>
-                        <input type="text" placeholder="Enter age" className="form-control" style={{ width: "100%" }} 
+                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%" }} 
                         value={address}  onChange={(e) => setAddress(e.target.value)}/>
                     </div>
 
