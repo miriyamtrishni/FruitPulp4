@@ -5,9 +5,12 @@ import {BrowserRouter ,Routes,Route} from 'react-router-dom'
 import HomePage from './HomePage';
 import WPage from './WPage';
 import Users from './Users'
+import Suppliers from './Suppliers'     
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+import CreateUsersh from './CreateUsersh'
+import UpdateUsersh from './UpdateUsersh'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +24,9 @@ function App() {
             <Route path='/update/:id' element={<UpdateUser />}></Route>
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />
+            <Route path='/supplier' element={<Suppliers />}></Route>
+            <Route path='/createsh' element={<CreateUsersh />}></Route>
+            <Route path='/updatesh/:id' element={<UpdateUsersh />}></Route>
           </Routes>
           
           </BrowserRouter>
