@@ -5,9 +5,14 @@ import {BrowserRouter ,Routes,Route} from 'react-router-dom'
 import HomePage from './HomePage';
 import WPage from './WPage';
 import Users from './Users'
+import Suppliers from './Suppliers'     
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+
+import CreateUsersh from './CreateUsersh'
+import UpdateUsersh from './UpdateUsersh'
+
 import DeletedEmployeesTable from './DeletedEmployeesTable'; // Import the new component
 import EmployeeReport from './EmployeeReport';
 
@@ -23,6 +28,11 @@ function App() {
             <Route path='/update/:id' element={<UpdateUser />}></Route>
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />
+
+            <Route path='/supplier' element={<Suppliers />}></Route>
+            <Route path='/createsh' element={<CreateUsersh />}></Route>
+            <Route path='/updatesh/:id' element={<UpdateUsersh />}></Route>
+
             <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}
             <Route path="/EmployeeDetailsReport" element={<EmployeeReport />} />
        

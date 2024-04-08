@@ -6,6 +6,8 @@ const PDFDocument = require('pdfkit');
 
 
 const UserModel = require('./models/Users')
+const SupplierUserModel = require('./models/Suppliers')
+
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -53,6 +55,15 @@ app.put('/updateUser/:id',(req,res) => {
 app.delete('/deleteUser/:id', async (req, res) => {
     const id = req.params.id;
 
+
+})
+
+app.post("/createUser", (req, res) =>{
+    UserModel.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
+
     try {
         // Find the user to be deleted
         const userToDelete = await UserModel.findById(id);
@@ -66,6 +77,7 @@ app.delete('/deleteUser/:id', async (req, res) => {
 
         // Delete the user from the users table
         await UserModel.findByIdAndDelete(id);
+
 
         res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
@@ -87,15 +99,46 @@ app.get('/getDeletedEmployees', async (req, res) => {
     }
 });
 
-
-app.post("/createUser", (req, res) =>{
-    UserModel.create(req.body)
-    .then(users => res.json(users))
+app.get('/supplier' ,(req,res) => {
+    SupplierUserModel.find({})
+    .then(suppliers => res.json(suppliers))
     .catch(err => res.json(err))
 
+})
+app.get('/getUsersh/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findById({_id:id})
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
 
+})
+app.put('/updateUsersh/:id',(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findByIdAndUpdate({_id:id} , {
+        names: req.body.names,
+        sid: req.body.sid ,
+        materialname: req.body.materialname,
+        quantitiy: req.body.quantitiy ,
+        price: req.body.price,
+        date: new Date (req.body.date)
+        
+    })
 
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
 
+})
+app.delete('/deleteUsersh/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(suppliers))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUsersh", (req, res) =>{
+    SupplierUserModel.create(req.body)
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
 })
 
 // Search user by EID
