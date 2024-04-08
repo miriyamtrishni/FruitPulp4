@@ -42,6 +42,7 @@ app.put('/updateUser/:id',(req,res) => {
         nic: req.body.nic,
         gender: req.body.gender ,
         age: req.body.age ,
+        address: req.body.address ,
         email: req.body.email ,
         jobtitle: req.body.jobtitle ,
         salary: req.body.salary
