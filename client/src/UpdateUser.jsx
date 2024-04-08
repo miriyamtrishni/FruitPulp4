@@ -35,7 +35,7 @@ function UpdateUser (){
         })
         .catch(err => console.log (err))
 
-    },[] )
+    },[id] )
 
 
 
@@ -71,13 +71,14 @@ function UpdateUser (){
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="age" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
-                        <input type="number" maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
-        title="Please enter only letters and numbers for Eid" // Error message for unsupported characters
-         placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
-                        value={eid}  onChange={(e) => setEid(e.target.value)}/>
+                        <label htmlFor="eid" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
+                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
+                        maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
+                        title="Please enter only letters and numbers for Eid"
+                        
+                        value={eid} onChange={(e) => setEid(e.target.value)}
+                        required />
                     </div>
-
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                          <label htmlFor="nic" style={{ width: "80px", marginRight: "10px" }}>NIC</label>
@@ -122,7 +123,7 @@ function UpdateUser (){
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="address" style={{ width: "80px", marginRight: "10px" }}>Address</label>
-                        <input type="text" placeholder="Enter age" className="form-control" style={{ width: "100%" }} 
+                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%" }} 
                         value={address}  onChange={(e) => setAddress(e.target.value)}/>
                     </div>
 
