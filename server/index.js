@@ -45,7 +45,11 @@ app.put('/updateUser/:id',(req,res) => {
         address: req.body.address ,
         email: req.body.email ,
         jobtitle: req.body.jobtitle ,
-        salary: req.body.salary
+        salary: req.body.salary,
+        overtimeHours: req.body.overtimeHours,
+        overtimeRate: req.body.overtimeRate,
+        bonus: req.body.bonus,
+
     })
     .then(users => res.json(users))
     .catch(err => res.json(err))
@@ -102,6 +106,28 @@ app.get('/getDeletedEmployees', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+// Check if Eid exists
+app.post('/checkEid', async (req, res) => {
+    try {
+        const { eid } = req.body;
+        const user = await UserModel.findOne({ eid });
+        if (user) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        console.error('Error checking Eid:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
 
 app.get('/supplier' ,(req,res) => {
     SupplierUserModel.find({})
