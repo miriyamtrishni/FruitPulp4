@@ -6,6 +6,7 @@ const PDFDocument = require('pdfkit');
 
 
 const UserModel = require('./models/Users')
+const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
 
 
@@ -107,7 +108,7 @@ app.get('/getDeletedEmployees', async (req, res) => {
     }
 });
 
-// Check if Eid exists
+// Check if Eid exists in employee details
 app.post('/checkEid', async (req, res) => {
     try {
         const { eid } = req.body;
@@ -123,11 +124,69 @@ app.post('/checkEid', async (req, res) => {
     }
 });
 
+// Check if Eid exists in attendance
+app.post('/checkEidd', async (req, res) => {
+    try {
+        const { eidd } = req.body;
+        const user = await AttendanceModel.findOne({ eidd });
+        if (user) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        console.error('Error checking Eid:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
 
+//attendance
+app.post("/createUserat", (req, res) =>{
+    AttendanceModel.create(req.body)
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+})
+app.get('/attendance' ,(req,res) => {
+    AttendanceModel.find({})
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
 
+})
 
+app.get('/getUserat/:id' ,(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findById({_id:id})
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUserat/:id',(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findByIdAndUpdate({_id:id} , {
+        eidd: req.body.eidd,
+        weekone: req.body.weekone ,
+        weektwo: req.body.weektwo,
+        weekthree: req.body.weekthree ,
+        weekfour: req.body.weekfour,
+        weekfour: req.body.weekfour,
+        month: req.body.month,
+        date: req.body.date,
+        
+    })
+
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+
+})
+
+app.delete('/deleteUserat/:id' ,(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(attendances))
+    .catch(err => res.json(err))
+})
 
 app.get('/supplier' ,(req,res) => {
     SupplierUserModel.find({})
@@ -174,6 +233,20 @@ app.post("/createUsersh", (req, res) =>{
 // Search user by EID
 app.get('/searchUserByEid', (req, res) => {
     const { eid } = req.query;
+    
+    UserModel.find({ eid }) // Find users with the specified EID
+        .then(users => {
+            res.json(users); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+
+// Search user by EIDD
+app.get('/searchUserByEidd', (req, res) => {
+    const { eidd } = req.query;
     
     UserModel.find({ eid }) // Find users with the specified EID
         .then(users => {
