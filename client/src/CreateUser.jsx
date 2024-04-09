@@ -12,22 +12,32 @@ function CreateUser (){
     const [email , setEmail] =useState()
     const [jobtitle , setJobtitle] =useState()
     const [salary , setSalary] =useState()
+    const [overtimeHours, setOvertimeHours] = useState(0);
+    const [overtimeRate, setOvertimeRate] = useState(0);
+    const [bonus, setBonus] = useState(0);
     const navigate = useNavigate()
 
-    const Submit = (e) => {
+    //change this github
+    const Submit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/createUser", {name ,eid,nic,gender,age,address, email, jobtitle , salary})
-        .then(result => {
-            console.log(result)
-            navigate('/')
-        
-        })
-
-        .catch(err => console.log(err))
-
-
-
-    }
+        try {
+            // Check if Eid already exists
+            const response = await axios.post("http://localhost:3001/checkEid", { eid });
+            if (response.status === 200 && response.data.exists) {
+                alert('Eid already exists');
+            } else {
+                // Proceed with user creation
+                const newUser = { name, eid, nic, gender, age, address, email, jobtitle, salary,overtimeHours, overtimeRate, bonus  };
+                const result = await axios.post("http://localhost:3001/createUser", newUser);
+                console.log(result);
+                navigate('/');
+            }
+        } catch (error) {
+            console.error(error);
+            // Handle error
+            alert('Error occurred. Please try again.');
+        }
+    };
 
 
     return(
@@ -114,7 +124,24 @@ function CreateUser (){
                         
                         onChange={(e) => setJobtitle(e.target.value)} required />
                     </div>
-
+                    {/* Add overtimeHours */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeHours" style={{ width: "80px", marginRight: "10px" }}>Overtime Hours</label>
+                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" }} 
+                            onChange={(e) => setOvertimeHours(e.target.value)} required />
+                    </div>
+                    {/* Add overtimeRate */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeRate" style={{ width: "80px", marginRight: "10px" }}>Overtime Rate</label>
+                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%" }} 
+                            onChange={(e) => setOvertimeRate(e.target.value)} required />
+                    </div>
+                    {/* Add bonus */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="bonus" style={{ width: "80px", marginRight: "10px" }}>Bonus</label>
+                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%" }} 
+                            onChange={(e) => setBonus(e.target.value)} required />
+                    </div>
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="salary" style={{ width: "80px", marginRight: "10px" }}>Salary</label>
                         <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" }} 

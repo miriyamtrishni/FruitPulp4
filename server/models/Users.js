@@ -50,6 +50,18 @@ const UserSchema = new mongoose.Schema({
     salary:{
         type:Number,
         required:true
+    },
+    overtimeHours: {
+        type: Number,
+        default: 0 // Default value is set to 0
+    },
+    overtimeRate: {
+        type: Number,
+        default: 0 // Default value is set to 0
+    },
+    bonus: {
+        type: Number,
+        default: 0 // Default value is set to 0
     }
 
    
