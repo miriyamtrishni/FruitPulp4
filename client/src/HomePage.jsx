@@ -57,7 +57,7 @@ const HomePage = () => {
             }}>Order Management</button>
           </Link>
 
-          <Link to="/">
+          <Link to="/supplier">
             <button style={{ 
               backgroundColor: 'black', 
               color: 'orange', 
@@ -118,7 +118,7 @@ const HomePage = () => {
             }}>Employee Management</button>
           </Link>
 
-          <Link to="/production">
+          <Link to="/stock">
             <button style={{ 
               backgroundColor: 'black', 
               color: 'orange', 
@@ -131,7 +131,7 @@ const HomePage = () => {
             }}>Stock Management</button>
           </Link>
 
-          <Link to="/production">
+          <Link to="/distributor">
             <button style={{ 
               backgroundColor: 'black', 
               color: 'orange', 
