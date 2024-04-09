@@ -42,9 +42,14 @@ app.put('/updateUser/:id',(req,res) => {
         nic: req.body.nic,
         gender: req.body.gender ,
         age: req.body.age ,
+        address: req.body.address ,
         email: req.body.email ,
         jobtitle: req.body.jobtitle ,
-        salary: req.body.salary
+        salary: req.body.salary,
+        overtimeHours: req.body.overtimeHours,
+        overtimeRate: req.body.overtimeRate,
+        bonus: req.body.bonus,
+
     })
     .then(users => res.json(users))
     .catch(err => res.json(err))
@@ -64,6 +69,10 @@ app.post("/createUser", (req, res) =>{
     .catch(err => res.json(err))
 })
 
+    // Route to delete a user
+app.delete('/deleteUser/:id', async (req, res) => {
+    const id = req.params.id;
+
     try {
         // Find the user to be deleted
         const userToDelete = await UserModel.findById(id);
@@ -77,7 +86,6 @@ app.post("/createUser", (req, res) =>{
 
         // Delete the user from the users table
         await UserModel.findByIdAndDelete(id);
-
 
         res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
@@ -98,6 +106,28 @@ app.get('/getDeletedEmployees', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+// Check if Eid exists
+app.post('/checkEid', async (req, res) => {
+    try {
+        const { eid } = req.body;
+        const user = await UserModel.findOne({ eid });
+        if (user) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        console.error('Error checking Eid:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
 
 app.get('/supplier' ,(req,res) => {
     SupplierUserModel.find({})
@@ -179,6 +209,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
             doc.text(`NIC: ${user.nic}`);
             doc.text(`Gender: ${user.gender}`);
             doc.text(`Age: ${user.age}`);
+            doc.text(`Address: ${user.address}`);
             doc.text(`Email: ${user.email}`);
             doc.text(`Job Title: ${user.jobtitle}`);
             doc.text(`Salary: ${user.salary}\n\n`);
