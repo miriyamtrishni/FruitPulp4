@@ -11,7 +11,7 @@ const attendanceSchema = new mongoose.Schema({
   },
 
   weekone: {
-    type: Number, // Array of numbers representing attendance for each day
+    type: Number, 
     required: true,
     maxlength: 5,
     minlength: 1
@@ -19,21 +19,21 @@ const attendanceSchema = new mongoose.Schema({
 
 
   weektwo: {
-    type: Number, // Array of numbers representing attendance for each day
+    type: Number, 
     required: true,
     maxlength: 5,
     minlength: 1
   },
 
   weekthree: {
-    type: Number, // Array of numbers representing attendance for each day
+    type: Number, 
     required: true,
     maxlength: 5,
     minlength: 1
   },
 
   weekfour: {
-    type: Number, // Array of numbers representing attendance for each day
+    type: Number, 
     required: true,
     maxlength: 5,
     minlength: 1

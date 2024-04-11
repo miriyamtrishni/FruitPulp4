@@ -14,7 +14,7 @@ const EmployeeReport = () => {
         outline: 'none',
         transition: 'background-color 0.3s ease',
         marginBottom: '50px',
-        marginLeft: '0px'
+        marginLeft: '10px'
     };
 
 
