@@ -41,7 +41,7 @@ function UpdateUserat() {
 
 const Update = (e) => {
   e.preventDefault();
-  axios.put("http://localhost:3001/updateUserat/"+id, { eidd,weekone,weekone,weekthree,weekfour,month,date })
+  axios.put("http://localhost:3001/updateUserat/"+id, { eidd,weekone,weektwo,weekthree,weekfour,month,date })
   .then(result => {
       console.log(result)
       navigate('/attendance')

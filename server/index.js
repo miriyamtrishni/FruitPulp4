@@ -57,20 +57,14 @@ app.put('/updateUser/:id',(req,res) => {
 
 })
 
-// Route to delete a user
-app.delete('/deleteUser/:id', async (req, res) => {
-    const id = req.params.id;
 
-
-})
 
 app.post("/createUser", (req, res) =>{
     UserModel.create(req.body)
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
-
-    // Route to delete a user
+// Route to delete a user
 app.delete('/deleteUser/:id', async (req, res) => {
     const id = req.params.id;
 
