@@ -118,7 +118,7 @@ function DeletedEmployeesTable() {
       </nav>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
             <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
-                <h1>Deleted Employees</h1>
+                <h1>Resign Employees</h1>
                 
                
                 <table style={{ width: "100%", textAlign: "center", border: "1px solid" }}>
