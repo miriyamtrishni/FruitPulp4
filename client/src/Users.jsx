@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import EmployeeReport from "./EmployeeReport";
+import DeletedEmployeesTable from "./DeletedEmployeesTable"; // Import the DeletedEmployeesTable component
 function Users() {
   const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");//search
+  const [searchResults, setSearchResults] = useState([]);//search
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((result) => setUsers(result.data)).catch((err) => console.log(err));
@@ -18,89 +20,133 @@ function Users() {
     }).catch((err) => console.log(err));
   };
 
-  
+ 
+  // Function to filter users based on search term
+  const handleSearch = () => {
+    const results = users.filter((user) => user.eid === searchTerm);
+    setSearchResults(results);
+  };
+
+  // Function to clear search results
+  const clearSearch = () => {
+    setSearchResults([]);
+    setSearchTerm("");
+  };
+
+
+
+
 
   return (
-    <div>
-     <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
-  <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
-    <li style={{ marginRight: "40px" }}>
-      <Link
-        to="/HomePage"
-        style={{
-          color: "orange",
-          textDecoration: "none",
-          fontWeight: "bold",
-          paddingRight: "10px",
-          transition: "all 0.3s ease", // Hover transition
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "orange")} // Change text color on hover out
-      >
-        Home
-      </Link>
-    </li>
-    <li style={{ marginRight: "40px" }}>
-      <Link
-        to="/attendance"
-        style={{
-          color: "orange",
-          textDecoration: "none",
-          fontWeight: "bold",
-          paddingRight: "10px",
-          transition: "all 0.3s ease", // Hover transition
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "orange")} // Change text color on hover out
-      >
-        Employee Details
-      </Link>
-    </li>
-    <li style={{ marginRight: "40px" }}>
-      <Link
-        to="/report"
-        style={{
-          color: "orange",
-          textDecoration: "none",
-          fontWeight: "bold",
-          paddingRight: "10px",
-          transition: "all 0.3s ease", // Hover transition
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "orange")} // Change text color on hover out
-      >
-        Employee Attendance
-      </Link>
-    </li>
-    <li>
-      <Link
-        to="/employee-details"
-        style={{
-          color: "orange",
-          textDecoration: "none",
-          fontWeight: "bold",
-          paddingRight: "10px",
-          transition: "all 0.3s ease", // Hover transition
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "orange")} // Change text color on hover out
-      >
-        Generate Report
-      </Link>
-    </li>
-  </ul>
-</nav>
+    <div style={{ 
+      backgroundImage: 'url("/image/background.jpg")', 
+      backgroundSize: 'cover', 
+      backgroundRepeat: 'no-repeat', 
+      display: 'flex', 
+      flexDirection: 'column', // Ensures children are aligned vertically
+      justifyContent: 'flex-start', // Aligns children at the start of the container
+      alignItems: 'center', 
+      minHeight: '100vh',
+      padding: 0, // Remove padding
+      margin: 0, // Remove margin
+    }}>
+      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+        <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+          <li style={{ marginRight: "40px" }}>
+        
+            <Link
+              to="/HomePage"
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Home
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employees Details
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/attendance" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employee Attendance
+            </Link>
+          </li>
 
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/EmployeeDetailsReport" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Genarate Report
+            </Link>
+          </li>
 
-
-
-
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/deleted-employees" // Path to navigate to the deleted employees table
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Resign Employees
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
         <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
           <Link to="/create" style={{ backgroundColor: "orange", color: "black", border: "1px solid black", padding: "1px", borderRadius: "5px", textDecoration: "none" }}>Add Employee+</Link>
-         
-
-          <table style={{ width: "100%", textAlign: "center", border: "1px solid" }}>
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" />
+          <button onClick={handleSearch}>Search</button>
+          {searchResults.length > 0 ? (
+            <button onClick={clearSearch}>Clear Search</button>
+          ) : null}
+          <table  id="employeeTable" style={{ width: "100%", textAlign: "center", border: "1px solid" }}>
             <thead>
               <tr style={{ border: "1px solid" }}>
                 <th style={{ padding: "10px", border: "1px solid" }}> Name </th>
@@ -111,11 +157,12 @@ function Users() {
                 <th style={{ padding: "10px", border: "1px solid" }}> Address </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Email </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> JobTitle </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Salary </th>
+                <th style={{ padding: "10px", border: "1px solid" }}> Salary (Rs.)</th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Action </th>
               </tr>
             </thead>
             <tbody>
+              
               {(searchResults.length > 0 ? searchResults : users).map((user) => {
                 return (
                   <tr style={{ border: "1px solid" }} key={user._id}>
@@ -142,5 +189,7 @@ function Users() {
     </div>
   );
 }
+
+
 
 export default Users;

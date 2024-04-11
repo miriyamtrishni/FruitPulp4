@@ -13,6 +13,9 @@ function UpdateUser (){
     const [email , setEmail] =useState()
     const [jobtitle , setJobtitle] =useState()
     const [salary , setSalary] =useState()
+    const [overtimeHours, setOvertimeHours] = useState(0);
+    const [overtimeRate, setOvertimeRate] = useState(0);
+    const [bonus, setBonus] = useState(0);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -27,6 +30,9 @@ function UpdateUser (){
             setEmail(result.data.email)
             setJobtitle(result.data.jobtitle)
             setSalary(result.data.salary)
+            setOvertimeHours(result.data.overtimeHours)
+            setOvertimeRate(result.data.overtimeRate)
+            setBonus(result.data.bonus)
         
         
         
@@ -35,7 +41,7 @@ function UpdateUser (){
         })
         .catch(err => console.log (err))
 
-    },[] )
+    },[id] )
 
 
 
@@ -71,13 +77,14 @@ function UpdateUser (){
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="age" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
-                        <input type="number" maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
-        title="Please enter only letters and numbers for Eid" // Error message for unsupported characters
-         placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
-                        value={eid}  onChange={(e) => setEid(e.target.value)}/>
+                        <label htmlFor="eid" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
+                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
+                        maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
+                        title="Please enter only letters and numbers for Eid"
+                        
+                        value={eid} onChange={(e) => setEid(e.target.value)}
+                        disabled   required />
                     </div>
-
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                          <label htmlFor="nic" style={{ width: "80px", marginRight: "10px" }}>NIC</label>
@@ -122,7 +129,7 @@ function UpdateUser (){
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="address" style={{ width: "80px", marginRight: "10px" }}>Address</label>
-                        <input type="text" placeholder="Enter age" className="form-control" style={{ width: "100%" }} 
+                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%" }} 
                         value={address}  onChange={(e) => setAddress(e.target.value)}/>
                     </div>
 
@@ -140,7 +147,24 @@ function UpdateUser (){
                         <input type="text" placeholder="Enter job title" className="form-control" style={{ width: "100%" }} 
                         value={jobtitle}  onChange={(e) => setJobtitle(e.target.value)}/>
                     </div>
-
+                    {/* Add overtimeHours */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeHours" style={{ width: "80px", marginRight: "10px" }}>Overtime Hours</label>
+                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" }} 
+                         value={overtimeHours}   onChange={(e) => setOvertimeHours(e.target.value)} required />
+                    </div>
+                    {/* Add overtimeRate */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeRate" style={{ width: "80px", marginRight: "10px" }}>Overtime Rate</label>
+                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%" }} 
+                        value={overtimeRate}    onChange={(e) => setOvertimeRate(e.target.value)} required />
+                    </div>
+                    {/* Add bonus */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="bonus" style={{ width: "80px", marginRight: "10px" }}>Bonus</label>
+                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%" }} 
+                         value={bonus}   onChange={(e) => setBonus(e.target.value)} required />
+                    </div>
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="salary" style={{ width: "80px", marginRight: "10px" }}>Salary</label>
                         <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" }}
