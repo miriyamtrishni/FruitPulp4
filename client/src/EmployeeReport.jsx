@@ -14,7 +14,7 @@ const EmployeeReport = () => {
         outline: 'none',
         transition: 'background-color 0.3s ease',
         marginBottom: '50px',
-        marginLeft: '10px'
+        marginLeft: '0px'
     };
 
 
@@ -35,9 +35,20 @@ const EmployeeReport = () => {
     };
 
     return (
-        <div>
-            <div>
-  <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+        <div style={{ 
+          backgroundImage: 'url("/image/background.jpg")', 
+          backgroundSize: 'cover', 
+          backgroundRepeat: 'no-repeat', 
+          display: 'flex', 
+          flexDirection: 'column', // Ensures children are aligned vertically
+          justifyContent: 'flex-start', // Aligns children at the start of the container
+          alignItems: 'center', 
+          minHeight: '100vh',
+          padding: 0, // Remove padding
+          margin: 0, // Remove margin
+        }}>
+            
+            <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
     <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
       <li style={{ marginRight: "40px" }}>
         <Link
@@ -140,7 +151,7 @@ const EmployeeReport = () => {
 
            
             
-        </div>
+        
     );
 };
 
