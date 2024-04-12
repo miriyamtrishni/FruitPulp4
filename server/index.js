@@ -8,7 +8,7 @@ const PDFDocument = require('pdfkit');
 const UserModel = require('./models/Users')
 const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
-
+const LoginModel = require('./models/Login')
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -19,6 +19,57 @@ app.use(express.json())
 
 
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
+//login
+app.post('/login', (req,res) => {
+    const {email,password} = req.body;
+    LoginModel.findOne({email,password})
+    .then(login => {
+        if(login){
+            if(login.password === password){
+                res.json("Success")
+            }
+           
+        else{
+            res.json("Incorrect Password")
+        }
+    }else{
+        res.json("No record existed")
+    }
+
+    })
+
+})
+
+//signup
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+
+    // Check if the record already exists
+    LoginModel.findOne({ email })
+        .then(login => {
+            if (login) {
+                // If record exists, send a response indicating that the record already exists
+                res.status(400).json({ message: "Record already exists" });
+            } else {
+                // If record does not exist, create a new record
+                LoginModel.create({ name, email, password })
+                    .then(login => res.json(login))
+                    .catch(err => res.status(500).json({ message: "Internal server error" }));
+            }
+        })
+        .catch(err => res.status(500).json({ message: "Internal server error" }));
+});
+
+
+
+
+
+
+
+
+
+
 
 app.get('/' ,(req,res) => {
     UserModel.find({})
@@ -64,6 +115,8 @@ app.post("/createUser", (req, res) =>{
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
+
+
 // Route to delete a user
 app.delete('/deleteUser/:id', async (req, res) => {
     const id = req.params.id;

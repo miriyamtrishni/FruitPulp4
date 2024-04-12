@@ -31,7 +31,7 @@ const WelcomePage = () => {
           Anaawei
         </h1>
         <div>
-          <Link to="/HomePage">
+          <Link to="/login">
             <button style={{ 
               backgroundColor: 'black', 
               color: 'orange', 
