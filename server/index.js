@@ -21,12 +21,47 @@ app.use(express.json())
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 //login
-app.post('/register',(req, res) =>{
-    LoginModel.create(req.body)
-    .then(login => res.json(login))
-    .catch(err => res.json(err))
+app.post('/login', (req,res) => {
+    const {email,password} = req.body;
+    LoginModel.findOne({email,password})
+    .then(login => {
+        if(login){
+            if(login.password === password){
+                res.json("Success")
+            }
+           
+        else{
+            res.json("Incorrect Password")
+        }
+    }else{
+        res.json("No record existed")
+    }
+
+    })
 
 })
+
+//signup
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+
+    // Check if the record already exists
+    LoginModel.findOne({ email })
+        .then(login => {
+            if (login) {
+                // If record exists, send a response indicating that the record already exists
+                res.status(400).json({ message: "Record already exists" });
+            } else {
+                // If record does not exist, create a new record
+                LoginModel.create({ name, email, password })
+                    .then(login => res.json(login))
+                    .catch(err => res.status(500).json({ message: "Internal server error" }));
+            }
+        })
+        .catch(err => res.status(500).json({ message: "Internal server error" }));
+});
+
+
 
 
 
