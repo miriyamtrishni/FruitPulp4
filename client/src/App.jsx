@@ -19,6 +19,9 @@ import UpdateUsersh from './UpdateUsersh'
 import DeletedEmployeesTable from './DeletedEmployeesTable'; // Import the new component
 import EmployeeReport from './EmployeeReport';
 
+import Signup from './Signup'
+import Login from './Login'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -45,7 +48,8 @@ function App() {
             <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}
             <Route path="/EmployeeDetailsReport" element={<EmployeeReport />} />
        
-
+            <Route path="/register" element={<Signup/>} />
+            <Route path="/login" element={<Login/>} />
 
           </Routes>
           

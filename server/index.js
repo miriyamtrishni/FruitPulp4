@@ -8,7 +8,7 @@ const PDFDocument = require('pdfkit');
 const UserModel = require('./models/Users')
 const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
-
+const LoginModel = require('./models/Login')
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -19,6 +19,22 @@ app.use(express.json())
 
 
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
+//login
+app.post('/register',(req, res) =>{
+    LoginModel.create(req.body)
+    .then(login => res.json(login))
+    .catch(err => res.json(err))
+
+})
+
+
+
+
+
+
+
+
 
 app.get('/' ,(req,res) => {
     UserModel.find({})
@@ -64,6 +80,8 @@ app.post("/createUser", (req, res) =>{
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
+
+
 // Route to delete a user
 app.delete('/deleteUser/:id', async (req, res) => {
     const id = req.params.id;
