@@ -279,16 +279,24 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Create a new PDF document
         const doc = new PDFDocument();
-        //doc.rect(50, 50, 100, 50).fill('');
-        doc.fillColor('Green').fontSize(16).text('ANNAWEI', 60, 60, { bold: true });
-        doc.moveDown();
-        doc.moveDown();
+
+       
+
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-
-
+        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        const text = 'ANAAWEI';
+        const textWidth = doc.widthOfString(text);
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        
+        doc.moveDown();
+        doc.moveDown();
+        doc.moveDown();
         // Add content to the PDF
-        doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
+        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
+        doc.moveDown();
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
             doc.text(`EID: ${user.eid}`);
@@ -305,7 +313,6 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.text(`\n\n`);
         doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
-        
 
         // Finalize the PDF
         doc.end();
@@ -326,6 +333,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
 
 
 
