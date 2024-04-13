@@ -47,8 +47,9 @@ function CreateUser (){
         <div
         
         style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif'}}>
-        <div style={{ display: "flex", width: "80%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+        <div style={{ display: "flex", width: "50%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
          <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+         
             <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add  Employee</h2>
                
@@ -175,16 +176,14 @@ function CreateUser (){
                     </div>
 
                     
-                    <button style={{ marginLeft: "110px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
+                    <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
 
                    
 
                 </form>
-                <div style={{ flex: 1, backgroundImage: "url('/image/im2.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-            {/* Optional text or additional styling can be added here */}
-        </div>
-
-
+               
+                <img src="/image/image11.jpg" alt="Employee Image" style={{ flex: 15,  backgroundSize: "cover", backgroundPosition: "left",marginLeft: "150px" }}/>
+                
 
            </div>
         </div>
