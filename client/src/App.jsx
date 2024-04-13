@@ -6,9 +6,12 @@ import HomePage from './HomePage';
 import WPage from './WPage';
 import Users from './Users'
 import Suppliers from './Suppliers'     
+import Attendances from './Attendances'
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
+import CreateUserat from './CreateUserat'
+import UpdateUserat from './UpdateUserat'
 
 import CreateUsersh from './CreateUsersh';
 import UpdateUsersh from './UpdateUsersh';
@@ -16,6 +19,9 @@ import SupplierReport from './SupplierReport'
  
 import DeletedEmployeesTable from './DeletedEmployeesTable'; // Import the new component
 import EmployeeReport from './EmployeeReport';
+
+import Signup from './Signup'
+import Login from './Login'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +33,11 @@ function App() {
             <Route path='/' element={<Users />}></Route>
             <Route path='/create' element={<CreateUser />}></Route>
             <Route path='/update/:id' element={<UpdateUser />}></Route>
+            
+            <Route path='/attendance' element={<Attendances />}></Route>
+            <Route path='/createat' element={<CreateUserat />}></Route>
+            <Route path='/updateat/:id' element={<UpdateUserat />}></Route>
+
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />
 
@@ -36,9 +47,15 @@ function App() {
             
 
 
+
             <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}
             <Route path="/EmployeeDetailsReport" element={<EmployeeReport />} />
+       
+            <Route path="/register" element={<Signup/>} />
+            <Route path="/login" element={<Login/>} />
+
             <Route path="/material-details" element={<SupplierReport />} />
+
 
 
           </Routes>

@@ -7,8 +7,9 @@ const PDFDocument = require('pdfkit');
 
 
 const UserModel = require('./models/Users')
+const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
-
+const LoginModel = require('./models/Login')
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -22,10 +23,64 @@ app.use(express.json())
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 
+//login
+app.post('/login', (req,res) => {
+    const {email,password} = req.body;
+    LoginModel.findOne({email,password})
+    .then(login => {
+        if(login){
+            if(login.password === password){
+                res.json("Success")
+            }
+           
+        else{
+            res.json("Incorrect Password")
+        }
+    }else{
+        res.json("No record existed")
+    }
+
+    })
+
+})
+
+//signup
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+
+    // Check if the record already exists
+    LoginModel.findOne({ email })
+        .then(login => {
+            if (login) {
+                // If record exists, send a response indicating that the record already exists
+                res.status(400).json({ message: "Record already exists" });
+            } else {
+                // If record does not exist, create a new record
+                LoginModel.create({ name, email, password })
+                    .then(login => res.json(login))
+                    .catch(err => res.status(500).json({ message: "Internal server error" }));
+            }
+        })
+        .catch(err => res.status(500).json({ message: "Internal server error" }));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 //function employee mamagement
+
 app.get('/' ,(req,res) => {
     UserModel.find({})
     .then(users => res.json(users))
@@ -63,12 +118,7 @@ app.put('/updateUser/:id',(req,res) => {
 
 })
 
-// Route to delete a user
-app.delete('/deleteUser/:id', async (req, res) => {
-    const id = req.params.id;
 
-
-})
 
 app.post("/createUser", (req, res) =>{
     UserModel.create(req.body)
@@ -76,7 +126,8 @@ app.post("/createUser", (req, res) =>{
     .catch(err => res.json(err))
 })
 
-    // Route to delete a user
+
+// Route to delete a user
 app.delete('/deleteUser/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -114,7 +165,7 @@ app.get('/getDeletedEmployees', async (req, res) => {
     }
 });
 
-// Check if Eid exists
+// Check if Eid exists in employee details
 app.post('/checkEid', async (req, res) => {
     try {
         const { eid } = req.body;
@@ -130,7 +181,70 @@ app.post('/checkEid', async (req, res) => {
     }
 });
 
+// Check if Eid exists in attendance
+app.post('/checkEidd', async (req, res) => {
+    try {
+        const { eidd } = req.body;
+        const user = await AttendanceModel.findOne({ eidd });
+        if (user) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        console.error('Error checking Eid:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
+
+
+//attendance
+app.post("/createUserat", (req, res) =>{
+    AttendanceModel.create(req.body)
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+})
+app.get('/attendance' ,(req,res) => {
+    AttendanceModel.find({})
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+
+})
+
+
+app.get('/getUserat/:id' ,(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findById({_id:id})
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUserat/:id',(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findByIdAndUpdate({_id:id} , {
+        eidd: req.body.eidd,
+        weekone: req.body.weekone ,
+        weektwo: req.body.weektwo,
+        weekthree: req.body.weekthree ,
+        weekfour: req.body.weekfour,
+        weekfour: req.body.weekfour,
+        month: req.body.month,
+        date: req.body.date,
+        
+    })
+
+    .then(attendances => res.json(attendances))
+    .catch(err => res.json(err))
+
+})
+
+app.delete('/deleteUserat/:id' ,(req,res) => {
+    const id = req.params.id;
+    AttendanceModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(attendances))
+    .catch(err => res.json(err))
+})
 
 // Search user by EID
 app.get('/searchUserByEid', (req, res) => {
@@ -161,6 +275,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
       
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
+
 
         // Add content to the PDF
         doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
@@ -263,7 +378,24 @@ app.get('/searchSupplierBySid', (req, res) => {
 });
         
 
+
+// Search user by EIDD
+app.get('/searchUserByEidd', (req, res) => {
+    const { eidd } = req.query;
+    
+    UserModel.find({ eid }) // Find users with the specified EID
+        .then(users => {
+            res.json(users); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+app.get('/EmployeeDetailsReport', async (req, res) => {
+
 app.get('/material-details', async (req, res) => {
+
     try {
         // Fetch all suppliers from the database
         const suppliers = await SupplierUserModel.find({});
@@ -282,6 +414,31 @@ app.get('/material-details', async (req, res) => {
         const doc = new PDFDocument();
       
         // Pipe the PDF to a writable stream
+
+        const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
+
+        // Set up styling
+        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
+
+        // Draw green square with company name "ANNAWEI"
+        doc.rect(50, 50, 150, 50).fill('lightgreen');
+        doc.fillColor('black').text('ANNAWEI', 60, 70);
+
+        // Add content to the PDF
+        doc.moveDown(); // Move down after the company name
+        doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
+        users.forEach(user => {
+            doc.fontSize(10).text(`Name: ${user.name}`);
+            doc.text(`EID: ${user.eid}`);
+            doc.text(`NIC: ${user.nic}`);
+            doc.text(`Gender: ${user.gender}`);
+            doc.text(`Age: ${user.age}`);
+            doc.text(`Address: ${user.address}`);
+            doc.text(`Email: ${user.email}`);
+            doc.text(`Job Title: ${user.jobtitle}`);
+            doc.text(`Salary: ${user.salary}\n\n`);
+        });
+
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
         doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
         const text = 'ANAAWEI';
@@ -299,6 +456,7 @@ app.get('/material-details', async (req, res) => {
         // Add content to the PDF
         doc.moveDown(); // Add some vertical space after the title
         
+
 
         // Display each material and its total quantity in a table-like format
         
