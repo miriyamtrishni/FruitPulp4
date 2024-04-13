@@ -145,7 +145,7 @@ const EmployeeReport = () => {
    
 }}>
     <button onClick={handleDownload} style={buttonStyle}>Download Employee Details Report</button>
-    <button style={buttonStyle}>Download Employee Attendance Report</button>
+    
 </div>
 </div>
 

@@ -321,7 +321,15 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
 
+        // Set up styling
+        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
+
+        // Draw green square with company name "ANNAWEI"
+        doc.rect(50, 50, 150, 50).fill('lightgreen');
+        doc.fillColor('black').text('ANNAWEI', 60, 70);
+
         // Add content to the PDF
+        doc.moveDown(); // Move down after the company name
         doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
