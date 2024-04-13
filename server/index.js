@@ -18,8 +18,9 @@ app.use(express.json())
 
 
 
-
+//databse link
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
 
 //login
 app.post('/login', (req,res) => {
@@ -39,7 +40,6 @@ app.post('/login', (req,res) => {
     }
 
     })
-
 })
 
 //signup
@@ -70,6 +70,9 @@ app.post('/register', (req, res) => {
 
 
 
+
+
+//function employee mamagement
 
 
 app.get('/' ,(req,res) => {
@@ -108,9 +111,6 @@ app.put('/updateUser/:id',(req,res) => {
     .catch(err => res.json(err))
 
 })
-
-
-
 app.post("/createUser", (req, res) =>{
     UserModel.create(req.body)
     .then(users => res.json(users))
@@ -176,8 +176,8 @@ app.post('/checkEid', async (req, res) => {
 app.post('/checkEidd', async (req, res) => {
     try {
         const { eidd } = req.body;
-        const user = await AttendanceModel.findOne({ eidd });
-        if (user) {
+        const attendances = await AttendanceModel.findOne({ eidd });
+        if (attendances) {
             res.json({ exists: true });
         } else {
             res.json({ exists: false });
@@ -250,6 +250,7 @@ app.get('/searchUserByEid', (req, res) => {
         });
 });
 
+
 // Search user by EIDD
 app.get('/searchUserByEidd', (req, res) => {
     const { eidd } = req.query;
@@ -262,6 +263,8 @@ app.get('/searchUserByEidd', (req, res) => {
             res.status(500).json({ error: 'Server error' });
         });
 });
+
+
 
 app.get('/EmployeeDetailsReport', async (req, res) => {
     try {
@@ -277,18 +280,15 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         // Create a new PDF document
         const doc = new PDFDocument();
       
-        // Pipe the PDF to a writable stream
-        const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-
-        // Set up styling
-        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
-
         // Draw green square with company name "ANNAWEI"
         doc.rect(50, 50, 150, 50).fill('lightgreen');
         doc.fillColor('black').text('ANNAWEI', 60, 70);
 
+        // Pipe the PDF to a writable stream
+        const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
+
+
         // Add content to the PDF
-        doc.moveDown(); // Move down after the company name
         doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
@@ -332,7 +332,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
 
 
-
+//function supplier management
 app.get('/supplier' ,(req,res) => {
     SupplierUserModel.find({})
     .then(suppliers => res.json(suppliers))
@@ -355,7 +355,7 @@ app.put('/updateUsersh/:id',(req,res) => {
         quantitiy: req.body.quantitiy ,
         price: req.body.price,
         date: new Date (req.body.date)
-        
+
     })
 
     .then(suppliers => res.json(suppliers))
@@ -375,20 +375,95 @@ app.post("/createUsersh", (req, res) =>{
     .catch(err => res.json(err))
 })
 
+// Search user by SID
+app.get('/searchSupplierBySid', (req, res) => {
+    const { sid } = req.query;
+   
+    SupplierUserModel.find({sid }) // Find supplier orders with the specified SID
+        .then(suppliers => {
+            res.json(suppliers); // Return the matching supplier orders
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
 
 
 
+app.get('/material-details', async (req, res) => {
 
+    try {
+        // Fetch all suppliers from the database
+        const suppliers = await SupplierUserModel.find({});
 
+        // Aggregate quantities by material name
+        const materialsQuantities = {};
+        suppliers.forEach(supplier => {
+            if (materialsQuantities[supplier.materialname]) {
+                materialsQuantities[supplier.materialname] += supplier.quantitiy;
+            } else {
+                materialsQuantities[supplier.materialname] = supplier.quantitiy;
+            }
+        });
 
+        // Create a new PDF document
+        const doc = new PDFDocument();
+      
+        // Set up styling
+        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
 
-
+        const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
+        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        const text = 'ANAAWEI';
+        const textWidth = doc.widthOfString(text);
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
         
-       
+        doc.moveDown();
+        doc.moveDown();
+        doc.moveDown();
+        // Title
+        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Supplied Materials', { align: 'center', bold: true });
+        
+        // Add content to the PDF
+        doc.moveDown(); // Add some vertical space after the title
+        
 
 
+        // Display each material and its total quantity in a table-like format
+        
+        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true, width: 400, align: 'left', bold: true });
+        doc.font('Helvetica-Bold').text('Total Quantity', { width: 800, align: 'right', bold: true, });
+        doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
+        doc.moveDown(); // Add some vertical space after the line
+        doc.moveDown(); // Add some vertical space after the line
+        
+        for (const [materialname, quantitiy] of Object.entries(materialsQuantities)) {
+            doc.font('Helvetica').fontSize(12).text(materialname, { width: 400, align: 'left', continued: true });
+            doc.font('Helvetica').text(quantitiy.toString(), { width: 800, align: 'right' });
+            doc.moveDown(); // Move to the next row
+        }
 
+        // Finalize the PDF
+        doc.end();
 
+        // Send the PDF file as a response
+        stream.on('finish', () => {
+            res.download('weekly_material_report.pdf', 'weekly_material_report.pdf', (err) => {
+                if (err) {
+                    console.error('Error downloading PDF:', err);
+                    res.status(500).json({ message: 'Error downloading PDF' });
+                }
+                // Delete the PDF file after it's sent
+                fs.unlinkSync('weekly_material_report.pdf');
+            });
+        });
+    } catch (error) {
+        console.error('Error generating PDF report:', error);
+        res.status(500).json({ message: 'Error generating PDF report' });
+    }
+});
 
 
 
@@ -480,6 +555,14 @@ app.post("/createUsersh", (req, res) =>{
 
 
 
+
+
+
+
+
+
+
+//server running
 
 app.listen(3001,() => {
 
