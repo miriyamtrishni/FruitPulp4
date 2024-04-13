@@ -1,9 +1,8 @@
-const express =require('express')
+const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
-
 
 
 const UserModel = require('./models/Users')
@@ -21,7 +20,6 @@ app.use(express.json())
 
 //databse link
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
 
 //login
 app.post('/login', (req,res) => {
@@ -75,10 +73,6 @@ app.post('/register', (req, res) => {
 
 
 
-
-
-
-
 //function employee mamagement
 
 app.get('/' ,(req,res) => {
@@ -117,9 +111,6 @@ app.put('/updateUser/:id',(req,res) => {
     .catch(err => res.json(err))
 
 })
-
-
-
 app.post("/createUser", (req, res) =>{
     UserModel.create(req.body)
     .then(users => res.json(users))
@@ -185,8 +176,8 @@ app.post('/checkEid', async (req, res) => {
 app.post('/checkEidd', async (req, res) => {
     try {
         const { eidd } = req.body;
-        const user = await AttendanceModel.findOne({ eidd });
-        if (user) {
+        const attendances = await AttendanceModel.findOne({ eidd });
+        if (attendances) {
             res.json({ exists: true });
         } else {
             res.json({ exists: false });
@@ -259,6 +250,19 @@ app.get('/searchUserByEid', (req, res) => {
         });
 });
 
+// Search user by EIDD
+app.get('/searchUserByEidd', (req, res) => {
+    const { eidd } = req.query;
+    
+    UserModel.find({ eidd }) // Find users with the specified EID
+        .then(attendances => {
+            res.json(attendances); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
 app.get('/EmployeeDetailsReport', async (req, res) => {
     try {
         // Fetch all employees from the database
@@ -276,8 +280,15 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
 
+        // Set up styling
+        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
+
+        // Draw green square with company name "ANNAWEI"
+        doc.rect(50, 50, 150, 50).fill('lightgreen');
+        doc.fillColor('black').text('ANNAWEI', 60, 70);
 
         // Add content to the PDF
+        doc.moveDown(); // Move down after the company name
         doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
@@ -296,10 +307,10 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
         
-
         // Finalize the PDF
         doc.end();
 
+        
         // Send the PDF file as a response
         stream.on('finish', () => {
             res.download('employee_report.pdf', 'employee_report.pdf', (err) => {
@@ -379,21 +390,6 @@ app.get('/searchSupplierBySid', (req, res) => {
         
 
 
-// Search user by EIDD
-app.get('/searchUserByEidd', (req, res) => {
-    const { eidd } = req.query;
-    
-    UserModel.find({ eid }) // Find users with the specified EID
-        .then(users => {
-            res.json(users); // Return the matching users
-        })
-        .catch(err => {
-            res.status(500).json({ error: 'Server error' });
-        });
-});
-
-app.get('/EmployeeDetailsReport', async (req, res) => {
-
 app.get('/material-details', async (req, res) => {
 
     try {
@@ -413,35 +409,12 @@ app.get('/material-details', async (req, res) => {
         // Create a new PDF document
         const doc = new PDFDocument();
       
-        // Pipe the PDF to a writable stream
-
-        const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-
         // Set up styling
-        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
-
-        // Draw green square with company name "ANNAWEI"
-        doc.rect(50, 50, 150, 50).fill('lightgreen');
-        doc.fillColor('black').text('ANNAWEI', 60, 70);
-
-        // Add content to the PDF
-        doc.moveDown(); // Move down after the company name
-        doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
-        users.forEach(user => {
-            doc.fontSize(10).text(`Name: ${user.name}`);
-            doc.text(`EID: ${user.eid}`);
-            doc.text(`NIC: ${user.nic}`);
-            doc.text(`Gender: ${user.gender}`);
-            doc.text(`Age: ${user.age}`);
-            doc.text(`Address: ${user.address}`);
-            doc.text(`Email: ${user.email}`);
-            doc.text(`Job Title: ${user.jobtitle}`);
-            doc.text(`Salary: ${user.salary}\n\n`);
-        });
+        
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
         doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
-        const text = 'ANAAWEI';
+        const text = '     ANAAWEI';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
@@ -460,15 +433,15 @@ app.get('/material-details', async (req, res) => {
 
         // Display each material and its total quantity in a table-like format
         
-        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true, width: 400, align: 'left', bold: true });
-        doc.font('Helvetica-Bold').text('Total Quantity', { width: 800, align: 'right', bold: true, });
+        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 450, align: 'left' , bold: true });
+        doc.font('Helvetica-Bold').text('Total Quantity', { width: 700, align: 'right', bold: true });
         doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
         doc.moveDown(); // Add some vertical space after the line
         doc.moveDown(); // Add some vertical space after the line
         
         for (const [materialname, quantitiy] of Object.entries(materialsQuantities)) {
-            doc.font('Helvetica').fontSize(12).text(materialname, { width: 400, align: 'left', continued: true });
-            doc.font('Helvetica').text(quantitiy.toString(), { width: 800, align: 'right' });
+            doc.font('Helvetica').fontSize(12).text(materialname, { width: 450, align: 'left' , continued: true });
+            doc.font('Helvetica').text(quantitiy.toString(), { width: 700, align: 'right'  });
             doc.moveDown(); // Move to the next row
         }
 
