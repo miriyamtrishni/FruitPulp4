@@ -143,10 +143,10 @@ function Users() {
             <tr style={{ border: "none",background: "#B2BEB5" }}>
                 <th style={{ padding: "10px", border: "none",width: "15%" }}> Name </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> EID </th>
-                <th style={{padding: "10px", border: "none",width: "10%"  }}> NIC </th>
+                <th style={{padding: "10px", border: "none",width: "5%"  }}> NIC </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> Gender </th>
                 <th style={{ padding: "10px", border: "none",width: "4%"  }}> Age </th>
-                <th style={{ padding: "10px", border: "none",width: "15%"  }}> Address </th>
+                <th style={{ padding: "10px", border: "none",width: "20%"  }}> Address </th>
                 <th style={{ padding: "10px", border: "none",width: "15%"  }}> Email </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> JobTitle </th>
                 <th style={{ padding: "10px", border: "none",width: "7%"  }}> Salary (Rs.)</th>
