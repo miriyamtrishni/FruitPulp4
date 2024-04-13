@@ -18,6 +18,7 @@ app.use(express.json())
 
 
 
+
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 //login
@@ -202,6 +203,7 @@ app.get('/attendance' ,(req,res) => {
 
 })
 
+
 app.get('/getUserat/:id' ,(req,res) => {
     const id = req.params.id;
     AttendanceModel.findById({_id:id})
@@ -235,52 +237,10 @@ app.delete('/deleteUserat/:id' ,(req,res) => {
     .catch(err => res.json(err))
 })
 
-app.get('/supplier' ,(req,res) => {
-    SupplierUserModel.find({})
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
-
-})
-app.get('/getUsersh/:id' ,(req,res) => {
-    const id = req.params.id;
-    SupplierUserModel.findById({_id:id})
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
-
-})
-app.put('/updateUsersh/:id',(req,res) => {
-    const id = req.params.id;
-    SupplierUserModel.findByIdAndUpdate({_id:id} , {
-        names: req.body.names,
-        sid: req.body.sid ,
-        materialname: req.body.materialname,
-        quantitiy: req.body.quantitiy ,
-        price: req.body.price,
-        date: new Date (req.body.date)
-        
-    })
-
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
-
-})
-app.delete('/deleteUsersh/:id' ,(req,res) => {
-    const id = req.params.id;
-    SupplierUserModel.findByIdAndDelete({_id: id})
-    .then(res => res.json(suppliers))
-    .catch(err => res.json(err))
-})
-
-app.post("/createUsersh", (req, res) =>{
-    SupplierUserModel.create(req.body)
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
-})
-
 // Search user by EID
 app.get('/searchUserByEid', (req, res) => {
     const { eid } = req.query;
-    
+
     UserModel.find({ eid }) // Find users with the specified EID
         .then(users => {
             res.json(users); // Return the matching users
@@ -290,14 +250,13 @@ app.get('/searchUserByEid', (req, res) => {
         });
 });
 
-
 // Search user by EIDD
 app.get('/searchUserByEidd', (req, res) => {
     const { eidd } = req.query;
     
-    UserModel.find({ eid }) // Find users with the specified EID
-        .then(users => {
-            res.json(users); // Return the matching users
+    UserModel.find({ eidd }) // Find users with the specified EID
+        .then(attendances => {
+            res.json(attendances); // Return the matching users
         })
         .catch(err => {
             res.status(500).json({ error: 'Server error' });
@@ -371,8 +330,154 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
 
 
+
+
+
+app.get('/supplier' ,(req,res) => {
+    SupplierUserModel.find({})
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
+
+})
+app.get('/getUsersh/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findById({_id:id})
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUsersh/:id',(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findByIdAndUpdate({_id:id} , {
+        names: req.body.names,
+        sid: req.body.sid ,
+        materialname: req.body.materialname,
+        quantitiy: req.body.quantitiy ,
+        price: req.body.price,
+        date: new Date (req.body.date)
+        
+    })
+
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
+
+})
+app.delete('/deleteUsersh/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(suppliers))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUsersh", (req, res) =>{
+    SupplierUserModel.create(req.body)
+    .then(suppliers => res.json(suppliers))
+    .catch(err => res.json(err))
+})
+
+
+
+
+
+
+
+
+
         
        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
