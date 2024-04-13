@@ -279,11 +279,10 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Create a new PDF document
         const doc = new PDFDocument();
-      
-        // Draw green square with company name "ANNAWEI"
-        doc.rect(50, 50, 150, 50).fill('lightgreen');
-        doc.fillColor('black').text('ANNAWEI', 60, 70);
-
+        //doc.rect(50, 50, 100, 50).fill('');
+        doc.fillColor('Green').fontSize(16).text('ANNAWEI', 60, 60, { bold: true });
+        doc.moveDown();
+        doc.moveDown();
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
 

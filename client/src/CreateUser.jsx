@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function CreateUser (){
     const [name , setName] =useState()
@@ -41,13 +42,100 @@ function CreateUser (){
 
 
     return(
+<div >
+      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
+        <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+          <li style={{ marginRight: "40px" }}>
+        
+            <Link
+              to="/HomePage"
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Home
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employees Details
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/attendance" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employee Attendance
+            </Link>
+          </li>
 
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/EmployeeDetailsReport" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Genarate Report
+            </Link>
+          </li>
+
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/deleted-employees" // Path to navigate to the deleted employees table
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Resign Employees
+            </Link>
+          </li>
+        </ul>
+      </nav>
         
 
         <div
         
         style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif'}}>
-        <div style={{ display: "flex", width: "50%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+        <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
          <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
          
             <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -182,13 +270,14 @@ function CreateUser (){
 
                 </form>
                
-                <img src="/image/image11.jpg" alt="Employee Image" style={{ flex: 15,  backgroundSize: "cover", backgroundPosition: "left",marginLeft: "150px" }}/>
-                
-
+              
            </div>
+           <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
+                    {/* Optional text or additional styling can be added here */}
+                </div>
         </div>
 </div>
-
+</div>
     )
 
 

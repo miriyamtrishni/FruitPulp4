@@ -39,7 +39,7 @@ function Users() {
 
   return (
     <div >
-      <nav style={{ backgroundColor: "Black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+      <nav style={{ backgroundColor: "Black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
           <li style={{ marginRight: "40px" }}>
         
@@ -130,7 +130,7 @@ function Users() {
        <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif' }}>
         <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '180vw' }}>
 
-          <Link to="/create" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD Employee +</Link>
+          <Link to="/create" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD  +</Link>
          
           <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
           <button onClick={handleSearch}style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search</button>

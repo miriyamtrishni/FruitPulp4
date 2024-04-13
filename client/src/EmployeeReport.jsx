@@ -3,52 +3,81 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const EmployeeReport = () => {
-    const buttonStyle = {
-        padding: '15px 30px',
-        fontSize: '18px',
-        cursor: 'pointer',
-        backgroundColor: 'orange',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        outline: 'none',
-        transition: 'background-color 0.3s ease',
-        marginBottom: '50px',
-        marginLeft: '10px'
+
+  const buttonStyle2 = {
+    padding: '15px 30px',
+    fontSize: '18px',
+    cursor: 'pointer',
+    backgroundColor: 'orange',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    outline: 'none',
+    transition: 'background-color 0.3s ease',
+    marginBottom: '20px',
+    marginLeft: '40px',
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: '900' 
+    
+};
+
+
+
+  const boxStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '60px',
+    margin: '60px 60px',
+    backgroundColor: '#f8f8f8',
+    borderRadius: '8px',
+    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+    height:"30vh",
+    marginLeft:"200px",
+    marginTop:"300px"
+};
+
+const textStyle = {
+  marginBottom: '50px',
+    fontSize: '18px',
+    color: '#333',
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: '700' 
+};
+
+    
+
+    const handleDownload2 = () => {
+      axios({
+        url: "http://localhost:3001/EmployeeDetailsReport", // Endpoint to download the file
+        method: 'GET',
+        responseType: 'blob', // Important: Set responseType to 'blob' to handle binary data
+      }).then(response => {
+        // Create a blob object from the response data
+        const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      
+        // Create a temporary anchor element to trigger the download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'employee_report.pdf'; // Set the file name
+        document.body.appendChild(a);
+        a.click();
+      
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }).catch(error => {
+        console.error('Error downloading file:', error);
+        // Handle error
+      });
     };
-
-
-    const handleDownload = () => {
-        axios.get('http://localhost:3001/EmployeeDetailsReport', { responseType: 'blob' })
-            .then(response => {
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', 'employee_report.pdf');
-                document.body.appendChild(link);
-                link.click();
-            })
-            .catch(error => {
-                console.error('Error downloading PDF:', error);
-                // Handle error
-            });
-    };
-
+  
     return (
-        <div style={{ 
-          backgroundImage: 'url("/image/background.jpg")', 
-          backgroundSize: 'cover', 
-          backgroundRepeat: 'no-repeat', 
-          display: 'flex', 
-          flexDirection: 'column', // Ensures children are aligned vertically
-          justifyContent: 'flex-start', // Aligns children at the start of the container
-          alignItems: 'center', 
-          minHeight: '100vh',
-          padding: 0, // Remove padding
-          margin: 0, // Remove margin
-        }}>
+      <div>
+        <div>
             
-            <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+            <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
     <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
       <li style={{ marginRight: "40px" }}>
         <Link
@@ -143,12 +172,15 @@ const EmployeeReport = () => {
     height: '65vh', // Adjust the height as needed
     marginLeft: '100px'
    
+   
 }}>
-    <button onClick={handleDownload} style={buttonStyle}>Download Employee Details Report</button>
-    
+     <div style={boxStyle}>
+                <span style={textStyle}>Download the Employee Details Report <br/><br/><br/> This report includes the  employee details,<br/> total number of employees <br/> and sum of the total salaries. </span>
+    <button onClick={handleDownload2} style={buttonStyle2}>Download Report</button>
+    </div>
 </div>
 </div>
-
+</div>
            
             
         

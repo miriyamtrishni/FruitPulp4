@@ -54,7 +54,7 @@ const Submit = async (e) => {
   return (
 
     <div>
-      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
           <li style={{ marginRight: "40px" }}>
         
@@ -143,17 +143,17 @@ const Submit = async (e) => {
       </nav>
      
 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-           <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
-          
-                <form onSubmit={Submit}>
-                    <h2>Add Attendance</h2>
-                   
+      <div   style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif'}}>
+        <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+         
+            <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add  Attendance</h2>
                     
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eid" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
-                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Eid</label>
+                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
                         title="Please enter only letters and numbers for Eid"
                         onChange={(e) => setEidd(e.target.value)} required />
@@ -161,49 +161,44 @@ const Submit = async (e) => {
 
                     
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="email" style={{ width: "80px", marginRight: "10px" }}>Week two</label>
-                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="email" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Week two</label>
+                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          maxLength="5"
                         onChange={(e) => setWeekone(e.target.value)} required />
                     </div>
 
                   
-
-  
-
-
-                    
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="email" style={{ width: "80px", marginRight: "10px" }}>Week two</label>
-                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="email" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Week two</label>
+                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          maxLength="5"
                         onChange={(e) => setWeektwo(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="jobTitle" style={{ width: "80px", marginRight: "10px" }}>Week  three</label>
-                        <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="jobTitle" style={{width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Week  three</label>
+                        <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          maxLength="5"
                         onChange={(e) => setWeekthree(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="jobTitle" style={{ width: "80px", marginRight: "10px" }}>Week four</label>
-                        <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="jobTitle" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Week four</label>
+                        <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                          maxLength="5"
                         onChange={(e) => setWeekfour(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="jobTitle" style={{ width: "80px", marginRight: "10px" }}>Month</label>
-                        <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="jobTitle" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Month</label>
+                        <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         onChange={(e) => setMonth(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="jobTitle" style={{ width: "80px", marginRight: "10px" }}>Date</label>
-                        <input type="date" placeholder="Enter  date " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="jobTitle" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700' }}>Date</label>
+                        <input type="date" placeholder="Enter  date " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         onChange={(e) => setDate(e.target.value)} required />
                     </div>
@@ -212,21 +207,19 @@ const Submit = async (e) => {
 
                     
 
-                    <button style={{ marginLeft: "90px", backgroundColor: "blue", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
+                    <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
 
-
+                   
                 </form>
-
-
-
-
+               
            </div>
+           <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
+                    {/* Optional text or additional styling can be added here */}
+                </div>
         </div>
 
-
-    
-      
-       
+        </div>
+        
     </div>
   );
 }
