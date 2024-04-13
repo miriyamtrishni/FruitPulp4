@@ -136,14 +136,14 @@ function Attendances() {
           <table style={{ width: "100%", textAlign: "center", borderCollapse: "collapse", marginRight:"80px" }}>
             <thead>
               <tr style={{ border: "none",background: "#B2BEB5"  }}>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> EID </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> EID </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekone </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> weektwo </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekthree </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekfour </th>
                 <th style={{ padding: "10px", border: "none",width: "5%"  }}> Month </th>
-                <th style={{ padding: "10px", border: "none",width: "20%"  }}> Date </th>
-                <th style={{ padding: "10px", border: "none",width: "20%" }}> Action </th>
+                <th style={{ padding: "10px", border: "none",width: "25%"  }}> Date </th>
+                <th style={{ padding: "10px", border: "none",width: "25%" }}> Action </th>
               </tr>
             </thead>
             <tbody>

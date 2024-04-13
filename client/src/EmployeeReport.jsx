@@ -31,7 +31,7 @@ const EmployeeReport = () => {
     margin: '60px 60px',
     backgroundColor: '#f8f8f8',
     borderRadius: '8px',
-    boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+    boxShadow: "10px 14px 8px rgba(0,0,0,0.3)",
     height:"30vh",
     marginLeft:"200px",
     marginTop:"300px"
@@ -74,8 +74,8 @@ const textStyle = {
     };
   
     return (
-      <div>
-        <div>
+      <div >
+        <div >
             
             <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
     <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
@@ -178,7 +178,9 @@ const textStyle = {
                 <span style={textStyle}>Download the Employee Details Report <br/><br/><br/> This report includes the  employee details,<br/> total number of employees <br/> and sum of the total salaries. </span>
     <button onClick={handleDownload2} style={buttonStyle2}>Download Report</button>
     </div>
+    
 </div>
+
 </div>
 </div>
            
