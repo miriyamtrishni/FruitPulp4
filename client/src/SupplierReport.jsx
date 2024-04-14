@@ -32,6 +32,7 @@ const SupplierReport = () => {
       height:"50vh",
       width: '50vw', 
       marginTop:'80px'
+
       
   };
 
@@ -84,7 +85,7 @@ const SupplierReport = () => {
               <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900', }}>
+  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900' }}>
     <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
       <li style={{ marginRight: "40px" }}>
 
@@ -169,12 +170,14 @@ const SupplierReport = () => {
   
   <div style={{
     display: 'flex',
-   
+    backgroundColor:"#FEF29B",
+    minHeight: "100vh",
     justifyContent: 'center', // Center vertically
-    marginTop: '20px', // Align to the left
+     // Align to the left
     
    
 }}>
+
   <div style={boxStyle}>
 
                 <img src="/image/b5.jpg" alt="Material Report" style={imageStyle} />
