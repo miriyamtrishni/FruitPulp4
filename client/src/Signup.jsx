@@ -26,80 +26,85 @@ function Signup() {
             });
     };
 
+    const handleLoginClick = () => {
+        navigate('/login');
+    };
+
+
     return (
         <div style={{
-            backgroundImage: 'url("/image/im2.jpg")',
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh"
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#ffffff"
         }}>
-            <div style={{ border: "1px solid #ccc", padding: "20px", borderRadius: "5px", width: "300px", backgroundColor: "#FFAC1C" }}>
-                <h2>Register</h2>
+             <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+            <div style={{  border: "none", padding: "20px", borderRadius: "10px", display: "flex", flexDirection: "column", alignItems: "center", width: "80%",maxWidth: "700px", boxShadow: "0 4px 8px rgba(0,0,0,0.3)",fontFamily: 'Poppins, sans-serif'  }}>
+                <h2 style={{color:"#F4BB29"}}>Sign Up</h2>
+                <div style={{ display: "flex", width: "100%",marginLeft:"20px" }}>
+            <div style={{ flex: 1, marginBottom: "20px" }}>
                 <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column" }}>
+                    <div style={{ marginBottom: "20px" }}>
                         <label htmlFor="name" style={{ marginBottom: "5px" }}>
-                            <strong>Name</strong>
+                        <i className="fa fa-user"></i> 
                         </label>
                         <input
                             type="text"
                             placeholder="Enter Name"
                             autoComplete="off"
                             name="name"
-                            style={{ marginTop: "5px" }}
+                            style={{ marginLeft: "30px" , width: "70%",padding: "8px" }}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
-                    <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column" }}>
+                    <div style={{ marginBottom: "20px" }}>
                         <label htmlFor="email" style={{ marginBottom: "5px" }}>
-                            <strong>Email</strong>
+                        <i className="fa fa-envelope"></i> 
                         </label>
                         <input
                             type="text"
                             placeholder="Enter Email"
                             autoComplete="off"
                             name="email"
-                            style={{ marginTop: "5px" }}
+                            style={{ marginLeft: "30px" , width: "70%",padding: "8px"}}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                    <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column" }}>
+                    <div style={{ marginBottom: "20px" }}>
                         <label htmlFor="password" style={{ marginBottom: "5px" }}>
-                            <strong>Password</strong>
+                        <i className="fa fa-lock"></i> 
                         </label>
                         <input
                             type="password"
                             placeholder="Enter Password"
                             autoComplete="off"
                             name="password"
-                            style={{ marginTop: "5px" }}
+                            style={{ marginLeft: "30px" , width: "70%",padding: "8px" }}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <button type="submit" style={{
-                        backgroundColor: "green", color: "white", padding: "10px 20px", border: "none",
-                        borderRadius: "5px", cursor: "pointer", marginRight: "10px",
-                        transition: "background-color 0.3s ease",
+                        backgroundColor: "#F4BB29", color: "white", padding: "10px 20px", border: "none",
+                        borderRadius: "5px", cursor: "pointer", width:"30%",marginLeft: "120px",fontWeight:"700",marginTop: "10px"
                     }}>
                         Register
                     </button>
                 </form>
-                <p>Already have an account</p>
-                <Link
-                    to="/login"
-                    style={{
-                        backgroundColor: "transparent", border: "1px solid green", color: "green", padding: "10px 20px",
-                        borderRadius: "5px", cursor: "pointer", transition: "background-color 0.3s ease",
-                        textDecoration: "none",
-                    }}
-                    // Adding hover styles using :hover pseudo-class
-                    onMouseEnter={(e) => e.target.style.backgroundColor = "lightgreen"}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
-                >
-                    Login
-                </Link>
+                <p style={{ textAlign: "center", marginTop: "30px", marginBottom: "10px", fontFamily: 'Poppins, sans-serif',fontWeight:"500" ,marginLeft:"10px",fontSize:"15px"}}>Already have an account? Login</p>
+                <button onClick={handleLoginClick} style={{
+                            backgroundColor: "#F4BB29", color: "white", padding: "10px 20px", border: "none",
+                            borderRadius: "5px", cursor: "pointer", width:"30%",fontWeight:"700",marginLeft:"120px"
+                        }}>
+                            Login
+                        </button>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <img src="/image/b3.jpg" alt="Login Image" style={{ width: "100%", borderRadius: "5px", height:"100%"}} />
+                    </div>
+                </div>
             </div>
         </div>
     );

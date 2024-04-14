@@ -1,4 +1,4 @@
-const express =require('express')
+const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const fs = require('fs');
@@ -20,7 +20,6 @@ app.use(express.json())
 
 //databse link
 mongoose.connect("mongodb+srv://all:all123@cluster0.j8vsstt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
 
 //login
 app.post('/login', (req,res) => {
@@ -61,6 +60,10 @@ app.post('/register', (req, res) => {
         })
         .catch(err => res.status(500).json({ message: "Internal server error" }));
 });
+
+
+
+
 
 
 
@@ -251,6 +254,9 @@ app.get('/searchUserByEid', (req, res) => {
 });
 
 
+
+
+
 // Search user by EIDD
 app.get('/searchUserByEidd', (req, res) => {
     const { eidd } = req.query;
@@ -263,6 +269,9 @@ app.get('/searchUserByEidd', (req, res) => {
             res.status(500).json({ error: 'Server error' });
         });
 });
+
+
+
 
 
 
@@ -280,7 +289,16 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         // Create a new PDF document
         const doc = new PDFDocument();
 
+
        
+
+        
+        
+
+        
+      
+       
+
 
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
@@ -295,8 +313,13 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.moveDown();
         doc.moveDown();
         // Add content to the PDF
+
         doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
         doc.moveDown();
+
+        doc.moveDown(); // Move down after the company name
+        doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
+
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
             doc.text(`EID: ${user.eid}`);
@@ -314,9 +337,14 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
 
+
+
+        
+
         // Finalize the PDF
         doc.end();
 
+        
         // Send the PDF file as a response
         stream.on('finish', () => {
             res.download('employee_report.pdf', 'employee_report.pdf', (err) => {
@@ -333,6 +361,16 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -397,6 +435,9 @@ app.get('/searchSupplierBySid', (req, res) => {
 
 
 
+
+
+
 app.get('/material-details', async (req, res) => {
 
     try {
@@ -420,12 +461,12 @@ app.get('/material-details', async (req, res) => {
         
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        doc.rect(50, 50, 150, 50).fill('#F4BB29'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
-        const x = 50 + (100 - textWidth) / 2;
-        const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        const x = 60 + (100 - textWidth) / 2;
+        const y = 70;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(20).text(text, x, y, { align: 'left'});
         
         doc.moveDown();
         doc.moveDown();
