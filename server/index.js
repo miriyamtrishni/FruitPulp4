@@ -270,6 +270,19 @@ app.get('/searchUserByEidd', (req, res) => {
         });
 });
 
+// Search user by in deleted employee
+app.get('/searchUserByEiddeleted', (req, res) => {
+    const { eid} = req.query;
+    
+    DeletedUserModel.find({ eid }) // Find users with the specified EID in deleted employee
+        .then(employees => {
+            res.json(employees); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
 
 
 

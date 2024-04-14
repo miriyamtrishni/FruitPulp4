@@ -43,37 +43,49 @@ function CreateUser (){
 
     return(
 <div >
-      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
-        <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
-          <li style={{ marginRight: "40px" }}>
-        
-            <Link
-              to="/HomePage"
-              style={{
-                color: "orange",
-                textDecoration: "none",
-                fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-            >
-              Home
-            </Link>
-          </li>
+<nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+  <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+    <li style={{ marginRight: "40px" }}>
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '15px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+      FRUIT PULP
+    </div>
+    <Link
+        to="/HomePage"
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontWeight: "bold",
+          paddingLeft: "700px",
+          transition: "all 0.3s ease", // Hover transition
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+      >
+        HOME
+      </Link>
+    </li>
           <li style={{ marginRight: "40px" }}>
             <Link
               to="/" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
              Employees Details
             </Link>
@@ -82,14 +94,14 @@ function CreateUser (){
             <Link
               to="/attendance" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
              Employee Attendance
             </Link>
@@ -99,14 +111,14 @@ function CreateUser (){
             <Link
               to="/EmployeeDetailsReport" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
               Genarate Report
             </Link>
@@ -116,14 +128,14 @@ function CreateUser (){
             <Link
               to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
               Resign Employees
             </Link>
