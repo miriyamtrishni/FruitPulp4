@@ -332,6 +332,14 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
 //function supplier management
 app.get('/supplier' ,(req,res) => {
     SupplierUserModel.find({})
