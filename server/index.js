@@ -460,12 +460,12 @@ app.get('/material-details', async (req, res) => {
         
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
-        doc.rect(50, 50, 150, 50).fill('#F4BB29'); 
+        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
-        const x = 60 + (100 - textWidth) / 2;
-        const y = 70;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(20).text(text, x, y, { align: 'left'});
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
         
         doc.moveDown();
         doc.moveDown();
