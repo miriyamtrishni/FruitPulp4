@@ -93,7 +93,7 @@ function Suppliers() {
     </li>
     <li style={{ marginRight: "40px" }}>
       <Link
-        to="/reportsh"
+        to="/supplier"
         style={{
           color: "black",
           textDecoration: "none",
@@ -146,7 +146,7 @@ function Suppliers() {
                 <th style={{ padding: "10px", border: "none",width: "10%"   }}> Name </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> SID </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> Materialname </th>
-                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Quantitiy </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Quantity kg </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"   }}> Price Rs </th>
                 <th style={{ padding: "10px", border: "none",width: "20%" }}> Date </th>
                 <th style={{ padding: "10px", border: "none" ,width: "20%"}}> Action </th>

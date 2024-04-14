@@ -135,7 +135,7 @@ const SupplierReport = () => {
       </li>
       <li style={{ marginRight: "40px" }}>
         <Link
-          to="/reportsh" // Path to navigate to the deleted employees table
+          to="/supplier" // Path to navigate to the deleted employees table
           style={{
             color: "black",
             textDecoration: "none",

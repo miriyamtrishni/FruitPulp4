@@ -29,17 +29,51 @@ function Login() {
     };
 
     return (
+        
         <div style={{
             display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundColor: "#ffffff"
+    backgroundColor: "#FCF4D9"
         }}>
+            {/* Navigation Links */}
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      right: '20px',
+      fontSize: '15px', 
+      fontWeight: '900',
+      fontFamily: 'Poppins, sans-serif'
+    }}>
+      <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+      <a href="/WPage" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>HOME</a>
+      <a href="/HomePage" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>FUNCTIONS</a>
+      <a href="/login" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>LOGIN</a>
+      <a href="/register" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>SIGN UP</a>
+      <i class="fas fa-bars" style={{ marginRight: '100px',color: 'black', fontSize: '15px', cursor:'pointer' }}></i>
+    </div>
+
+    {/* Fruit Pulp Text */}
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '20px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+       <span style={{color: 'black'}}>FRUIT</span> PULP
+    </div>
             <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-            <div style={{ border: "none", padding: "20px", borderRadius: "10px", display: "flex", flexDirection: "column", alignItems: "center", width: "80%",maxWidth: "700px", boxShadow: "0 4px 8px rgba(0,0,0,0.3)",fontFamily: 'Poppins, sans-serif' }}>
+            <div style={{ border: "none", padding: "20px", borderRadius: "10px", display: "flex", flexDirection: "column", alignItems: "center", width: "80%",maxWidth: "700px", boxShadow: "0 4px 8px rgba(0,0,0,0.3)",fontFamily: 'Poppins, sans-serif',backgroundColor: "#FFFFFF" }}>
                 <h2 style={{color:"#F4BB29"}}>Login</h2>
                 <div style={{ display: "flex", width: "100%",marginLeft:"20px" }}>
             <div style={{ flex: 1, marginBottom: "20px" }}>
@@ -86,7 +120,7 @@ function Login() {
                         </button>
                     </div>
                     <div style={{ flex: 1 }}>
-                        <img src="/image/b4.jpg" alt="Login Image" style={{ width: "100%", borderRadius: "5px", height:"100%"}} />
+                        <img src="/image/img26.jpg" alt="Login Image" style={{ width: "100%", borderRadius: "5px", height:"100%"}} />
                     </div>
                 </div>
             </div>
