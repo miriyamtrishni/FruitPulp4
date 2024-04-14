@@ -39,7 +39,6 @@ app.post('/login', (req,res) => {
     }
 
     })
-
 })
 
 //signup
@@ -73,7 +72,11 @@ app.post('/register', (req, res) => {
 
 
 
+
+
+
 //function employee mamagement
+
 
 app.get('/' ,(req,res) => {
     UserModel.find({})
@@ -240,7 +243,7 @@ app.delete('/deleteUserat/:id' ,(req,res) => {
 // Search user by EID
 app.get('/searchUserByEid', (req, res) => {
     const { eid } = req.query;
-    
+
     UserModel.find({ eid }) // Find users with the specified EID
         .then(users => {
             res.json(users); // Return the matching users
@@ -249,6 +252,10 @@ app.get('/searchUserByEid', (req, res) => {
             res.status(500).json({ error: 'Server error' });
         });
 });
+
+
+
+
 
 // Search user by EIDD
 app.get('/searchUserByEidd', (req, res) => {
@@ -263,6 +270,11 @@ app.get('/searchUserByEidd', (req, res) => {
         });
 });
 
+
+
+
+
+
 app.get('/EmployeeDetailsReport', async (req, res) => {
     try {
         // Fetch all employees from the database
@@ -276,20 +288,38 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Create a new PDF document
         const doc = new PDFDocument();
+
+
+       
+
+        
+        
+
+        
       
+       
+
+
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-
-        // Set up styling
-        doc.font('Helvetica-BoldOblique').fontSize(20).fillColor('black');
-
-        // Draw green square with company name "ANNAWEI"
-        doc.rect(50, 50, 150, 50).fill('#F4BB29');
-        doc.fillColor('white').text('ANNAWEI', 60, 70);
-
+        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        const text = 'ANAAWEI';
+        const textWidth = doc.widthOfString(text);
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        
+        doc.moveDown();
+        doc.moveDown();
+        doc.moveDown();
         // Add content to the PDF
+
+        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
+        doc.moveDown();
+
         doc.moveDown(); // Move down after the company name
         doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
+
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
             doc.text(`EID: ${user.eid}`);
@@ -306,7 +336,11 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.text(`\n\n`);
         doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
+
+
+
         
+
         // Finalize the PDF
         doc.end();
 
@@ -327,6 +361,9 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
+
 
 
 
@@ -363,7 +400,7 @@ app.put('/updateUsersh/:id',(req,res) => {
         quantitiy: req.body.quantitiy ,
         price: req.body.price,
         date: new Date (req.body.date)
-        
+
     })
 
     .then(suppliers => res.json(suppliers))
@@ -373,7 +410,7 @@ app.put('/updateUsersh/:id',(req,res) => {
 app.delete('/deleteUsersh/:id' ,(req,res) => {
     const id = req.params.id;
     SupplierUserModel.findByIdAndDelete({_id: id})
-    .then(suppliers => res.json(suppliers))
+    .then(res => res.json(suppliers))
     .catch(err => res.json(err))
 })
 
@@ -386,7 +423,7 @@ app.post("/createUsersh", (req, res) =>{
 // Search user by SID
 app.get('/searchSupplierBySid', (req, res) => {
     const { sid } = req.query;
-    
+   
     SupplierUserModel.find({sid }) // Find supplier orders with the specified SID
         .then(suppliers => {
             res.json(suppliers); // Return the matching supplier orders
@@ -395,7 +432,10 @@ app.get('/searchSupplierBySid', (req, res) => {
             res.status(500).json({ error: 'Server error' });
         });
 });
-        
+
+
+
+
 
 
 app.get('/material-details', async (req, res) => {
@@ -488,7 +528,93 @@ app.get('/material-details', async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //server running
+
 app.listen(3001,() => {
 
     console.log("server is running")

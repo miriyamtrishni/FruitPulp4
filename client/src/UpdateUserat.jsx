@@ -52,18 +52,7 @@ const Update = (e) => {
 
 }
   return (
-    <div style={{ 
-      backgroundImage: 'url("/image/background.jpg")', 
-      backgroundSize: 'cover', 
-      backgroundRepeat: 'no-repeat', 
-      display: 'flex', 
-      flexDirection: 'column', // Ensures children are aligned vertically
-      justifyContent: 'flex-start', // Aligns children at the start of the container
-      alignItems: 'center', 
-      minHeight: '100vh',
-      padding: 0, // Remove padding
-      margin: 0, // Remove margin
-    }}>
+    <div >
       <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
           <li style={{ marginRight: "40px" }}>
@@ -151,17 +140,20 @@ const Update = (e) => {
           </li>
         </ul>
       </nav>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-           <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
-          
-                <form  onSubmit={Update}>
-                    <h2>Update Attendance</h2>
+      
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif' }}>
+    <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+        <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+
+                <form onSubmit={Update}style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                    <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Update Attendance</h2>
+                   
                    
                     
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eidd" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
-                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="eidd" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Eid</label>
+                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
                         title="Please enter only letters and numbers for Eid"
                         
@@ -174,44 +166,44 @@ const Update = (e) => {
                   
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "80px", marginRight: "10px" }}>Week one</label>
-                        <input type="number" placeholder="Enter week one" className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week one</label>
+                        <input type="number" placeholder="Enter week one" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={weekone}   onChange={(e) => setWeekone(e.target.value)} required />
                     </div>
 
                     
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="number" style={{ width: "80px", marginRight: "10px" }}>Week two</label>
-                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="number" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week two</label>
+                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={weektwo}  onChange={(e) => setWeektwo(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "80px", marginRight: "10px" }}>Week  three</label>
-                        <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week  three</label>
+                        <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={weekthree}   onChange={(e) => setWeekthree(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "80px", marginRight: "10px" }}>Week four</label>
-                        <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week four</label>
+                        <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={weekfour}   onChange={(e) => setWeekfour(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="month" style={{ width: "80px", marginRight: "10px" }}>Month</label>
-                        <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="month" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Month</label>
+                        <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={month}  onChange={(e) => setMonth(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="date" style={{ width: "80px", marginRight: "10px" }}>Date</label>
-                        <input type="date" placeholder="Enter  date " className="form-control" style={{ width: "100%" }} 
+                        <label htmlFor="date" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Date</label>
+                        <input type="date" placeholder="Enter  date " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         value={date}    onChange={(e) => setDate(e.target.value)} required />
                     </div>
@@ -220,7 +212,7 @@ const Update = (e) => {
 
                     
 
-                    <button style={{ marginLeft: "90px", backgroundColor: "blue", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Update</button>
+                    <button style={{ marginLeft: "90px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Update</button>
 
 
                 </form>
@@ -229,6 +221,9 @@ const Update = (e) => {
 
 
            </div>
+           <div style={{ flex: 1, backgroundImage: "url('/image/im4.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
+                    {/* Optional text or additional styling can be added here */}
+                </div>
         </div>
 
 
@@ -236,7 +231,7 @@ const Update = (e) => {
       
        
     </div>
-      
+    </div>
        
     
   );

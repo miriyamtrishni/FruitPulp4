@@ -32,19 +32,8 @@ function Attendances() {
 
 
   return (
-    <div style={{ 
-      backgroundImage: 'url("/image/background.jpg")', 
-      backgroundSize: 'cover', 
-      backgroundRepeat: 'no-repeat', 
-      display: 'flex', 
-      flexDirection: 'column', // Ensures children are aligned vertically
-      justifyContent: 'flex-start', // Aligns children at the start of the container
-      alignItems: 'center', 
-      minHeight: '100vh',
-      padding: 0, // Remove padding
-      margin: 0, // Remove margin
-    }}>
-     <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+    <div >
+     <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "40px" }}>
       <Link
@@ -133,43 +122,45 @@ function Attendances() {
 
 
 
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-        <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
-          <Link to="/createat" style={{ backgroundColor: "orange", color: "black", border: "1px solid black", padding: "1px", borderRadius: "5px", textDecoration: "none" }}>Add Attendance+</Link>
-          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" />
-          <button onClick={handleSearch}>Search</button>
+<div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif' }}>
+        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '80vw' }}>
+        
+          <Link to="/createat" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
+         
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
+          <button onClick={handleSearch}style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search</button>
           {searchResults.length > 0 ? (
-            <button onClick={clearSearch}>Clear Search</button>
+            <button onClick={clearSearch}style={{ backgroundColor: "red", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Clear Search</button>
           ) : null}
 
-          <table style={{ width: "100%", textAlign: "center", border: "1px solid" }}>
+          <table style={{ width: "100%", textAlign: "center", borderCollapse: "collapse", marginRight:"80px" }}>
             <thead>
-              <tr style={{ border: "1px solid" }}>
-                <th style={{ padding: "10px", border: "1px solid" }}> EID </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> weekone </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> weektwo </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> weekthree </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> weekfour </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Month </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Date </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Action </th>
+              <tr style={{ border: "none",background: "#B2BEB5"  }}>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> EID </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekone </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weektwo </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekthree </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekfour </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> Month </th>
+                <th style={{ padding: "10px", border: "none",width: "25%"  }}> Date </th>
+                <th style={{ padding: "10px", border: "none",width: "25%" }}> Action </th>
               </tr>
             </thead>
             <tbody>
             {(searchResults.length > 0 ? searchResults : attendances).map((attendance) => {
                 return (
-                  <tr style={{ border: "1px solid" }} key={attendance._id}>
-                    <td style={{ border: "1px solid" }}>{attendance.eidd}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.weekone}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.weektwo}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.weekthree}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.weekfour}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.month}</td>
-                    <td style={{ border: "1px solid" }}>{attendance.date}</td>
+                  <tr style={{ border: "none" ,height: "50px",fontWeight: "bold" }} key={attendance._id}>
+                    <td style={{ border: "none" }}>{attendance.eidd}</td>
+                    <td style={{ border: "none" }}>{attendance.weekone}</td>
+                    <td style={{ border: "none" }}>{attendance.weektwo}</td>
+                    <td style={{ border: "none" }}>{attendance.weekthree}</td>
+                    <td style={{ border: "none" }}>{attendance.weekfour}</td>
+                    <td style={{ border: "none" }}>{attendance.month}</td>
+                    <td style={{ border: "none" }}>{attendance.date}</td>
                     
                     <td>
-                      <Link to={`/updateat/${attendance._id}`} style={{ backgroundColor: "yellow", color: "black", border: "1px solid black", padding: "1px", borderRadius: "5px", textDecoration: "none" }}>Update</Link>
-                      <button style={{ marginLeft: "10px", backgroundColor: "red", color: "white", border: "1px solid black", padding: "1px", borderRadius: "5px", textDecoration: "none" }} onClick={() => handleDelete(attendance._id)}>Delete</button>
+                      <Link to={`/updateat/${attendance._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none",fontWeight: "bold", }}>Update</Link>
+                      <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none" ,fontWeight: "bold",}} onClick={() => handleDelete(attendance._id)}>Delete</button>
                     </td>
                   </tr>
                 )

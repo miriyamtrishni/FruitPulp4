@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function CreateUser (){
     const [name , setName] =useState()
@@ -41,37 +42,128 @@ function CreateUser (){
 
 
     return(
+<div >
+      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
+        <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+          <li style={{ marginRight: "40px" }}>
+        
+            <Link
+              to="/HomePage"
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Home
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employees Details
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/attendance" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+             Employee Attendance
+            </Link>
+          </li>
 
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/EmployeeDetailsReport" 
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Genarate Report
+            </Link>
+          </li>
+
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/deleted-employees" // Path to navigate to the deleted employees table
+              style={{
+                color: "orange",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+            >
+              Resign Employees
+            </Link>
+          </li>
+        </ul>
+      </nav>
         
 
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-           <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
-          
-                <form onSubmit={Submit}>
-                    <h2>Add User</h2>
-                   
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="name" style={{ width: "80px", marginRight: "10px" }}>Name</label>
-                        <input type="text" placeholder="Enter name" className="form-control" style={{ width: "100%" }} 
-                        
-                        onChange={(e) => setName(e.target.value)} required />
-                    </div>
+        <div
+        
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif'}}>
+        <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+         
+            <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add  Employee</h2>
+               
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label htmlFor="names" style={{ width: "200px", marginRight: "10px",fontWeight: '700'  }}>Name</label>
+                    <input type="text" placeholder="Enter names" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                    
+                    onChange={(e) => setName(e.target.value)} required />
+                </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eid" style={{ width: "80px", marginRight: "10px" }}>Eid</label>
-                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" }} 
+               
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Eid</label>
+                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                         maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
                         title="Please enter only letters and numbers for Eid"
                         onChange={(e) => setEid(e.target.value)} required />
                     </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                    <label htmlFor="nic" style={{ width: "80px", marginRight: "10px" }}>NIC</label>
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Nic</label>
                      <input 
                             type="text" 
                             placeholder="Enter NIC" 
                             className="form-control" 
-                            style={{ width: "100%" }} 
+                            style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                             maxLength="12" // Limit input to 12 characters
                             pattern="[A-Za-z0-9]*" // Allow only letters (both lowercase and uppercase) and numbers
                             title="Please enter only letters and numbers for NIC" // Error message for unsupported characters
@@ -81,11 +173,12 @@ function CreateUser (){
                     </div>
 
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                    <label htmlFor="gender" style={{ width: "80px", marginRight: "10px" }}>Gender</label>
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Gender</label>
+                      
                      <select 
                     className="form-control" 
-                     style={{ width: "100%" }} 
+                     style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                      onChange={(e) => setGender(e.target.value)} 
                      required
                      >
@@ -96,73 +189,95 @@ function CreateUser (){
                     </div>
 
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="age" style={{ width: "80px", marginRight: "10px" }}>Age</label>
-                        <input type="number" placeholder="Enter age" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Age</label>
+                      
+                        <input type="number" placeholder="Enter age" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                         
                         onChange={(e) => setAge(e.target.value)} required />
                     </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="address" style={{ width: "80px", marginRight: "10px" }}>Address</label>
-                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%" }} 
+
+
+
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="address" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Address</label>
+                      
+                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         onChange={(e) => setAddress(e.target.value)} required />
                     </div>
 
+
                     
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="email" style={{ width: "80px", marginRight: "10px" }}>Email</label>
-                        <input type="email" placeholder="Enter email" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="address" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Email</label>
+                      
+                        <input type="email" placeholder="Enter email" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         onChange={(e) => setEmail(e.target.value)} required />
                     </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="jobTitle" style={{ width: "80px", marginRight: "10px" }}>Job Title</label>
-                        <input type="text" placeholder="Enter job title" className="form-control" style={{ width: "100%" }} 
+
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Job Title</label>
+                      
+                        <input type="text" placeholder="Enter job title" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
                         onChange={(e) => setJobtitle(e.target.value)} required />
                     </div>
+
+
                     {/* Add overtimeHours */}
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeHours" style={{ width: "80px", marginRight: "10px" }}>Overtime Hours</label>
-                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Overtime Hours</label>
+                      
+                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                             onChange={(e) => setOvertimeHours(e.target.value)} required />
                     </div>
+
+
                     {/* Add overtimeRate */}
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeRate" style={{ width: "80px", marginRight: "10px" }}>Overtime Rate</label>
-                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Rate</label>
+                      
+                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                             onChange={(e) => setOvertimeRate(e.target.value)} required />
                     </div>
+
+
                     {/* Add bonus */}
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "80px", marginRight: "10px" }}>Bonus</label>
-                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%" }} 
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Bonus</label>
+                      
+                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                             onChange={(e) => setBonus(e.target.value)} required />
                     </div>
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="salary" style={{ width: "80px", marginRight: "10px" }}>Salary</label>
-                        <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" }} 
+
+
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="salary" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Salary </label>
+                      
+                        <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
                         
                         onChange={(e) => setSalary(e.target.value)} required />
                     </div>
 
                     
+                    <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
 
-                    <button style={{ marginLeft: "90px", backgroundColor: "blue", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
-
+                   
 
                 </form>
-
-
-
-
+               
+              
            </div>
+           <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
+                    {/* Optional text or additional styling can be added here */}
+                </div>
         </div>
-
-
+</div>
+</div>
     )
 
 

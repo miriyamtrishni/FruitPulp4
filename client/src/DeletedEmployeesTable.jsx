@@ -18,19 +18,8 @@ function DeletedEmployeesTable() {
 
     return (
 
-        <div style={{ 
-          backgroundImage: 'url("/image/background.jpg")', 
-          backgroundSize: 'cover', 
-          backgroundRepeat: 'no-repeat', 
-          display: 'flex', 
-          flexDirection: 'column', // Ensures children are aligned vertically
-          justifyContent: 'flex-start', // Aligns children at the start of the container
-          alignItems: 'center', 
-          minHeight: '100vh',
-          padding: 0, // Remove padding
-          margin: 0, // Remove margin
-        }}>
-      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
+        <div >
+      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
           <li style={{ marginRight: "40px" }}>
             <Link
@@ -117,7 +106,7 @@ function DeletedEmployeesTable() {
         </ul>
       </nav>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-            <div style={{ backgroundColor: "lightgreen", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
+            <div style={{ backgroundColor: "#B2BEB5", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
                 <h1>Resign Employees</h1>
                 
                

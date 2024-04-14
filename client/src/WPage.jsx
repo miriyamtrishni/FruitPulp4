@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const WelcomePage = () => {
   return (
-    
+
     <div style={{ 
       
       backgroundImage: 'url("/image/img11.jpg")', 
@@ -107,7 +107,11 @@ const WelcomePage = () => {
 
     </div>
 </div>
-  );
+  )
+
+
+    
+     
 };
 
 export default WelcomePage;
