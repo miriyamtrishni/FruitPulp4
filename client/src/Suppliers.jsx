@@ -130,8 +130,8 @@ function Suppliers() {
 
 
 
-      <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif' }}>
-        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '80vw',backgroundColor:"#FFFFE1",boxShadow: "0 4px 8px rgba(0,0,0,0.3)" }}>
+      <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
+        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '80vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
         
           <Link to="/createsh" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
          
