@@ -36,11 +36,11 @@ const WelcomePage = () => {
       <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
-      <a href="/home" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>Home</a>
-      <a href="/login" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>Login</a>
-      <a href="/functions" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>Functions</a>
-      <a href="/other" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>Other</a>
-      <i class="fas fa-bars" style={{ marginRight: '100px',color: 'black', fontSize: '15px' }}></i>
+      <a href="/home" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>HOME</a>
+      <a href="/login" style={{ marginRight: '50px', color: 'black', textDecoration: 'none' }}>FUNCTIONS</a>
+      <a href="/functions" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>LOGIN</a>
+      <a href="/other" style={{ marginRight: '50px',color: 'black', textDecoration: 'none' }}>SIGN UP</a>
+      <i class="fas fa-bars" style={{ marginRight: '100px',color: 'black', fontSize: '15px', cursor:'pointer' }}></i>
     </div>
 
     {/* Fruit Pulp Text */}
@@ -49,8 +49,9 @@ const WelcomePage = () => {
       top: '20px', 
       left: '20px',
       fontSize: '20px', 
-      fontWeight: '900', 
+      fontWeight: '1000', 
       fontFamily: 'Poppins, sans-serif', 
+      
       color: '#F4BB29',
       marginLeft:'20px'
     }}>

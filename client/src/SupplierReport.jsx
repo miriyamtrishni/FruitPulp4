@@ -14,10 +14,9 @@ const SupplierReport = () => {
         borderRadius: '5px',
         outline: 'none',
         transition: 'background-color 0.3s ease',
-        marginBottom: '20px',
-        marginLeft: '40px',
         fontFamily: 'Poppins, sans-serif',
-        fontWeight: '900' 
+        fontWeight: '700' ,
+        marginRight:'120px'
         
     };
 
@@ -25,23 +24,32 @@ const SupplierReport = () => {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '60px',
-      margin: '60px 60px',
+      padding: '20px',
+      margin: 'auto',
       backgroundColor: '#f8f8f8',
       borderRadius: '8px',
       boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-      height:"30vh",
-      marginLeft:"200px",
-      marginTop:"300px"
+      height:"50vh",
+      width: '50vw', 
+      marginTop:'80px'
+      
   };
 
   const textStyle = {
-    marginBottom: '50px',
+    
       fontSize: '18px',
       color: '#333',
       fontFamily: 'Poppins, sans-serif',
-      fontWeight: '700' 
+      fontWeight: '700',
+      marginRight:'50px'
+
   };
+
+  const imageStyle = {
+    width: '50%', // Image takes half of the container width
+    height: '100%', // Image height matches the container
+    objectFit: 'cover' // Ensures the image covers the designated area
+};
 
     const handleDownload2 = () => {
     axios({
@@ -70,72 +78,90 @@ const SupplierReport = () => {
   };
 
     return (
-        <div>
+    
+        
             <div>
-  <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
+              <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900', }}>
     <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
       <li style={{ marginRight: "40px" }}>
+
+      <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '15px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+      FRUIT PULP
+    </div>
         <Link
           to="/HomePage"
           style={{
-            color: "#F4BB29",
+            color: "black",
             textDecoration: "none",
             fontWeight: "bold",
-            paddingRight: "10px",
+            paddingLeft: "700px",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "black")}
         >
-          Home
+           HOME
         </Link>
       </li>
       <li style={{ marginRight: "40px" }}>
         <Link
           to="/supplier-details" 
           style={{
-            color: "#F4BB29",
+            color: "black",
             textDecoration: "none",
             fontWeight: "bold",
             paddingRight: "10px",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "black")}
         >
-          Supplier Details
+         SUPPLIER DETAILS
         </Link>
       </li>
       <li style={{ marginRight: "40px" }}>
         <Link
           to="/reportsh" // Path to navigate to the deleted employees table
           style={{
-            color: "#F4BB29",
+            color: "black",
             textDecoration: "none",
             fontWeight: "bold",
             paddingRight: "10px",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "black")}
         >
-          Supplier Orders
+           SUPPLIER ORDERS
         </Link>
       </li>
       <li style={{ marginRight: "40px" }}>
         <Link
           to="/material-details" 
           style={{
-            color: "#F4BB29",
+            color: "black",
             textDecoration: "none",
             fontWeight: "bold",
             paddingRight: "10px",
             transition: "all 0.3s ease",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "black")}
         >
-          Generate Report
+          GENERATE REPORT
         </Link>
       </li>
     </ul>
@@ -143,17 +169,20 @@ const SupplierReport = () => {
   
   <div style={{
     display: 'flex',
-    flexDirection: 'column',
+   
     justifyContent: 'center', // Center vertically
-    alignItems: 'flex-start', // Align to the left
-    height: '60vh', // Adjust the height as needed
-    marginLeft: '100px'
+    marginTop: '20px', // Align to the left
+    
    
 }}>
   <div style={boxStyle}>
-                <span style={textStyle}>Download the latest Supplied Material Report <br/><br/><br/> This report includes the supplied materials <br/> and the total quantity of each material. </span>
-    <button onClick={handleDownload2} style={buttonStyle2}>Download Report</button>
-    </div>
+
+                <img src="/image/b5.jpg" alt="Material Report" style={imageStyle} />
+                    <div>
+                        <p style={textStyle}>Supplied Material Report.</p>
+                        <button onClick={handleDownload2} style={buttonStyle2}>
+                        <i className="fa fa-download"></i> Download</button>
+                    </div>
 </div>
 </div>
 

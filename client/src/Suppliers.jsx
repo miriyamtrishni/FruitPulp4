@@ -44,70 +44,83 @@ function Suppliers() {
   return (
     <div>
       
-     <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
+     <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "40px" }}>
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '15px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+      FRUIT PULP
+    </div>
       <Link
         to="/HomePage"
         style={{
-          color: "#F4BB29",
+          color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingRight: "10px",
+          paddingLeft: "700px",
           transition: "all 0.3s ease", // Hover transition
         }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover out
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
       >
-        Home
+        HOME
       </Link>
     </li>
     <li style={{ marginRight: "40px" }}>
       <Link
         to="/supplier-details"
         style={{
-          color: "#F4BB29",
+          color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingRight: "10px",
+          paddingRight: "20px",
           transition: "all 0.3s ease", // Hover transition
         }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover out
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
       >
-        Supplier Details
+        SUPPLIER DETAILS
       </Link>
     </li>
     <li style={{ marginRight: "40px" }}>
       <Link
         to="/reportsh"
         style={{
-          color: "#F4BB29",
+          color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingRight: "10px",
+          paddingRight: "20px",
           transition: "all 0.3s ease", // Hover transition
         }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover out
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
       >
-        Supplier Orders
+        SUPPLIER ORDERS
       </Link>
     </li>
     <li>
       <Link
         to="/material-details"
         style={{
-          color: "#F4BB29",
+          color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingRight: "10px",
+          paddingRight: "50px",
           transition: "all 0.3s ease", // Hover transition
         }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover
-        onMouseOut={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover out
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
       >
-        Generate Report
+        GENERATE REPORT
       </Link>
     </li>
   </ul>
@@ -118,7 +131,7 @@ function Suppliers() {
 
 
       <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif' }}>
-        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '80vw' }}>
+        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '80vw',backgroundColor:"#FFFFE1",boxShadow: "0 4px 8px rgba(0,0,0,0.3)" }}>
         
           <Link to="/createsh" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
          
