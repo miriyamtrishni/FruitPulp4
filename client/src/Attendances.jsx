@@ -138,8 +138,12 @@ function Attendances() {
 
 
       <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
-        <div style={{ border: "none", borderRadius: "5px", height:"80vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
-      <h4>Please assign 1 for Present,0 for Absence</h4>
+       
+        <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
+        
+   <button style={{ borderRadius: '5px', backgroundColor: '#abfa87', padding: '10px', border: 'none' }}><h6 style={{ fontFamily: 'Arial', fontStyle: 'italic', lineHeight: '1.5', color: 'blue', display: 'yellow' }}>"Use '1' to denote presence and '0' to indicate absence in the employee attendance table.<br/>Additionally, if the attendance is not yet marked for upcoming days, you can represent them with '0'".</h6></button>
+
+<br/>
           <Link to="/createat" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
          
           <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
@@ -182,6 +186,7 @@ function Attendances() {
               })}
             </tbody>
           </table>
+         
         </div>
       </div>
     </div>

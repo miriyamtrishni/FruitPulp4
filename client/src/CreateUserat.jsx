@@ -12,6 +12,7 @@ function CreateUserat() {
     const [month, setMonth] = useState("");
     const [date, setDate] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessageee, setErrorMessageee] = useState("");
 
     const navigate = useNavigate();
 
@@ -64,11 +65,11 @@ function CreateUserat() {
         setter(value);
         
         if (value.length > 4) {
-            setErrorMessage("Maximum length is 4 characters");
+          setErrorMessageee("Maximum length is 4 characters");
         } else if (!value.match(/^E[0-9]{3}$/)) {
-            setErrorMessage("Please enter 'E' followed by  3 numbers");
+          setErrorMessageee("Please enter 'E' followed by  3 numbers");
         } else {
-            setErrorMessage("");
+            setErrorMessageee("");
         }
     };
     
@@ -194,35 +195,36 @@ function CreateUserat() {
                                  onChange={(e) => handleChange2(e, setEidd)}
                                  required
                                   />
-                          {errorMessage && <div style={{ color: "red", marginLeft: "10px" }}>{errorMessage}</div>}
+                          {errorMessageee && <div style={{ color: "red", marginLeft: "10px" }}>{errorMessageee}</div>}
                     </div>
 
 
 
                             <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                                 <label htmlFor="weekOne" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Week One</label>
-                                <input type="text" placeholder="Enter week one (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                <input type="number" placeholder="Enter week one (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
                                     value={weekone}
                                     onChange={(e) => handleChange(e, setWeekone)} required />
                             </div>
 
                             <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                                 <label htmlFor="weekTwo" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Week Two</label>
-                                <input type="text" placeholder="Enter week two (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                <input type="number" placeholder="Enter week two (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
                                     value={weektwo}
                                     onChange={(e) => handleChange(e, setWeektwo)} required />
                             </div>
 
                             <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                                 <label htmlFor="weekThree" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Week Three</label>
-                                <input type="text" placeholder="Enter week three (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                <input type="number" placeholder="Enter week three (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
                                     value={weekthree}
                                     onChange={(e) => handleChange(e, setWeekthree)} required />
                             </div>
 
                             <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                                 <label htmlFor="weekFour" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Week Four</label>
-                                <input type="text" placeholder="Enter week four (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                <input type="number" placeholder="Enter week four (max 5 characters, 0 or 1)" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                    maxLength="5" minLength="5"
                                     value={weekfour}
                                     onChange={(e) => handleChange(e, setWeekfour)} required />
                             </div>
