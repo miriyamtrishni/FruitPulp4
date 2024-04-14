@@ -14,7 +14,7 @@ const attendanceSchema = new mongoose.Schema({
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
 
@@ -22,21 +22,21 @@ const attendanceSchema = new mongoose.Schema({
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   weekthree: {
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   weekfour: {
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   month: {
