@@ -6,8 +6,8 @@ const attendanceSchema = new mongoose.Schema({
   eidd: {
     type:String,
         required:true,
-        maxlength: 3,
-        minlength: 3
+        maxlength: 4,
+        minlength: 4
   },
 
   weekone: {

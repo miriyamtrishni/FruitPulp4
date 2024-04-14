@@ -14,35 +14,42 @@ const EmployeeReport = () => {
     borderRadius: '5px',
     outline: 'none',
     transition: 'background-color 0.3s ease',
-    marginBottom: '20px',
-    marginLeft: '40px',
     fontFamily: 'Poppins, sans-serif',
-    fontWeight: '900' 
+    fontWeight: '700' ,
+    marginRight:'120px'
     
 };
 
+const boxStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '20px',
+  margin: 'auto',
+  backgroundColor: '#f8f8f8',
+  borderRadius: '8px',
+  boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+  height:"50vh",
+  width: '50vw', 
+  marginTop:'80px'
 
-
-  const boxStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '60px',
-    margin: '60px 60px',
-    backgroundColor: '#f8f8f8',
-    borderRadius: '8px',
-    boxShadow: "10px 14px 8px rgba(0,0,0,0.3)",
-    height:"30vh",
-    marginLeft:"200px",
-    marginTop:"300px"
+  
 };
 
 const textStyle = {
-  marginBottom: '50px',
-    fontSize: '18px',
-    color: '#333',
-    fontFamily: 'Poppins, sans-serif',
-    fontWeight: '700' 
+
+  fontSize: '18px',
+  color: '#333',
+  fontFamily: 'Poppins, sans-serif',
+  fontWeight: '700',
+  marginRight:'50px'
+
+};
+
+const imageStyle = {
+  width: '50%', // Image takes half of the container width
+  height: '100%', // Image height matches the container
+  objectFit: 'cover' // Ensures the image covers the designated area
 };
 
     
@@ -74,118 +81,135 @@ const textStyle = {
     };
   
     return (
-      <div >
-        <div >
-            
-            <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "16px" }}>
-    <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
-      <li style={{ marginRight: "40px" }}>
-        <Link
-          to="/HomePage"
-          style={{
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            paddingRight: "10px",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-        >
-          Home
-        </Link>
-      </li>
-      <li style={{ marginRight: "40px" }}>
-        <Link
-          to="/" // Path to navigate to the deleted employees table
-          style={{
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            paddingRight: "10px",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-        >
-          Employees Details
-        </Link>
-      </li>
-      <li style={{ marginRight: "40px" }}>
-        <Link
-          to="/attendance" // Path to navigate to the deleted employees table
-          style={{
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            paddingRight: "10px",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-        >
-          Employee Attendance
-        </Link>
-      </li>
-      <li style={{ marginRight: "40px" }}>
-        <Link
-          to="/EmployeeDetailsReport" // Path to navigate to the employee details report
-          style={{
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            paddingRight: "10px",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-        >
-          Generate Report
+      <div>
+      <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+<nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900' }}>
+<ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+<li style={{ marginRight: "40px" }}>
 
-          
-        </Link>
-      </li>
-      <li style={{ marginRight: "40px" }}>
-        <Link
-          to="/deleted-employees" // Path to navigate to the deleted employees table
-          style={{
-            color: "orange",
-            textDecoration: "none",
-            fontWeight: "bold",
-            paddingRight: "10px",
-            transition: "all 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-        >
-          Resign Employees
-        </Link>
-      </li>
-    </ul>
-  </nav>
+<div style={{ 
+position: 'absolute', 
+top: '20px', 
+left: '20px',
+fontSize: '15px', 
+fontWeight: '1000', 
+fontFamily: 'Poppins, sans-serif', 
+
+color: '#F4BB29',
+marginLeft:'20px'
+}}>
+FRUIT PULP
+</div>
+    <Link
+        to="/HomePage"
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontWeight: "bold",
+          paddingLeft: "700px",
+          transition: "all 0.3s ease", // Hover transition
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+      >
+        HOME
+      </Link>
+    </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+             Employees Details
+            </Link>
+          </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/attendance" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+             Employee Attendance
+            </Link>
+          </li>
+
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/EmployeeDetailsReport" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              Genarate Report
+            </Link>
+          </li>
+
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/deleted-employees" // Path to navigate to the deleted employees table
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              Resign Employees
+            </Link>
+          </li>
+        </ul>
+      </nav>
   
-  <div style={{
+      <div style={{
     display: 'flex',
-    flexDirection: 'column',
+    backgroundColor:"#FEF29B",
+    minHeight: "100vh",
     justifyContent: 'center', // Center vertically
-    alignItems: 'flex-start', // Align to the left
-    height: '65vh', // Adjust the height as needed
-    marginLeft: '100px'
-   
+     // Align to the left
+    
    
 }}>
-     <div style={boxStyle}>
-                <span style={textStyle}>Download the Employee Details Report <br/><br/><br/> This report includes the  employee details,<br/> total number of employees <br/> and sum of the total salaries. </span>
-    <button onClick={handleDownload2} style={buttonStyle2}>Download Report</button>
-    </div>
-    
+
+  <div style={boxStyle}>
+
+                <img src="/image/b5.jpg" alt="Employee Report" style={imageStyle} />
+                    <div>
+                        <p style={textStyle}>Employee Details Report.</p>
+                        <button onClick={handleDownload2} style={buttonStyle2}>
+                        <i className="fa fa-download"></i> Download</button>
+                    </div>
+</div>
 </div>
 
-</div>
-</div>
            
             
-        
+        </div>
     );
 };
 

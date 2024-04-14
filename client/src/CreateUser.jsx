@@ -16,6 +16,7 @@ function CreateUser (){
     const [overtimeHours, setOvertimeHours] = useState(0);
     const [overtimeRate, setOvertimeRate] = useState(0);
     const [bonus, setBonus] = useState(0);
+    const [errorMessage, setErrorMessage] = useState(""); // Define errorMessage state variable
     const navigate = useNavigate()
 
     //change this github
@@ -40,6 +41,23 @@ function CreateUser (){
         }
     };
 
+    const handleChange2 = (e) => {
+      let value = e.target.value.toUpperCase(); // Convert input to uppercase
+      // Replace any characters that are not 'E' or numbers with an empty string
+      value = value.replace(/[^E0-9]/g, "");
+      // Limit the length to 4 characters
+      value = value.slice(0, 4);
+      // Update the input value
+      setEid(value);
+      
+      if (value.length > 4) {
+          setErrorMessage("Maximum length is 4 characters");
+      } else if (!value.match(/^E[0-9]{3}$/)) {
+          setErrorMessage("Please enter 'E' followed by  3 numbers");
+      } else {
+          setErrorMessage("");
+      }
+  };
 
     return(
 <div >
@@ -146,7 +164,7 @@ function CreateUser (){
 
         <div
         
-        style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif'}}>
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B"}}>
         <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
          <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
          
@@ -161,13 +179,21 @@ function CreateUser (){
                 </div>
 
                
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Eid</label>
-                        <input type="text" placeholder="Enter Employee id" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
-                        maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
-                        title="Please enter only letters and numbers for Eid"
-                        onChange={(e) => setEid(e.target.value)} required />
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                   <label htmlFor="eid" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Eid</label>
+                    <input
+                          type="text"
+                          placeholder="Enter Employee id"
+                          className="form-control"
+                          style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                          maxLength="4"
+                          value={eid}
+                          onChange={handleChange2}
+                          required
+                     />
+                         {errorMessage && <div style={{ color: "red", marginLeft: "10px" }}>{errorMessage}</div>}
                     </div>
+
 
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Nic</label>
