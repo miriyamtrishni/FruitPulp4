@@ -417,15 +417,15 @@ app.get('/material-details', async (req, res) => {
         const doc = new PDFDocument();
       
         // Set up styling
-        doc.font('Helvetica-Bold').fontSize(24).fillColor('black');
+        
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        doc.rect(50, 50, 150, 50).fill('#F4BB29'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
-        const x = 50 + (100 - textWidth) / 2;
-        const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        const x = 60 + (100 - textWidth) / 2;
+        const y = 70;
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(20).text(text, x, y, { align: 'left'});
         
         doc.moveDown();
         doc.moveDown();
@@ -440,15 +440,15 @@ app.get('/material-details', async (req, res) => {
 
         // Display each material and its total quantity in a table-like format
         
-        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true, width: 400, align: 'left', bold: true });
-        doc.font('Helvetica-Bold').text('Total Quantity', { width: 800, align: 'right', bold: true, });
+        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 450, align: 'left' , bold: true });
+        doc.font('Helvetica-Bold').text('Total Quantity', { width: 700, align: 'right', bold: true });
         doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
         doc.moveDown(); // Add some vertical space after the line
         doc.moveDown(); // Add some vertical space after the line
         
         for (const [materialname, quantitiy] of Object.entries(materialsQuantities)) {
-            doc.font('Helvetica').fontSize(12).text(materialname, { width: 400, align: 'left', continued: true });
-            doc.font('Helvetica').text(quantitiy.toString(), { width: 800, align: 'right' });
+            doc.font('Helvetica').fontSize(12).text(materialname, { width: 450, align: 'left' , continued: true });
+            doc.font('Helvetica').text(quantitiy.toString(), { width: 700, align: 'right'  });
             doc.moveDown(); // Move to the next row
         }
 
@@ -471,6 +471,9 @@ app.get('/material-details', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
+
 
 
 
