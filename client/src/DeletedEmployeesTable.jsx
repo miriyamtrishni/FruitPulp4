@@ -142,7 +142,7 @@ const clearSearch = () => {
           </li>
         </ul>
       </nav>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" ,backgroundColor:"#FEF29B"}}>
             <div style={{ backgroundColor: "#B2BEB5", border: "1px solid black", borderRadius: "5px", padding: "20px" }}>
            
             <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
