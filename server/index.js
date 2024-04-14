@@ -317,8 +317,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
         doc.moveDown();
 
-        doc.moveDown(); // Move down after the company name
-        doc.fontSize(20).fillColor('black').text('Employee Details Report\n\n');
+        
 
         users.forEach(user => {
             doc.fontSize(10).text(`Name: ${user.name}`);
