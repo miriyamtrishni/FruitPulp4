@@ -6,15 +6,15 @@ const attendanceSchema = new mongoose.Schema({
   eidd: {
     type:String,
         required:true,
-        maxlength: 3,
-        minlength: 3
+        maxlength: 4,
+        minlength: 4
   },
 
   weekone: {
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
 
@@ -22,21 +22,21 @@ const attendanceSchema = new mongoose.Schema({
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   weekthree: {
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   weekfour: {
     type: Number, 
     required: true,
     maxlength: 5,
-    minlength: 1
+    minlength: 5
   },
 
   month: {

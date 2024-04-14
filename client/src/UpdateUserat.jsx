@@ -51,39 +51,69 @@ const Update = (e) => {
   .catch(err => console.log(err))
 
 }
+
+const handleChange = (e, setter) => {
+  let value = e.target.value;
+  // Trim any characters beyond the first 5
+  value = value.slice(0, 5);
+  // Replace any characters other than 0 or 1 with an empty string
+  value = value.replace(/[^01]/g, "");
+  // Update the input value
+  setter(value);
+
+  if (value.length > 5) {
+      setErrorMessage("Maximum length is 5 characters");
+  } else if (value.match(/[^01]/g)) {
+      setErrorMessage("Only 0 and 1 are allowed");
+  } else {
+      setErrorMessage("");
+  }
+};
   return (
     <div >
-      <nav style={{ backgroundColor: "black", padding: "10px 0", width: "100%", fontSize: "20px" }}>
-        <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
-          <li style={{ marginRight: "40px" }}>
-        
-            <Link
-              to="/HomePage"
-              style={{
-                color: "orange",
-                textDecoration: "none",
-                fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
-            >
-              Home
-            </Link>
-          </li>
+  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+  <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+    <li style={{ marginRight: "40px" }}>
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '15px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+      FRUIT PULP
+    </div>
+    <Link
+        to="/HomePage"
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontWeight: "bold",
+          paddingLeft: "700px",
+          transition: "all 0.3s ease", // Hover transition
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+      >
+        HOME
+      </Link>
+    </li>
           <li style={{ marginRight: "40px" }}>
             <Link
               to="/" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
              Employees Details
             </Link>
@@ -92,14 +122,14 @@ const Update = (e) => {
             <Link
               to="/attendance" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
              Employee Attendance
             </Link>
@@ -109,14 +139,14 @@ const Update = (e) => {
             <Link
               to="/EmployeeDetailsReport" 
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
               Genarate Report
             </Link>
@@ -126,14 +156,14 @@ const Update = (e) => {
             <Link
               to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
-                color: "orange",
+                color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "10px",
-                transition: "all 0.3s ease",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
               }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "white")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "orange")}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
               Resign Employees
             </Link>
@@ -141,7 +171,7 @@ const Update = (e) => {
         </ul>
       </nav>
       
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif' }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
     <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
 
@@ -166,39 +196,44 @@ const Update = (e) => {
                   
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week one</label>
-                        <input type="number" placeholder="Enter week one" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        value={weekone}   onChange={(e) => setWeekone(e.target.value)} required />
+                       <label htmlFor="week" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Week one</label>
+                           <input 
+                                type="number" 
+                                placeholder="Enter week one" 
+                                className="form-control" 
+                                style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
+                                value={weekone}   
+                                onChange={(e) => handleChange(e, setWeekone)} 
+                                required 
+                            />
                     </div>
-
                     
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="number" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week two</label>
                         <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={weektwo}  onChange={(e) => setWeektwo(e.target.value)} required />
+                        value={weektwo}  onChange={(e) => handleChange(e, setWeektwo)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week  three</label>
                         <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={weekthree}   onChange={(e) => setWeekthree(e.target.value)} required />
+                        value={weekthree}  onChange={(e) => handleChange(e, setWeekthree)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week four</label>
                         <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={weekfour}   onChange={(e) => setWeekfour(e.target.value)} required />
+                        value={weekfour}   onChange={(e) => handleChange(e, setWeekfour)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="month" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Month</label>
                         <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={month}  onChange={(e) => setMonth(e.target.value)} required />
+                        value={month}   onChange={(e) => setMonth(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>

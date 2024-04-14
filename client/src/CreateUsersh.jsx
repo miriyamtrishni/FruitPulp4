@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { Link } from "react-router-dom";
+
+
 
 function CreateUsersh (){
     const [names , setName] =useState()
@@ -29,8 +32,98 @@ function CreateUsersh (){
 
     return(
         
+
+        <div >
+<nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+  <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+    <li style={{ marginRight: "40px" }}>
+    <div style={{ 
+      position: 'absolute', 
+      top: '20px', 
+      left: '20px',
+      fontSize: '15px', 
+      fontWeight: '1000', 
+      fontFamily: 'Poppins, sans-serif', 
+      
+      color: '#F4BB29',
+      marginLeft:'20px'
+    }}>
+      FRUIT PULP
+    </div>
+    <Link
+        to="/HomePage"
+        style={{
+          color: "black",
+          textDecoration: "none",
+          fontWeight: "bold",
+          paddingLeft: "700px",
+          transition: "all 0.3s ease", // Hover transition
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+        onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+      >
+        HOME
+      </Link>
+    </li>
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/supplier" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+             SUPPLIER DETAILS
+            </Link>
+          </li>
+         
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/material-details" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              SUPPLIER ORDERS
+            </Link>
+          </li>
+
+          <li style={{ marginRight: "40px" }}>
+            <Link
+              to="/material-details" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "20px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              GENARATE REPORT
+            </Link>
+          </li>
+
+         
+
+         
+        </ul>
+      </nav>
+
         
-    
+ 
 
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B"}}>
             
@@ -107,7 +200,7 @@ function CreateUsersh (){
             {/* Optional text or additional styling can be added here */}
         </div>
         </div>
-
+</div>
 </div>
 
     )
