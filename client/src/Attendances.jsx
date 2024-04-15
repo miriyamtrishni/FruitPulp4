@@ -33,7 +33,7 @@ function Attendances() {
 
   return (
     <div >
-  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+    <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
     <div style={{ 
@@ -55,7 +55,8 @@ function Attendances() {
           color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingLeft: "700px",
+          paddingLeft: "500px",
+          paddingRight: "60px",
           transition: "all 0.3s ease", // Hover transition
         }}
         onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -64,14 +65,14 @@ function Attendances() {
         HOME
       </Link>
     </li>
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -80,14 +81,14 @@ function Attendances() {
              EMPLOYEE DETAILS
             </Link>
           </li>
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/attendance" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "2px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -97,14 +98,14 @@ function Attendances() {
             </Link>
           </li>
 
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -114,14 +115,14 @@ function Attendances() {
             </Link>
           </li>
 
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -141,7 +142,15 @@ function Attendances() {
        
         <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
         
-   <button style={{ borderRadius: '5px', backgroundColor: '#abfa87', padding: '10px', border: 'none' }}><h6 style={{ fontFamily: 'Arial', fontStyle: 'italic', lineHeight: '1.5', color: 'blue', display: 'yellow' }}>"Use '1' to denote presence and '0' to indicate absence in the employee attendance table.<br/>Additionally, if the attendance is not yet marked for upcoming days, you can represent them with '0'".</h6></button>
+        <button style={{ 
+               borderRadius: '5px', backgroundColor: 'yellow',  padding: '5px',  border: 'none', 
+        }}>
+        <h5 style={{  fontFamily: 'Arial',  lineHeight: '1.2', color: 'blue', margin: '0' 
+         }}>
+             Use 1 to denote presence and 0 to indicate absence in the employee attendance table.<br/>Additionally, if the attendance is not yet marked for upcoming days,it can be represented by a single 0.
+         </h5>
+        </button>
+
 
 <br/>
           <Link to="/createat" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>

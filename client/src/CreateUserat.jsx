@@ -78,7 +78,7 @@ function CreateUserat() {
 
     return (
         <div>
-       <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+     <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
     <div style={{ 
@@ -100,7 +100,8 @@ function CreateUserat() {
           color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingLeft: "700px",
+          paddingLeft: "500px",
+          paddingRight: "60px",
           transition: "all 0.3s ease", // Hover transition
         }}
         onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -109,14 +110,14 @@ function CreateUserat() {
         HOME
       </Link>
     </li>
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -125,14 +126,14 @@ function CreateUserat() {
              EMPLOYEE DETAILS
             </Link>
           </li>
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/attendance" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "2px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -142,14 +143,14 @@ function CreateUserat() {
             </Link>
           </li>
 
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -159,14 +160,14 @@ function CreateUserat() {
             </Link>
           </li>
 
-          <li style={{ marginRight: "25px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover

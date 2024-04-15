@@ -71,9 +71,9 @@ const handleChange = (e, setter) => {
 };
   return (
     <div >
-  <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+     <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
-    <li style={{ marginRight: "40px" }}>
+    <li style={{ marginRight: "25px" }}>
     <div style={{ 
       position: 'absolute', 
       top: '20px', 
@@ -93,7 +93,8 @@ const handleChange = (e, setter) => {
           color: "black",
           textDecoration: "none",
           fontWeight: "bold",
-          paddingLeft: "700px",
+          paddingLeft: "500px",
+          paddingRight: "60px",
           transition: "all 0.3s ease", // Hover transition
         }}
         onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
@@ -102,70 +103,70 @@ const handleChange = (e, setter) => {
         HOME
       </Link>
     </li>
-          <li style={{ marginRight: "40px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-             Employees Details
+             EMPLOYEE DETAILS
             </Link>
           </li>
-          <li style={{ marginRight: "40px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/attendance" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-             Employee Attendance
+             EMPLOYEE ATTENDANCE
             </Link>
           </li>
 
-          <li style={{ marginRight: "40px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-              Genarate Report
+              GENARATE REPORT
             </Link>
           </li>
 
-          <li style={{ marginRight: "40px" }}>
+          <li style={{ marginRight: "10px" }}>
             <Link
               to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
                 color: "black",
                 textDecoration: "none",
                 fontWeight: "bold",
-                paddingRight: "20px",
+                paddingRight: "10px",
                 transition: "all 0.3s ease", // Hover transition
               }}
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-              Resign Employees
+              RESIGN EMPLOYEES
             </Link>
           </li>
         </ul>

@@ -289,9 +289,6 @@ app.get('/searchUserByEiddeleted', (req, res) => {
 
 
 
-
-
-
 app.get('/EmployeeDetailsReport', async (req, res) => {
     try {
         // Fetch all employees from the database
@@ -305,16 +302,6 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Create a new PDF document
         const doc = new PDFDocument();
-
-
-       
-
-        
-        
-
-        
-      
-       
 
 
         // Pipe the PDF to a writable stream
@@ -354,8 +341,6 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
 
 
-
-        
 
         // Finalize the PDF
         doc.end();
