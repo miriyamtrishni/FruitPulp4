@@ -142,7 +142,15 @@ function Attendances() {
        
         <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
         
-   <button style={{ borderRadius: '5px', backgroundColor: '#abfa87', padding: '10px', border: 'none' }}><h6 style={{ fontFamily: 'Arial', fontStyle: 'italic', lineHeight: '1.5', color: 'blue', display: 'yellow' }}>"Use '1' to denote presence and '0' to indicate absence in the employee attendance table.<br/>Additionally, if the attendance is not yet marked for upcoming days, you can represent them with '0'".</h6></button>
+        <button style={{ 
+               borderRadius: '5px', backgroundColor: 'yellow',  padding: '5px',  border: 'none', 
+        }}>
+        <h5 style={{  fontFamily: 'Arial',  lineHeight: '1.2', color: 'blue', margin: '0' 
+         }}>
+             Use 1 to denote presence and 0 to indicate absence in the employee attendance table.<br/>Additionally, if the attendance is not yet marked for upcoming days,it can be represented by a single 0.
+         </h5>
+        </button>
+
 
 <br/>
           <Link to="/createat" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
