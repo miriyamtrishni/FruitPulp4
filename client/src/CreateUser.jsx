@@ -203,7 +203,7 @@ function CreateUser (){
                             placeholder="Enter NIC" 
                             className="form-control" 
                             style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                            maxLength="12" // Limit input to 12 characters
+                            maxLength="12"  minLength="12"// Limit input to 12 characters
                             pattern="[A-Za-z0-9]*" // Allow only letters (both lowercase and uppercase) and numbers
                             title="Please enter only letters and numbers for NIC" // Error message for unsupported characters
                               onChange={(e) => setNic(e.target.value)} 
