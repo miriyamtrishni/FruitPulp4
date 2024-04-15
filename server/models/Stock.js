@@ -2,11 +2,9 @@ const mongoose = require('mongoose')
 
 const UserSchemaM = new mongoose.Schema({
     code: {
-        type:Number,
-        maxlength: 3,
-        minlength: 3,
-        required:true
-    },
+        type:String,
+
+     },
     namem:{
         type:String,
         required:true
@@ -15,9 +13,13 @@ const UserSchemaM = new mongoose.Schema({
         type:String,
 
     },
-    qty:{
-        type:String,
-        required:true
+    qty: {
+        type: Number,
+        required: true
+    },
+    unit: {
+        type: String,
+        default: 'kilogram' // Default unit is kilogram
     },
     type:{
         type:String,

@@ -6,9 +6,11 @@ import Users from './Users'
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 
-import UsersMT from "./UsersMT.jsx";
 import CreateMT from "./CreateMT";
 import UpdateMT from "./UpdateMT.jsx";
+import StocksMT from "./StocksMT.jsx";
+import StockReport from "./StockReport"
+
 
 function App() {
     //const [count, setCount] = useState(0)
@@ -23,9 +25,10 @@ function App() {
                     <Route path="/HomePage" element={<HomePage/>}/>
                     <Route path="/WPage" element={<WPage/>}/>
 
-                    <Route path='/usermt' element={<UsersMT/>}></Route>
+                    <Route path='/stocksmt' element={<StocksMT/>}></Route>
                     <Route path='/createmt' element={<CreateMT/>}></Route>
                     <Route path='/updatemt/:id' element={<UpdateMT/>}></Route>
+                    <Route path="/stock-details" element={<StockReport/>}/>
 
                 </Routes>
 
