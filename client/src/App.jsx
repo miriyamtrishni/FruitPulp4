@@ -7,6 +7,8 @@ import WPage from './WPage';
 import Users from './Users'
 import Suppliers from './Suppliers'     
 import Attendances from './Attendances'
+import Machines from './Machines'
+import Distributors from './Distributors'
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
@@ -22,6 +24,13 @@ import EmployeeReport from './EmployeeReport';
 
 import Signup from './Signup'
 import Login from './Login'
+
+import CreateUserla from './CreateUserla';
+import UpdateUserla from './UpdateUserla';
+
+import CreateUserds from './CreateUserds';
+import UpdateUserds from './UpdateUserds';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -56,8 +65,16 @@ function App() {
 
             <Route path="/material-details" element={<SupplierReport />} />
 
+            <Route path='/machinary' element={<Machines />}></Route>
+            <Route path='/createla' element={<CreateUserla />}></Route>
+            <Route path='/updatela/:id' element={<UpdateUserla />}></Route>
 
+            <Route path='/distributor' element={<Distributors />}></Route>
+            <Route path='/createds' element={<CreateUserds />}></Route>
+            <Route path='/updateds/:id' element={<UpdateUserds />}></Route>
+            
 
+            
           </Routes>
           
           </BrowserRouter>

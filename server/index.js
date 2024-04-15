@@ -9,6 +9,10 @@ const UserModel = require('./models/Users')
 const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
 const LoginModel = require('./models/Login')
+const MachineUserModel = require('./models/Machines')
+const DistributorUserModel = require('./models/Distributors')
+
+
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -524,6 +528,128 @@ app.get('/material-details', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
+
+
+
+
+
+//function machinery management
+app.get('/machinary' ,(req,res) => {
+    MachineUserModel.find({})
+    .then(machines => res.json(machines))
+    .catch(err => res.json(err))
+
+})
+app.get('/getUserla/:id' ,(req,res) => {
+    const id = req.params.id;
+    MachineUserModel.findById({_id:id})
+    .then(machines => res.json(machines))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUserla/:id',(req,res) => {
+    const id = req.params.id;
+    MachineUserModel.findByIdAndUpdate({_id:id} , {
+        namel: req.body.namel,
+        codel: req.body.codel ,
+        datel: new Date (req.body.datel),
+        returndate: new Date (req.body.returndate),
+        pricel: req.body.pricel,
+        statusl: req.body.statusl,
+
+    })
+
+    .then(machines => res.json(machines))
+    .catch(err => res.json(err))
+
+})
+app.delete('/deleteUserla/:id' ,(req,res) => {
+    const id = req.params.id;
+    MachineUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(machines))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUserla", (req, res) =>{
+    MachineUserModel.create(req.body)
+    .then(machines => res.json(machines))
+    .catch(err => res.json(err))
+})
+
+// Search  by code
+app.get('/searchMachineByCode', (req, res) => {
+    const { codel } = req.query;
+   
+    MachineUserModel.find({codel }) // Find repairs with the specified code
+        .then(machines => {
+            res.json(machines); // Return the matching repairs 
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+
+//function distributor  management
+app.get('/distributor' ,(req,res) => {
+    DistributorUserModel.find({})
+    .then(distributors => res.json(distributors))
+    .catch(err => res.json(err))
+
+})
+app.get('/getUserds/:id' ,(req,res) => {
+    const id = req.params.id;
+    DistributorUserModel.findById({_id:id})
+    .then(distributors => res.json(distributors))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUserds/:id',(req,res) => {
+    const id = req.params.id;
+    DistributorUserModel.findByIdAndUpdate({_id:id} , {
+        named: req.body.named,
+        did: req.body. did ,
+        addressd: req.body.addressd,
+        materiald: req.body. materiald,
+        dated: new Date (req.body.dated),
+        quantityd: req.body. quantityd,
+        statusd: req.body.statusd,
+
+    })
+
+    .then(distributors => res.json(distributors))
+    .catch(err => res.json(err))
+
+})
+app.delete('/deleteUserds/:id' ,(req,res) => {
+    const id = req.params.id;
+    DistributorUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(distributors))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUserds", (req, res) =>{
+    DistributorUserModel.create(req.body)
+    .then(distributors => res.json(distributors))
+    .catch(err => res.json(err))
+})
+
+// Search  by code
+app.get('/searchDistributorByDid', (req, res) => {
+    const {  did } = req.query;
+   
+    DistributorUserModel.find({ did }) // Find repairs with the specified code
+        .then(distributors => {
+            res.json(distributors); // Return the matching repairs 
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+
 
 
 
