@@ -180,7 +180,7 @@ const SupplierReport = () => {
 
   <div style={boxStyle}>
 
-                <img src="/image/b5.jpg" alt="Material Report" style={imageStyle} />
+                <img src="/image/b4.jpg" alt="Material Report" style={imageStyle} />
                     <div>
                         <p style={textStyle}>Supplied Material Report.</p>
                         <button onClick={handleDownload2} style={buttonStyle2}>
