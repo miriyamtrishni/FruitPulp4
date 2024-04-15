@@ -337,8 +337,8 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Add total employees and total salaries to the document with different font sizes
         doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
 
 
 
