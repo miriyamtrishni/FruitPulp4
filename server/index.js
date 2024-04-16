@@ -104,6 +104,7 @@ app.put('/updateUser/:id',(req,res) => {
         eid: req.body.eid ,
         nic: req.body.nic,
         gender: req.body.gender ,
+        dob: req.body.dob ,
         age: req.body.age ,
         address: req.body.address ,
         email: req.body.email ,
@@ -337,8 +338,8 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Add total employees and total salaries to the document with different font sizes
         doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`Total Employees: ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
 
 
 
