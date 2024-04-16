@@ -63,8 +63,11 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0 // Default value is set to 0
     }
-
-   
+,
+    dob: {
+        type: Date,
+        required: true
+      },
 
 })
 

@@ -104,6 +104,7 @@ app.put('/updateUser/:id',(req,res) => {
         eid: req.body.eid ,
         nic: req.body.nic,
         gender: req.body.gender ,
+        dob: req.body.dob ,
         age: req.body.age ,
         address: req.body.address ,
         email: req.body.email ,
