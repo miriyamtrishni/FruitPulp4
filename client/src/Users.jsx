@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 
 import EmployeeReport from "./EmployeeReport";
 import DeletedEmployeesTable from "./DeletedEmployeesTable"; // Import the DeletedEmployeesTable component
+
 function Users() {
   const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");//search
-  const [searchResults, setSearchResults] = useState([]);//search
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((result) => setUsers(result.data)).catch((err) => console.log(err));
@@ -20,7 +21,6 @@ function Users() {
     }).catch((err) => console.log(err));
   };
 
- 
   // Function to filter users based on search term
   const handleSearch = () => {
     const results = users.filter((user) => user.eid === searchTerm);
@@ -33,12 +33,8 @@ function Users() {
     setSearchTerm("");
   };
 
-
-
-
-
   return (
-    <div >
+    <div>
       <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
@@ -139,59 +135,51 @@ function Users() {
           </li>
         </ul>
       </nav>
-      
 
-       <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
-        <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
-      
-          <Link to="/create" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
-         
-          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
-          <button onClick={handleSearch}style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search</button>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", fontFamily: 'Poppins, sans-serif', backgroundColor: "#FEF29B" }}>
+        <div style={{ border: "none", borderRadius: "5px", height: "90vh", width: '90vw', boxShadow: "0 4px 8px rgba(0,0,0,0.3)", backgroundColor: "#ffffff" }}>
+
+          <Link to="/create" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none", marginBottom: "10px", display: "inline-block", marginLeft: "10px", marginTop: "20px" }}>ADD +</Link>
+
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Eid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }} />
+          <button onClick={handleSearch} style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search</button>
           {searchResults.length > 0 ? (
-            <button onClick={clearSearch}style={{ backgroundColor: "red", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Clear Search</button>
+            <button onClick={clearSearch} style={{ backgroundColor: "red", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Clear Search</button>
           ) : null}
 
-
-          <table  id="employeeTable" style={{ width: "100%", textAlign: "center", borderCollapse: "collapse", marginRight:"80px"}}>
+          <table id="employeeTable" style={{ width: "100%", textAlign: "center", borderCollapse: "collapse", marginRight: "80px" }}>
             <thead>
-            <tr style={{ border: "none",background: "#B2BEB5" }}>
-                <th style={{ padding: "10px", border: "none",width: "15%" }}> Name </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> EID </th>
-                <th style={{padding: "10px", border: "none",width: "5%"  }}> NIC </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> Gender </th>
-                <th style={{ padding: "10px", border: "none",width: "4%"  }}> Age </th>
-                <th style={{ padding: "10px", border: "none",width: "20%"  }}> Address </th>
-                <th style={{ padding: "10px", border: "none",width: "15%"  }}> Email </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> JobTitle </th>
-                <th style={{ padding: "10px", border: "none",width: "7%"  }}> Salary (Rs.)</th>
-                <th style={{ padding: "10px", border: "none",width: "20%" }}> Action </th>
+              <tr style={{ border: "none", background: "#B2BEB5" }}>
+                <th style={{ padding: "10px", border: "none", width: "15%" }}> Name </th>
+                <th style={{ padding: "10px", border: "none", width: "10%" }}> EID </th>
+               
+               
+                <th style={{ padding: "10px", border: "none", width: "10%" }}> Age </th>
+                
+                <th style={{ padding: "10px", border: "none", width: "15%" }}> Email </th>
+                <th style={{ padding: "10px", border: "none", width: "10%" }}> JobTitle </th>
+                <th style={{ padding: "10px", border: "none", width: "10%" }}> Salary (Rs.)</th>
+                <th style={{ padding: "10px", border: "none", width: "20%" }}> Action </th>
               </tr>
             </thead>
             <tbody>
-              
               {(searchResults.length > 0 ? searchResults : users).map((user) => {
+                const dob = user.dob ? new Date(user.dob) : null;
+                const age = dob ? Math.floor((new Date() - dob) / (365.25 * 24 * 60 * 60 * 1000)) : "";
                 return (
-                  <tr style={{ border: "none" ,height: "50px",fontWeight: "bold"}} key={user._id}>
-                    <td style={{ border: "none"  }}>{user.name}</td>
-                    <td style={{ border: "none"  }}>{user.eid}</td>
-                    <td style={{ border: "none"  }}>{user.nic}</td>
-                    <td style={{ border: "none" }}>{user.gender}</td>
-                    <td style={{ border: "none"  }}>{user.age}</td>
-                    <td style={{ border: "none"  }}>{user.address}</td>
-                    <td style={{ border: "none"  }}>{user.email}</td>
-                    <td style={{ border: "none"  }}>{user.jobtitle}</td>
-                    <td style={{ border: "none"  }}>{user.salary}</td>
+                  <tr style={{ border: "none", height: "50px", fontWeight: "bold" }} key={user._id}>
+                    <td style={{ border: "none" }}>{user.name}</td>
+                    <td style={{ border: "none" }}>{user.eid}</td>
                    
-                    <td >
-                      
-                      <Link to={`/update/${user._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none",fontWeight: "bold", }}>Update</Link>
-                      <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none" ,fontWeight: "bold",}} onClick={() => handleDelete(user._id)}>Delete</button>
+                    <td style={{ border: "none" }}>{age}</td>
+                    <td style={{ border: "none" }}>{user.email}</td>
+                    <td style={{ border: "none" }}>{user.jobtitle}</td>
+                    <td style={{ border: "none" }}>{user.salary}</td>
+                    <td>
+                      <Link to={`/update/${user._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none", fontWeight: "bold", }}>Update</Link>
+                      <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none", fontWeight: "bold", }} onClick={() => handleDelete(user._id)}>Delete</button>
                     </td>
-
                   </tr>
-
-                  
                 );
               })}
             </tbody>
@@ -201,7 +189,5 @@ function Users() {
     </div>
   );
 }
-
-
 
 export default Users;

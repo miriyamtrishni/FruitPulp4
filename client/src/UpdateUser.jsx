@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function UpdateUser (){
     const {id} = useParams()
     const [name , setName] =useState()
+    const [dob , setDob] =useState()
     const [eid, setEid] =useState()
     const [nic, setNic] =useState()
     const [gender, setGender] =useState()
@@ -24,6 +25,7 @@ function UpdateUser (){
         .then(result => {console.log(result)
             setName(result.data.name)
             setEid(result.data.eid)
+            setDob(result.data.dob)
             setNic(result.data.nic)
             setGender(result.data.gender)
             setAge(result.data.age)
@@ -34,9 +36,6 @@ function UpdateUser (){
             setOvertimeHours(result.data.overtimeHours)
             setOvertimeRate(result.data.overtimeRate)
             setBonus(result.data.bonus)
-        
-        
-        
         
         
         })
@@ -63,6 +62,21 @@ function UpdateUser (){
 
     }
     
+    const handleChangeDOB = (e) => {
+      setDob(e.target.value);
+      calculateAge(e.target.value);
+  };
+
+  const calculateAge = (dob) => {
+      const today = new Date();
+      const birthDate = new Date(dob);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
+      setAge(age);
+  };
 
 
     return(
@@ -169,8 +183,8 @@ function UpdateUser (){
         </ul>
       </nav>
         
-<div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "16px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
-<div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "16px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
+        <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
 
                 <form onSubmit={Update}style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -194,59 +208,60 @@ function UpdateUser (){
                         disabled   required />
                     </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                         <label htmlFor="nic" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>NIC</label>
-                         <input 
-                           type="text" 
-                             placeholder="Enter NIC" 
-                             className="form-control" 
-                             style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                             maxLength="12"  minLength="12"// Limit input to 12 characters
-                             pattern="[A-Za-z0-9]*" // Allow only letters (both lowercase and uppercase) and numbers
-                             title="Please enter only letters and numbers for NIC" // Error message for unsupported characters
-                             value={nic}  
-                             onChange={(e) => setNic(e.target.value)}
-                             required 
-                         />
-                        </div>
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="dob" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Date of Birth</label>
+                                <input type="date" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                value={dob} onChange={handleChangeDOB} required />
+                            </div>
+
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="age" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Age</label>
+                                <input type="text" value={age} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                            </div>
+
+                            <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                              <label htmlFor="gender" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Gender</label>
+                              <select 
+                              className="form-control" 
+                              style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                              value={gender}  onChange={(e) => setGender(e.target.value)}
+                              required
+                           >
+                            <option value="">Select Gender</option>
+                              <option value="Female">Female</option>
+                              <option value="Male">Male</option>
+                              <option value="Disclose">Disclose</option>
+                              </select>
+                              </div>
+
+                              <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="address" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Address</label>
+                                <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                                value={address}  onChange={(e) => setAddress(e.target.value)}/>
+                              </div>
+
+                            <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                                  <label htmlFor="nic" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>NIC</label>
+                                  <input 
+                                    type="text" 
+                                      placeholder="Enter NIC" 
+                                      className="form-control" 
+                                      style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                                      maxLength="12"  minLength="12"// Limit input to 12 characters
+                                      pattern="[A-Za-z0-9]*" // Allow only letters (both lowercase and uppercase) and numbers
+                                      title="Please enter only letters and numbers for NIC" // Error message for unsupported characters
+                                      value={nic}  
+                                      onChange={(e) => setNic(e.target.value)}
+                                      required 
+                                    />
+                             </div>
 
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                    <label htmlFor="gender" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Gender</label>
-                     <select 
-                    className="form-control" 
-                     style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                     value={gender}  onChange={(e) => setGender(e.target.value)}
-                     required
-                     >
-                  <option value="">Select Gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                     </select>
-                    </div>
-
-
-
-
-
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="age" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Age</label>
-                        <input type="number" placeholder="Enter age" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        value={age}  onChange={(e) => setAge(e.target.value)}/>
-                    </div>
-
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="address" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Address</label>
-                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        value={address}  onChange={(e) => setAddress(e.target.value)}/>
-                    </div>
-
-
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="email" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Email</label>
-                        <input type="email" placeholder="Enter email" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        value={email}  onChange={(e) => setEmail(e.target.value)}/>
-                    </div>
+                             <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                                  <label htmlFor="email" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Email</label>
+                                   <input type="email" placeholder="Enter email" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                                   value={email}  onChange={(e) => setEmail(e.target.value)}/>
+                            </div>
 
                     
 

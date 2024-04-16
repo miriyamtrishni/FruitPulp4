@@ -164,8 +164,8 @@ const clearSearch = () => {
                         <tr>
                         <th style={{ padding: "10px", border: "1px solid" }}> Name </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> EID </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> NIC </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Gender </th>
+                
+               
                 <th style={{ padding: "10px", border: "1px solid" }}> Age </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Address </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Email </th>
@@ -180,9 +180,9 @@ const clearSearch = () => {
                             <tr style={{ border: "1px solid" }} key={employee._id}>
                                 <td style={{ border: "1px solid" }}>{employee.name}</td>
                                 <td style={{ border: "1px solid" }}>{employee.eid}</td>
-                                <td style={{ border: "1px solid" }}>{employee.nic}</td>
+                              
                                 <td style={{ border: "1px solid" }}>{employee.age}</td>
-                                <td style={{ border: "1px solid" }}>{employee.gender}</td>
+                               
                                 <td style={{ border: "1px solid" }}>{employee.address}</td>
                                 <td style={{ border: "1px solid" }}>{employee.email}</td>
                                 <td style={{ border: "1px solid" }}>{employee.jobtitle}</td>
