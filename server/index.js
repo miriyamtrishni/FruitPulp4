@@ -421,6 +421,7 @@ app.post("/createUsersh", (req, res) =>{
     .catch(err => res.json(err))
 })
 
+
 // Search user by SID
 app.get('/searchSupplierBySid', (req, res) => {
     const { sid } = req.query;
