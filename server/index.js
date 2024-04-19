@@ -375,7 +375,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         const users = await UserModel.find({});
 
         // Calculate total salaries
-        const totalSalaries = users.reduce((total, user) => total + user.salary, 0);
+        const totalSalaries = users.reduce((total, user) => total + user.actualSalary, 0);
 
         // Get the total number of employees
         const totalEmployees = users.length;
@@ -412,7 +412,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
             doc.text(`Address: ${user.address}`);
             doc.text(`Email: ${user.email}`);
             doc.text(`Job Title: ${user.jobtitle}`);
-            doc.text(`Salary: ${user.salary}\n\n`);
+            doc.text(`Salary: ${user.actualSalary}\n\n`);
         });
 
         // Add total employees and total salaries to the document with different font sizes
