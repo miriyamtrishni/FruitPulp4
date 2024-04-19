@@ -11,7 +11,7 @@ const SupplierUserModel = require('./models/Suppliers')
 const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
-
+const LeaveModel = require('./models/Leaves')
 
 
 // Import the DeletedUserModel
@@ -113,17 +113,21 @@ app.put('/updateUser/:id',(req,res) => {
         overtimeHours: req.body.overtimeHours,
         overtimeRate: req.body.overtimeRate,
         bonus: req.body.bonus,
+        epf:req.body.epf,
+        etf:req.body.etf,
+        actualSalary:req.body.actualSalary,
+
 
     })
     .then(users => res.json(users))
     .catch(err => res.json(err))
 
 })
-app.post("/createUser", (req, res) =>{
+app.post("/createUser", (req, res) => {
     UserModel.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-})
+        .then(users => res.json({ success: true, message: 'Employee added successfully', data: users }))
+        .catch(err => res.json({ success: false, message: 'Error adding employee', error: err }))
+});
 
 
 // Route to delete a user
@@ -196,7 +200,81 @@ app.post('/checkEidd', async (req, res) => {
     }
 });
 
+//leave
+app.post("/createUserLeave", (req, res) =>{
+    LeaveModel.create(req.body)
+    .then(leaves => res.json(leaves))
+    .catch(err => res.json(err))
+})
 
+app.get('/leave' ,(req,res) => {
+    LeaveModel.find({})
+    .then(leaves => res.json(leaves))
+    .catch(err => res.json(err))
+
+})
+
+app.get('/getUserLeave/:id' ,(req,res) => {
+    const id = req.params.id;
+    LeaveModel.findById({_id:id})
+    .then(leaves => res.json(leaves))
+    .catch(err => res.json(err))
+
+})
+
+app.put('/updateUserLeave/:id',(req,res) => {
+    const id = req.params.id;
+    LeaveModel.findByIdAndUpdate({_id:id} , {
+        eid3: req.body.eid3,
+        leavetype: req.body.leavetype ,
+        leavepay: req.body.leavepay,
+        approve:req.body.approve,
+        monthh: req.body.monthh ,
+        datee: req.body.datee,
+       
+        
+    })
+
+    .then(leaves => res.json(leaves))
+    .catch(err => res.json(err))
+
+})
+
+app.delete('/deleteUserLeave/:id' ,(req,res) => {
+    const id = req.params.id;
+    LeaveModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(leaves))
+    .catch(err => res.json(err))
+})
+
+// Search user by EID3
+app.get('/searchUserByEid3', (req, res) => {
+    const { eid3 } = req.query;
+
+    LeaveModel.find({ eid3 }) // Find users with the specified EID
+        .then(leaves => {
+            res.json(leaves); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+// Check if Eid exists in attendance
+app.post('/checkEid3', async (req, res) => {
+    try {
+        const { eid3 } = req.body;
+        const leaves = await LeaveModel.findOne({ eid3 });
+        if (leaves) {
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
+    } catch (error) {
+        console.error('Error checking Eid:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 //attendance
 app.post("/createUserat", (req, res) =>{
@@ -219,6 +297,7 @@ app.get('/getUserat/:id' ,(req,res) => {
     .catch(err => res.json(err))
 
 })
+
 app.put('/updateUserat/:id',(req,res) => {
     const id = req.params.id;
     AttendanceModel.findByIdAndUpdate({_id:id} , {
@@ -266,7 +345,7 @@ app.get('/searchUserByEid', (req, res) => {
 app.get('/searchUserByEidd', (req, res) => {
     const { eidd } = req.query;
     
-    UserModel.find({ eidd }) // Find users with the specified EID
+    AttendanceModel.find({ eidd }) // Find users with the specified EID
         .then(attendances => {
             res.json(attendances); // Return the matching users
         })
