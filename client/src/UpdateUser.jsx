@@ -56,7 +56,7 @@ function UpdateUser (){
 
     const Update = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:3001/updateUser/"+id, {name ,eid,nic,gender,age,address,email,jobtitle , salary})
+        axios.put("http://localhost:3001/updateUser/"+id, {name ,eid,nic,gender,age,address,email,jobtitle , salary,epf,etf,actualSalary})
         .then(result => {
             console.log(result)
             navigate('/')
@@ -83,16 +83,17 @@ function UpdateUser (){
       setAge(age);
   };
 
-  const handleSalaryChange = (value) => {
-    const salaryValue = value; // Use the provided value directly
+  const handleSalaryChange = (e) => {
+    const salaryValue = e.target.value;
     setSalary(salaryValue);
-    const etfValue = 0.03 * parseFloat(salaryValue); // Calculate ETF (3% of salary)
-    const epfValue = 0.12 * parseFloat(salaryValue); // Calculate EPF (12% of salary)
-    setEtf(etfValue); // Update etf state
-    setEpf(epfValue); // Update epf state
-    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue; // Calculate actual salary
-    setActualSalary(actualSalaryValue); // Update actualSalary state
+    const etfValue = 0.03 * parseFloat(salaryValue);
+    const epfValue = 0.12 * parseFloat(salaryValue);
+    setEtf(etfValue);
+    setEpf(epfValue);
+    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue;
+    setActualSalary(actualSalaryValue);
 };
+
 
 
 
@@ -324,17 +325,20 @@ function UpdateUser (){
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          value={bonus}   onChange={(e) => setBonus(e.target.value)} required />
                     </div>
+
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
-                        <input 
-                            type="number" 
-                            placeholder="Enter salary" 
-                            className="form-control" 
-                            style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
-                            value={salary}  
-                            onChange={(e) => handleSalaryChange(e.target.value)}
-                        />
-                    </div>
+    <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+    <input 
+        type="number" 
+        placeholder="Enter salary" 
+        className="form-control" 
+        style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+        value={salary}  
+        onChange={(e) => handleSalaryChange(e)} // Pass the event object
+    />
+</div>
+
+
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>EPF</label>
                         <input 
