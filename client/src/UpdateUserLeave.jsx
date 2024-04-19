@@ -6,28 +6,26 @@ import {useParams,useNavigate} from "react-router-dom";
 import EmployeeReport from "./EmployeeReport";
 import DeletedEmployeesTable from "./DeletedEmployeesTable"; // Import the DeletedEmployeesTable component
 
-function UpdateUserat() {
+function UpdateUserLeave() {
   const {id} =useParams()
-  const [eidd , setEidd] =useState()
+  const [eid3, setEid3] =useState()
  
-  const [weekone, setWeekone] =useState()
-  const [weektwo, setWeektwo] =useState()
-  const [weekthree , setWeekthree] =useState()
-  const[weekfour,setWeekfour] =useState()
-  const [month , setMonth] =useState()
-  const [date , setDate] =useState()
+  const [leavetype, setLeavetype] = useState("");
+  const [leavepay, setLeavePay] = useState("");
+  const [approve, setApprove] = useState("");
+  const [monthh, setMonthh] = useState("");
+  const [datee, setDatee] = useState("");
   const navigate= useNavigate()
 
   useEffect(() => {
-    axios.get('http://localhost:3001/getUserat/'+id)
+    axios.get('http://localhost:3001/getUserleave/'+id)
     .then(result => {console.log(result)
-        setEidd(result.data.eidd)
-        setWeekone(result.data.weekone)
-        setWeektwo(result.data.weektwo)
-        setWeekthree(result.data.weekthree)
-        setWeekfour(result.data.weekfour)
-        setMonth(result.data.month)
-        setDate(result.data.date)
+        setEid3(result.data.eid3)
+        setLeavetype(result.data.leavetype)
+        setLeavePay(result.data.leavepay)
+        setApprove(result.data.approve)
+        setMonthh(result.data.monthh)
+        setDatee(result.data.datee)
         
     
     })
@@ -37,10 +35,10 @@ function UpdateUserat() {
 
 const Update = (e) => {
   e.preventDefault();
-  axios.put("http://localhost:3001/updateUserat/"+id, { eidd,weekone,weektwo,weekthree,weekfour,month,date })
+  axios.put("http://localhost:3001/updateUserleave/"+id, { eid3,leavepay,approve,leavetype,monthh,datee })
   .then(result => {
       console.log(result)
-      navigate('/attendance')
+      navigate('/leave')
   
   })
 
@@ -48,23 +46,9 @@ const Update = (e) => {
 
 }
 
-const handleChange = (e, setter) => {
-  let value = e.target.value;
-  // Trim any characters beyond the first 5
-  value = value.slice(0, 5);
-  // Replace any characters other than 0 or 1 with an empty string
-  value = value.replace(/[^01]/g, "");
-  // Update the input value
-  setter(value);
 
-  if (value.length > 5) {
-      setErrorMessage("Maximum length is 5 characters");
-  } else if (value.match(/[^01]/g)) {
-      setErrorMessage("Only 0 and 1 are allowed");
-  } else {
-      setErrorMessage("");
-  }
-};
+
+ 
   return (
     <div >
      <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
@@ -132,6 +116,7 @@ const handleChange = (e, setter) => {
             </Link>
           </li>
 
+
           <li style={{ marginRight: "10px" }}>
             <Link
               to="/leave" 
@@ -190,7 +175,7 @@ const handleChange = (e, setter) => {
         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
 
                 <form onSubmit={Update}style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                    <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Update Attendance</h2>
+                    <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Update Leave</h2>
                    
                    
                     
@@ -201,60 +186,46 @@ const handleChange = (e, setter) => {
                         maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
                         title="Please enter only letters and numbers for Eid"
                         
-                        value={eidd}  onChange={(e) => setEidd(e.target.value)}  disabled required />
+                        value={eid3}  onChange={(e) => setEid3(e.target.value)}  disabled required />
                     </div>
 
+                    
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                       <label htmlFor="week" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Week one</label>
-                           <input 
-                                type="number" 
-                                placeholder="Enter week one" 
-                                className="form-control" 
-                                style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
-                                value={weekone}   
-                                onChange={(e) => handleChange(e, setWeekone)} 
-                                required 
-                            />
-                    </div>
+
+                  
+
+                    
                     
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="number" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week two</label>
-                        <input type="number" placeholder="Enter week two" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                        <label htmlFor="leavetype" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Leave Type</label>
+                        <input type="text" placeholder="Enter leave type" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={weektwo}  onChange={(e) => handleChange(e, setWeektwo)} required />
+                        value={leavetype}  onChange={(e) => handleChange(e, setLeavetype)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week  three</label>
-                        <input type="number" placeholder="Enter Week three " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                        <label htmlFor="leavetype" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Pay Details Of the leave</label>
+                        <input type="text" placeholder="Enter leave type" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={weekthree}  onChange={(e) => handleChange(e, setWeekthree)} required />
+                        value={leavepay}  onChange={(e) => handleChange(e, setLeavePay)} required />
                     </div>
 
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="week" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Week four</label>
-                        <input type="number" placeholder="Enter Week four " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        value={weekfour}   onChange={(e) => handleChange(e, setWeekfour)} required />
-                    </div>
 
+                   
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="month" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Month</label>
                         <input type="text" placeholder="Enter  month " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={month}   onChange={(e) => setMonth(e.target.value)} required />
+                        value={monthh}   onChange={(e) => setMonthh(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="date" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Date</label>
                         <input type="date" placeholder="Enter  date " className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={date}    onChange={(e) => setDate(e.target.value)} required />
+                        value={datee}    onChange={(e) => setDatee(e.target.value)} required />
                     </div>
                     
-                    
-
                     
 
                     <button style={{ marginLeft: "90px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Update</button>
@@ -284,4 +255,5 @@ const handleChange = (e, setter) => {
 
 
 
-export default UpdateUserat;
+export default UpdateUserLeave;
+

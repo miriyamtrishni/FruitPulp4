@@ -17,6 +17,9 @@ function CreateUser() {
     const [overtimeHours, setOvertimeHours] = useState(0);
     const [overtimeRate, setOvertimeRate] = useState(0);
     const [bonus, setBonus] = useState(0);
+    const [etf, setEtf] = useState(0); // Add etf state
+    const [epf, setEpf] = useState(0); // Add epf state
+    const [actualSalary, setActualSalary] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // Define errorMessage state variable
     const navigate = useNavigate();
 
@@ -36,7 +39,11 @@ function CreateUser() {
                 salary,
                 overtimeHours,
                 overtimeRate,
-                bonus
+                bonus,
+                etf,
+                epf,
+                actualSalary ,
+               
             };
             const result = await axios.post("http://localhost:3001/createUser", newUser);
             console.log(result);
@@ -81,7 +88,16 @@ function CreateUser() {
       }
   };
 
-
+  const handleSalaryChange = (e) => {
+    const salaryValue = e.target.value;
+    setSalary(salaryValue);
+    const etfValue = 0.03 * parseFloat(salaryValue); // Calculate ETF (3% of salary)
+    const epfValue = 0.12 * parseFloat(salaryValue); // Calculate EPF (12% of salary)
+    setEtf(etfValue); // Update etf state
+    setEpf(epfValue); // Update epf state
+    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue; // Calculate actual salary
+    setActualSalary(actualSalaryValue); // Update actualSalary state
+};
 
 
 
@@ -152,6 +168,23 @@ function CreateUser() {
              EMPLOYEE ATTENDANCE
             </Link>
           </li>
+
+          <li style={{ marginRight: "10px" }}>
+            <Link
+              to="/leave" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              EMPLOYEE LEAVE
+            </Link>
+          </li>     
 
           <li style={{ marginRight: "10px" }}>
             <Link
@@ -307,13 +340,25 @@ function CreateUser() {
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                             onChange={(e) => setBonus(e.target.value)} required />
                     </div>
-			 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="salary" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Salary </label>
-                      
-                        <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
-                        
-                        onChange={(e) => setSalary(e.target.value)} required />
-                    </div>
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+                    <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
+                </div>
+                
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
+                    <input type="text" value={etf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
+
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>EPF</label>
+                    <input type="text" value={epf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
+
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Actual Salary</label>
+                    <input type="text" value={actualSalary} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
 
 
                             <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
