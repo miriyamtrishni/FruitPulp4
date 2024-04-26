@@ -31,6 +31,12 @@ import UpdateUserla from './UpdateUserla';
 import CreateUserds from './CreateUserds';
 import UpdateUserds from './UpdateUserds';
 
+import CreateMT from "./CreateMT";
+import UpdateMT from "./UpdateMT.jsx";
+import StocksMT from "./StocksMT.jsx";
+import StockReport from "./StockReport"
+
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -53,8 +59,11 @@ function App() {
             <Route path='/supplier' element={<Suppliers />}></Route>
             <Route path='/createsh' element={<CreateUsersh />}></Route>
             <Route path='/updatesh/:id' element={<UpdateUsersh />}></Route>
-            
 
+            <Route path='/stocksmt' element={<StocksMT/>}></Route>
+            <Route path='/createmt' element={<CreateMT/>}></Route>
+            <Route path='/updatemt/:id' element={<UpdateMT/>}></Route>
+            <Route path="/stock-details" element={<StockReport/>}/>
 
 
             <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}

@@ -178,12 +178,7 @@ function CreateUserds (){
                     </div>
 
                     
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="dated" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}> Dispatch date</label>
-                        <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        onChange={(e) => setDate(e.target.value)} required />
-                    </div>
+
         
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>

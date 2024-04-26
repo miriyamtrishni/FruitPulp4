@@ -165,7 +165,7 @@ const HomePage = () => {
             }}>Employee Management</button>
           </Link>
 
-          <Link to="/stock">
+          <Link to="/stocksmt">
             <button style={{ 
               backgroundColor: '#FFF1B9', 
               color: 'black', 

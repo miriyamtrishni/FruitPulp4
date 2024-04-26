@@ -147,7 +147,7 @@ function Distributors() {
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> DID </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> Delivery address </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}>Materialname </th>
-                <th style={{ padding: "10px", border: "none",width: "20%"   }}> Dispatch date </th>
+
                 <th style={{ padding: "10px", border: "none",width: "10%" }}>Amount packets</th>
                 <th style={{ padding: "10px", border: "none",width: "10%" }}>Delivery Status </th>
                 <th style={{ padding: "10px", border: "none" ,width: "20%"}}> Action </th>
@@ -161,7 +161,7 @@ function Distributors() {
                     <td style={{ border: "none" }}>{distributor.did}</td>
                     <td style={{ border: "none" }}>{distributor.addressd}</td>
                     <td style={{ border: "none"  }}>{distributor.materiald}</td>
-                    <td style={{ border: "none"  }}>{distributor.dated}</td>
+
                     <td style={{ border: "none" }}>{distributor.quantityd}</td>
                     <td style={{ border: "none" }}>{distributor.statusd}</td>
                     

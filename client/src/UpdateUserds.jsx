@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+// import React,{useState,useEffect} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -191,11 +191,7 @@ function UpdateUserds (){
                      </select>
                     </div>
 
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="dated" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Dispatch date</label>
-                        <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        value={dated}  onChange={(e) => setDate(e.target.value)}/>
-                    </div>
+
 
                     
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
