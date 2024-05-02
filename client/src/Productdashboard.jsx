@@ -10,7 +10,7 @@ import
  import { GiFruitBowl } from "react-icons/gi";
  import { BiSolidError } from "react-icons/bi";
 
-function Home() {
+function Homedashboard() {
 
     const data = [
         {
@@ -302,4 +302,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Homedashboard
