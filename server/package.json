@@ -12,10 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "d3": "^7.9.0",
     "express": "^4.19.1",
     "fs": "^0.0.1-security",
     "mongoose": "^8.2.2",
     "nodemon": "^3.1.0",
-    "pdfkit": "^0.15.0"
+    "pdfkit": "^0.15.0",
+    "svg-to-pdfkit": "^0.1.8"
+
   }
 }
