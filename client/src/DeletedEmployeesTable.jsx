@@ -110,6 +110,23 @@ const clearSearch = () => {
 
           <li style={{ marginRight: "10px" }}>
             <Link
+              to="/leave" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              EMPLOYEE LEAVE
+            </Link>
+          </li>
+          
+          <li style={{ marginRight: "10px" }}>
+            <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
@@ -164,8 +181,8 @@ const clearSearch = () => {
                         <tr>
                         <th style={{ padding: "10px", border: "1px solid" }}> Name </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> EID </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> NIC </th>
-                <th style={{ padding: "10px", border: "1px solid" }}> Gender </th>
+                
+               
                 <th style={{ padding: "10px", border: "1px solid" }}> Age </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Address </th>
                 <th style={{ padding: "10px", border: "1px solid" }}> Email </th>
@@ -180,9 +197,9 @@ const clearSearch = () => {
                             <tr style={{ border: "1px solid" }} key={employee._id}>
                                 <td style={{ border: "1px solid" }}>{employee.name}</td>
                                 <td style={{ border: "1px solid" }}>{employee.eid}</td>
-                                <td style={{ border: "1px solid" }}>{employee.nic}</td>
+                              
                                 <td style={{ border: "1px solid" }}>{employee.age}</td>
-                                <td style={{ border: "1px solid" }}>{employee.gender}</td>
+                               
                                 <td style={{ border: "1px solid" }}>{employee.address}</td>
                                 <td style={{ border: "1px solid" }}>{employee.email}</td>
                                 <td style={{ border: "1px solid" }}>{employee.jobtitle}</td>

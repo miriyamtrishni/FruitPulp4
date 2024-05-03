@@ -28,9 +28,10 @@ const SupplierSchema = new mongoose.Schema({
         required:true
     },
 
-    date:{
-        type:Date,
-        required:true
+    date: {
+        type: Date,
+        required: true,
+        get: v => v.toLocaleDateString() 
     }
 
    

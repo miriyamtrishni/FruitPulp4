@@ -1,44 +1,73 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
-function CreateUser (){
-    const [name , setName] =useState()
-    const [eid, setEid] =useState()
+function CreateUser() {
+    const [name, setName] = useState("");
+    const [eid, setEid] = useState("");
+    const [dob, setDob] = useState("");
+    const [age, setAge] = useState("");
+    const [gender, setGender] = useState("");
+    const [address, setAddress] = useState("");
+    const [email, setEmail] = useState("");
+    const [jobtitle, setJobtitle] = useState("");
     const [nic, setNic] =useState()
-    const [gender, setGender] =useState()
-    const [age , setAge] =useState()
-    const[address,setAddress] =useState()
-    const [email , setEmail] =useState()
-    const [jobtitle , setJobtitle] =useState()
-    const [salary , setSalary] =useState()
+    const [salary, setSalary] = useState("");
     const [overtimeHours, setOvertimeHours] = useState(0);
     const [overtimeRate, setOvertimeRate] = useState(0);
     const [bonus, setBonus] = useState(0);
+    const [etf, setEtf] = useState(0); // Add etf state
+    const [epf, setEpf] = useState(0); // Add epf state
+    const [actualSalary, setActualSalary] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // Define errorMessage state variable
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    //change this github
-    const Submit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Check if Eid already exists
-            const response = await axios.post("http://localhost:3001/checkEid", { eid });
-            if (response.status === 200 && response.data.exists) {
-                alert('Eid already exists');
-            } else {
-                // Proceed with user creation
-                const newUser = { name, eid, nic, gender, age, address, email, jobtitle, salary,overtimeHours, overtimeRate, bonus  };
-                const result = await axios.post("http://localhost:3001/createUser", newUser);
-                console.log(result);
-                navigate('/');
-            }
+            const newUser = {
+                name,
+                eid,
+                dob,
+                gender,
+                nic,
+                age,
+                address,
+                email,
+                jobtitle,
+                salary,
+                overtimeHours,
+                overtimeRate,
+                bonus,
+                etf,
+                epf,
+                actualSalary ,
+               
+            };
+            const result = await axios.post("http://localhost:3001/createUser", newUser);
+            console.log(result);
+            navigate('/');
         } catch (error) {
             console.error(error);
-            // Handle error
             alert('Error occurred. Please try again.');
         }
+    };
+
+    const handleChangeDOB = (e) => {
+        setDob(e.target.value);
+        calculateAge(e.target.value);
+    };
+
+    const calculateAge = (dob) => {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        setAge(age);
     };
 
     const handleChange2 = (e) => {
@@ -59,9 +88,23 @@ function CreateUser (){
       }
   };
 
-    return(
-<div >
-<nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+  const handleSalaryChange = (e) => {
+    const salaryValue = e.target.value;
+    setSalary(salaryValue);
+    const etfValue = 0.03 * parseFloat(salaryValue); // Calculate ETF (3% of salary)
+    const epfValue = 0.12 * parseFloat(salaryValue); // Calculate EPF (12% of salary)
+    setEtf(etfValue); // Update etf state
+    setEpf(epfValue); // Update epf state
+    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue; // Calculate actual salary
+    setActualSalary(actualSalaryValue); // Update actualSalary state
+};
+
+
+
+    return (
+        <div>
+            
+               <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
     <div style={{ 
@@ -128,6 +171,23 @@ function CreateUser (){
 
           <li style={{ marginRight: "10px" }}>
             <Link
+              to="/leave" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              EMPLOYEE LEAVE
+            </Link>
+          </li>     
+
+          <li style={{ marginRight: "10px" }}>
+            <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
@@ -161,26 +221,20 @@ function CreateUser (){
           </li>
         </ul>
       </nav>
-        
 
-        <div
-        
-        style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B"}}>
-        <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
-         <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
-         
-            <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add  Employee</h2>
-               
-                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                    <label htmlFor="names" style={{ width: "200px", marginRight: "10px",fontWeight: '700'  }}>Name</label>
-                    <input type="text" placeholder="Enter names" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                    
-                    onChange={(e) => setName(e.target.value)} required />
-                </div>
 
-               
-                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh", padding: "20px", fontFamily: 'Poppins, sans-serif', backgroundColor: "#FEF29B" }}>
+                <div style={{ display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
+                    <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+                        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add Employee</h2>
+                             
+                            <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="name" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Name</label>
+                                <input type="text" placeholder="Enter name" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={(e) => setName(e.target.value)} required />
+                            </div>
+
+                            <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                    <label htmlFor="eid" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Eid</label>
                     <input
                           type="text"
@@ -194,7 +248,39 @@ function CreateUser (){
                      />
                          {errorMessage && <div style={{ color: "red", marginLeft: "10px" }}>{errorMessage}</div>}
                     </div>
+                            <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="dob" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Date of Birth</label>
+                                <input type="date" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleChangeDOB} required />
+                            </div>
 
+                            <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                                <label htmlFor="age" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Age</label>
+                                <input type="text" value={age} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                            </div>
+
+                            <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Gender</label>
+                      
+                     <select 
+                    className="form-control" 
+                     style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                     onChange={(e) => setGender(e.target.value)} 
+                     required
+                     >
+                  <option value="">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Disclose">Disclose</option>
+
+                     </select>
+                    </div>
+                             <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="address" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Address</label>
+                      
+                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                        
+                        onChange={(e) => setAddress(e.target.value)} required />
+                    </div>
 
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Nic</label>
@@ -210,44 +296,6 @@ function CreateUser (){
                               required 
                          />
                     </div>
-
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Gender</label>
-                      
-                     <select 
-                    className="form-control" 
-                     style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                     onChange={(e) => setGender(e.target.value)} 
-                     required
-                     >
-                  <option value="">Select Gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                     </select>
-                    </div>
-
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Age</label>
-                      
-                        <input type="number" placeholder="Enter age" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
-                        
-                        onChange={(e) => setAge(e.target.value)} required />
-                    </div>
-
-
-
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="address" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Address</label>
-                      
-                        <input type="text" placeholder="Enter address" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        onChange={(e) => setAddress(e.target.value)} required />
-                    </div>
-
-
                     
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="address" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Email</label>
@@ -276,7 +324,7 @@ function CreateUser (){
                     </div>
 
 
-                    {/* Add overtimeRate */}
+			              { /* Add overtimeRate */}
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Rate</label>
                       
@@ -292,36 +340,37 @@ function CreateUser (){
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                             onChange={(e) => setBonus(e.target.value)} required />
                     </div>
-
-
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="salary" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Salary </label>
-                      
-                        <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
-                        
-                        onChange={(e) => setSalary(e.target.value)} required />
-                    </div>
-
-                    
-                    <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
-
-                   
-
-                </form>
-               
-              
-           </div>
-           <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
-                    {/* Optional text or additional styling can be added here */}
+                    <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+                    <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
                 </div>
+                
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
+                    <input type="text" value={etf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
+
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>EPF</label>
+                    <input type="text" value={epf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
+
+                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Actual Salary</label>
+                    <input type="text" value={actualSalary} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
+
+
+                            <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
+                        </form>
+                    </div>
+                    <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center", minHeight: "100%" }}>
+                        {/* Optional text or additional styling can be added here */}
+                    </div>
+                </div>
+            </div>
         </div>
-</div>
-</div>
     )
-
-
-
-
 }
 
 export default CreateUser;

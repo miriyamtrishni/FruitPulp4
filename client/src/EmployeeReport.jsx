@@ -152,6 +152,23 @@ const imageStyle = {
 
           <li style={{ marginRight: "10px" }}>
             <Link
+              to="/leave" 
+              style={{
+                color: "black",
+                textDecoration: "none",
+                fontWeight: "bold",
+                paddingRight: "10px",
+                transition: "all 0.3s ease", // Hover transition
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
+              onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
+            >
+              EMPLOYEE LEAVE
+            </Link>
+          </li>
+          
+          <li style={{ marginRight: "10px" }}>
+            <Link
               to="/EmployeeDetailsReport" 
               style={{
                 color: "black",

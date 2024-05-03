@@ -7,6 +7,7 @@ import WPage from './WPage';
 import Users from './Users'
 import Suppliers from './Suppliers'     
 import Attendances from './Attendances'
+import Leaves from './Leaves';
 import Machines from './Machines'
 import Distributors from './Distributors'
 
@@ -14,6 +15,9 @@ import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
 import CreateUserat from './CreateUserat'
 import UpdateUserat from './UpdateUserat'
+
+import UpdateUserLeave from './UpdateUserLeave'
+import CreateUserLeave from './CreateUserLeave'
 
 import CreateUsersh from './CreateUsersh';
 import UpdateUsersh from './UpdateUsersh';
@@ -46,6 +50,10 @@ function App() {
             <Route path='/attendance' element={<Attendances />}></Route>
             <Route path='/createat' element={<CreateUserat />}></Route>
             <Route path='/updateat/:id' element={<UpdateUserat />}></Route>
+
+            <Route path='/leave' element={<Leaves />}></Route>
+            <Route path='/createleave' element={<CreateUserLeave />}></Route>
+            <Route path='/updateleave/:id' element={<UpdateUserLeave />}></Route>
 
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />

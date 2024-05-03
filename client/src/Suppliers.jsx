@@ -24,6 +24,11 @@ function Suppliers() {
   };
 
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+
   // Function to filter users based on search term
   const handleSearch = () => {
     const results = suppliers.filter((supplier) => supplier.sid === searchTerm);
@@ -36,7 +41,10 @@ function Suppliers() {
     setSearchTerm("");
   };
 
-
+  const formattedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
 
 
   
@@ -161,7 +169,7 @@ function Suppliers() {
                     <td style={{ border: "none" }}>{supplier.materialname}</td>
                     <td style={{ border: "none"  }}>{supplier.quantitiy}</td>
                     <td style={{ border: "none"  }}>{supplier.price}</td>
-                    <td style={{ border: "none" }}>{supplier.date}</td>
+                    <td style={{ border: "none" }}>{formattedDate(supplier.date)}</td>
                     
                     <td >
                       

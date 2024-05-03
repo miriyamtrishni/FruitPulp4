@@ -28,7 +28,12 @@ function CreateUsersh (){
 
 
     }
-
+    const handleDateChange = (e) => {
+        
+        const selectedDate = new Date(e.target.value);
+        const formattedDate = selectedDate.toLocaleDateString();
+        setDate(formattedDate);
+    };
 
     return(
         
@@ -182,11 +187,10 @@ function CreateUsersh (){
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="date" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Date</label>
-                        <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        onChange={(e) => setDate(e.target.value)} required />
-                    </div>
+                                <label htmlFor="date" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Date</label>
+                                <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                    onChange={handleDateChange} required />
+                            </div>
 
                     
 
