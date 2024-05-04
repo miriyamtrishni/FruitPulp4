@@ -20,7 +20,7 @@ function UpdateUser (){
     const [bonus, setBonus] = useState(0);
     const [etf, setEtf] = useState(0); // Add etf state
     const [epf, setEpf] = useState(0); // Add epf state
-    const [actualSalary, setActualSalary] = useState(0);
+    const [actualSalary, setActualSalary] = useState("");
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -84,37 +84,18 @@ function UpdateUser (){
   };
 
   const handleSalaryChange = (e) => {
-    const salaryValue = parseFloat(e.target.value);
-    const etfValue = 0.03 * salaryValue; 
-    const epfValue = 0.12 * salaryValue; 
-    const actualSalaryValue = salaryValue - etfValue - epfValue ; // Include the bonus ,+ parseFloat(bonus)
+    const salaryValue = e.target.value;
     setSalary(salaryValue);
-    setEtf(etfValue); 
-    setEpf(epfValue); 
-    setActualSalary(actualSalaryValue); 
-};
-
-const handleOvertimeHoursChange = (e) => {
-  const hours = parseFloat(e.target.value);
-  setOvertimeHours(hours);
-  calculateBonus(hours, overtimeRate); // Calculate bonus with updated overtime hours, actualSalary
-};
-
-const handleOvertimeRateChange = (e) => {
-  const rate = parseFloat(e.target.value);
-  setOvertimeRate(rate);
-  calculateBonus(overtimeHours, rate); // Calculate bonus with updated overtime rate,, actualSalary
-};
-
-const calculateBonus = (hours, rate) => {
-  const overtimeBonus = (actualSalary / 208) * hours * rate; // Assuming 208 work hours in a month
-  setBonus(overtimeBonus.toFixed(2)); // Round bonus to 2 decimal places
- 
+    const etfValue = 0.03 * parseFloat(salaryValue);
+    const epfValue = 0.12 * parseFloat(salaryValue);
+    setEtf(etfValue);
+    setEpf(epfValue);
+    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue;
+    setActualSalary(actualSalaryValue);
 };
 
 
-//const updatedActualSalary = actualSalary + overtimeBonus; // Update actual salary with bonus
-//setActualSalary(updatedActualSalary); // Update the actualSalary state
+
 
 
 
@@ -327,50 +308,71 @@ const calculateBonus = (hours, rate) => {
                         value={jobtitle}  onChange={(e) => setJobtitle(e.target.value)}/>
                     </div>
 
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                    <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
-                    <input  value={salary} type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
-                </div>
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeHours" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Overtime Hours</label>
-                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleOvertimeHoursChange} required />
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                      <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
+                      <input 
+                          type="number" 
+                          placeholder="Enter salary" 
+                          className="form-control" 
+                          style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                          value={salary}  
+                          onChange={(e) => handleSalaryChange(e)} // Pass the event object
+                      />
                     </div>
 
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeRate" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Overtime Rate</label>
-                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleOvertimeRateChange} required />
+                    
+                    {/* Add overtimeHours */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeHours" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Overtime Hours</label>
+                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                         value={overtimeHours}   onChange={(e) => setOvertimeHours(e.target.value)} required />
+                    </div>
+                    {/* Add overtimeRate */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="overtimeRate" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Overtime Rate</label>
+                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                        value={overtimeRate}    onChange={(e) => setOvertimeRate(e.target.value)} required />
+                    </div>
+                    {/* Add bonus */}
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="bonus" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Bonus</label>
+                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                         value={bonus}   onChange={(e) => setBonus(e.target.value)} required />
                     </div>
 
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>OT</label>
-                        <input type="text" value={bonus} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                  
+
+
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>EPF</label>
+                        <input 
+                            type="text" 
+                            value={epf} 
+                            className="form-control" 
+                            style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
+                            disabled 
+                        />
                     </div>
-
-
-
-                   
-                
-                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
-                    <input type="text" value={etf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
-                </div>
-
-                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>EPF</label>
-                    <input type="text" value={epf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
-                </div>
-
-                <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}> Salary</label>
-                <input 
-                    type="text" 
-                    value={actualSalary} // Use toFixed(2) to display the value with 2 decimal places
-                    className="form-control" 
-                    style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
-                    disabled 
-                />
-              </div>
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
+                        <input 
+                            type="text" 
+                            value={etf} 
+                            className="form-control" 
+                            style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
+                            disabled 
+                        />
+                    </div>
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+                        <input 
+                            type="text" 
+                            value={actualSalary} 
+                            className="form-control" 
+                            style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
+                            disabled 
+                        />
+                    </div>
 
 
                     <button style={{ marginLeft: "110px", backgroundColor: "black", color: "white", border: "none",  padding: "10px 20px", borderRadius: "5px" }}>Update</button>
