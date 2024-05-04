@@ -307,20 +307,6 @@ function UpdateUser (){
                         <input type="text" placeholder="Enter job title" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         value={jobtitle}  onChange={(e) => setJobtitle(e.target.value)}/>
                     </div>
-
-                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                      <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
-                      <input 
-                          type="number" 
-                          placeholder="Enter salary" 
-                          className="form-control" 
-                          style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
-                          value={salary}  
-                          onChange={(e) => handleSalaryChange(e)} // Pass the event object
-                      />
-                    </div>
-
-                    
                     {/* Add overtimeHours */}
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="overtimeHours" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Overtime Hours</label>
@@ -335,12 +321,22 @@ function UpdateUser (){
                     </div>
                     {/* Add bonus */}
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Bonus</label>
+                        <label htmlFor="bonus" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>OT</label>
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          value={bonus}   onChange={(e) => setBonus(e.target.value)} required />
                     </div>
 
-                  
+                    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+    <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
+    <input 
+        type="number" 
+        placeholder="Enter salary" 
+        className="form-control" 
+        style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+        value={salary}  
+        onChange={(e) => handleSalaryChange(e)} // Pass the event object
+    />
+</div>
 
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
@@ -364,7 +360,7 @@ function UpdateUser (){
                         />
                     </div>
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}> Salary</label>
                         <input 
                             type="text" 
                             value={actualSalary} 
