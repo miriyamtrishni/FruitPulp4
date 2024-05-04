@@ -19,11 +19,9 @@ function CreateUser() {
     const [bonus, setBonus] = useState(0);
     const [etf, setEtf] = useState(0); // Add etf state
     const [epf, setEpf] = useState(0); // Add epf state
-    const [actualSalary, setActualSalary] = useState(0);
+    const [actualSalary, setActualSalary] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // Define errorMessage state variable
     const navigate = useNavigate();
-
-   
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -91,41 +89,22 @@ function CreateUser() {
   };
 
   const handleSalaryChange = (e) => {
-    const salaryValue = parseFloat(e.target.value);
-    const etfValue = 0.03 * salaryValue; 
-    const epfValue = 0.12 * salaryValue; 
-    const actualSalaryValue = salaryValue - etfValue - epfValue               //+ parseFloat(bonus); // Include the bonus
+    const salaryValue = e.target.value;
     setSalary(salaryValue);
-    setEtf(etfValue); 
-    setEpf(epfValue); 
-    setActualSalary(actualSalaryValue); 
+    const etfValue = 0.03 * parseFloat(salaryValue); // Calculate ETF (3% of salary)
+    const epfValue = 0.12 * parseFloat(salaryValue); // Calculate EPF (12% of salary)
+    setEtf(etfValue); // Update etf state
+    setEpf(epfValue); // Update epf state
+    const actualSalaryValue = parseFloat(salaryValue) - etfValue - epfValue; // Calculate actual salary
+    setActualSalary(actualSalaryValue); // Update actualSalary state
 };
 
-const handleOvertimeHoursChange = (e) => {
-  const hours = parseFloat(e.target.value);
-  setOvertimeHours(hours);
-  calculateBonus(hours, overtimeRate); // Calculate bonus with updated overtime hours ,, actualSalary
-};
 
-const handleOvertimeRateChange = (e) => {
-  const rate = parseFloat(e.target.value);
-  setOvertimeRate(rate);
-  calculateBonus(overtimeHours, rate); // Calculate bonus with updated overtime rate , actualSalary
-};
-
-const calculateBonus = (hours, rate) => {
-  const overtimeBonus = (actualSalary / 208) * hours * rate; // Assuming 208 work hours in a month
-  setBonus(overtimeBonus.toFixed(2)); // Round bonus to 2 decimal places
-
-};
-
-//const updatedActualSalary = actualSalary + overtimeBonus; // Update actual salary with bonus
-  //setActualSalary(updatedActualSalary); // Update the actualSalary state
 
     return (
- <div>
+        <div>
             
-   <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+               <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
     <div style={{ 
@@ -335,29 +314,37 @@ const calculateBonus = (hours, rate) => {
                         onChange={(e) => setJobtitle(e.target.value)} required />
                     </div>
 
+
+                    {/* Add overtimeHours */}
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Overtime Hours</label>
+                      
+                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
+                            onChange={(e) => setOvertimeHours(e.target.value)} required />
+                    </div>
+                    
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                     <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
                     <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
                 </div>
 
+			              { /* Add overtimeRate */}
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeHours" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Overtime Hours</label>
-                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleOvertimeHoursChange} required />
-                    </div>
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="overtimeRate" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Overtime Rate</label>
-                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleOvertimeRateChange} required />
-                    </div>
-
-                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>OT</label>
-                        <input type="text" value={bonus} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                        <label htmlFor="eid" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Rate</label>
+                      
+                        <input type="number" placeholder="Enter overtime rate" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
+                            onChange={(e) => setOvertimeRate(e.target.value)} required />
                     </div>
 
 
-
-                   
+                    {/* Add bonus */}
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Bonus</label>
+                      
+                        <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                            onChange={(e) => setBonus(e.target.value)} required />
+                    </div>
+                  
                 
                 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                     <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
@@ -369,19 +356,10 @@ const calculateBonus = (hours, rate) => {
                     <input type="text" value={epf} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
                 </div>
 
-                
-
                 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}> Salary</label>
-                <input 
-                    type="text" 
-                    value={actualSalary} // Use toFixed(2) to display the value with 2 decimal places
-                    className="form-control" 
-                    style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} 
-                    disabled 
-                />
-              </div>
-
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Actual Salary</label>
+                    <input type="text" value={actualSalary} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
+                </div>
 
 
                             <button style={{ marginLeft: "10px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
