@@ -30,6 +30,11 @@ function Attendances() {
     setSearchTerm("");
   };
 
+  const formattedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
+
 
   return (
     <div >
@@ -157,7 +162,7 @@ function Attendances() {
 
       <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
        
-        <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
+        <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '80vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
         
         <button style={{ 
                borderRadius: '5px', backgroundColor: 'yellow',  padding: '5px',  border: 'none', 
@@ -181,13 +186,13 @@ function Attendances() {
           <table style={{ width: "100%", textAlign: "center", borderCollapse: "collapse", marginRight:"80px" }}>
             <thead>
               <tr style={{ border: "none",background: "#B2BEB5"  }}>
-                <th style={{ padding: "10px", border: "none",width: "10%"  }}> EID </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekone </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weektwo </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekthree </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> weekfour </th>
-                <th style={{ padding: "10px", border: "none",width: "5%"  }}> Month </th>
-                <th style={{ padding: "10px", border: "none",width: "25%"  }}> Date </th>
+                <th style={{ padding: "10px", border: "none",width: "5%"  }}> EID </th>
+                <th style={{ padding: "10px", border: "none",width: "8%"  }}> weekone </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> weektwo </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> weekthree </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> weekfour </th>
+               
+                <th style={{ padding: "10px", border: "none",width: "8%"  }}> Date </th>
                 <th style={{ padding: "10px", border: "none",width: "25%" }}> Action </th>
               </tr>
             </thead>
@@ -200,9 +205,8 @@ function Attendances() {
                     <td style={{ border: "none" }}>{attendance.weektwo}</td>
                     <td style={{ border: "none" }}>{attendance.weekthree}</td>
                     <td style={{ border: "none" }}>{attendance.weekfour}</td>
-                    <td style={{ border: "none" }}>{attendance.month}</td>
-                    <td style={{ border: "none" }}>{attendance.date}</td>
-                    
+                   
+                     <td style={{ border: "none" }}>{formattedDate(attendance.date)}</td>
                     <td>
                       <Link to={`/updateat/${attendance._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none",fontWeight: "bold", }}>Update</Link>
                       <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none" ,fontWeight: "bold",}} onClick={() => handleDelete(attendance._id)}>Delete</button>
