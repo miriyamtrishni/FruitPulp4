@@ -10,6 +10,7 @@ import Attendances from './Attendances'
 import Leaves from './Leaves';
 import Machines from './Machines'
 import Distributors from './Distributors'
+import Supplierdetails from './Supplierdetails';
 
 import CreateUser from './CreateUser'
 import UpdateUser from './UpdateUser'
@@ -22,6 +23,8 @@ import CreateUserLeave from './CreateUserLeave'
 import CreateUsersh from './CreateUsersh';
 import UpdateUsersh from './UpdateUsersh';
 import SupplierReport from './SupplierReport'
+import CreateUsersi from './CreateUsersi';
+import UpdateUsersi from './UpdateUsersi';
  
 import DeletedEmployeesTable from './DeletedEmployeesTable'; // Import the new component
 import EmployeeReport from './EmployeeReport';
@@ -61,9 +64,9 @@ function App() {
             <Route path='/supplier' element={<Suppliers />}></Route>
             <Route path='/createsh' element={<CreateUsersh />}></Route>
             <Route path='/updatesh/:id' element={<UpdateUsersh />}></Route>
-            
-
-
+            <Route path='/supplier-details' element={<Supplierdetails />}></Route>
+            <Route path='/createsi' element={<CreateUsersi />}></Route>
+            <Route path='/updatesi/:id' element={<UpdateUsersi />}></Route>
 
             <Route path="/deleted-employees" element={<DeletedEmployeesTable />} /> {/* Add route for deleted employees table */}
             <Route path="/EmployeeDetailsReport" element={<EmployeeReport />} />
