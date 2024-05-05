@@ -321,13 +321,13 @@ function UpdateUser (){
                     </div>
                     {/* Add bonus */}
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Bonus</label>
+                        <label htmlFor="bonus" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>OT</label>
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          value={bonus}   onChange={(e) => setBonus(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-    <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+    <label htmlFor="salary" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
     <input 
         type="number" 
         placeholder="Enter salary" 
@@ -360,7 +360,7 @@ function UpdateUser (){
                         />
                     </div>
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Actual Salary</label>
+                        <label style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}> Salary</label>
                         <input 
                             type="text" 
                             value={actualSalary} 
