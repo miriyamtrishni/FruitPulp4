@@ -156,8 +156,8 @@ function UpdateUsersh (){
                     </div>
 
                     <div style={{ marginBottom:"2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="sid" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Sid</label>
-                        <input type="number" maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
+                        <label htmlFor="sid" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>SID</label>
+                        <input type="text" maxLength="4" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
         title="Please enter only letters and numbers for Sid" // Error message for unsupported characters
          placeholder="Enter Supplier id" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         value={sid}  onChange={(e) => setSid(e.target.value)}/>
