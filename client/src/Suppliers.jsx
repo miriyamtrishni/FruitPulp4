@@ -156,7 +156,7 @@ function Suppliers() {
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> Materialname </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> Quantity kg </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"   }}> Price Rs </th>
-                <th style={{ padding: "10px", border: "none",width: "20%" }}> Date </th>
+                <th style={{ padding: "10px", border: "none",width: "10%" }}> Date </th>
                 <th style={{ padding: "10px", border: "none" ,width: "20%"}}> Action </th>
               </tr>
             </thead>

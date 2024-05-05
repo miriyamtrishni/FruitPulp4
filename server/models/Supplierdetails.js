@@ -24,7 +24,7 @@ const SupplierdetailSchema = new mongoose.Schema({
     },
 
     contactsi:{
-        type:Number,
+        type:String,
         required:true,
         maxlength: 10,
         minlength: 10

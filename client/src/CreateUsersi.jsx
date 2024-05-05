@@ -10,6 +10,7 @@ function CreateUsersi() {
     const [emailsi, setEmail] = useState("");
     const [contactsi, setContact] = useState("");
     const [errorMessage, setErrorMessage] = useState(""); // Define errorMessage state variable
+    const [errorMessage1, setErrorMessage1] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -50,6 +51,18 @@ function CreateUsersi() {
           setErrorMessage("");
       }
   };
+
+  const handleChange4 = (e) => {
+    const value = e.target.value;
+    setContact(value);
+    
+    // Check if the length of the input value is not equal to 10
+    if (value.length !== 10) {
+        setErrorMessage1(' Contact no must be 10 characters long.');
+    } else {
+        setErrorMessage1('');
+    }
+};
 
 
 
@@ -166,7 +179,7 @@ function CreateUsersi() {
                           onChange={handleChange2}
                           required
                      />
-                         {errorMessage && <div style={{ color: "red", marginLeft: "10px" }}>{errorMessage}</div>}
+                         {errorMessage && <div style={{ backgroundColor: "#f8d7da", border: "1px solid #f5c6cb", color: "black", padding: "10px", marginLeft: "10px", borderRadius: "10px", fontFamily: 'Poppins, sans-serif',fontWeight: '700',marginBottom: "5px" }}>{errorMessage}</div>}
                     </div>
                            
 
@@ -194,8 +207,9 @@ function CreateUsersi() {
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="contactsi" style={{ width: "130px", marginRight: "10px" ,fontWeight: '700'}}>Contact No</label>
                       
-                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} 
-                            onChange={(e) => setContact(e.target.value)} required />
+                        <input type="text" placeholder="Enter Contact No" className="form-control" style={{ width: "100%" ,padding: "8px", margin: "5px 0 15px"}} value={contactsi} maxLength="10"
+                           onChange={handleChange4} required />
+                           {errorMessage1 && <div style={{ backgroundColor: "#f8d7da", border: "1px solid #f5c6cb", color: "black", padding: "10px", marginLeft: "10px", borderRadius: "10px", fontFamily: 'Poppins, sans-serif',fontWeight: '700',marginBottom: "5px" }}>{errorMessage1}</div>}
                     </div>
 
 
@@ -205,7 +219,7 @@ function CreateUsersi() {
                             <button style={{ marginLeft: "110px", backgroundColor: "black", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>Submit</button>
                         </form>
                     </div>
-                    <div style={{ flex: 1, backgroundImage: "url('/image/im3.jpg')", backgroundSize: "cover", backgroundPosition: "center"}}>
+                    <div style={{ flex: 1, backgroundImage: "url('/image/img26.jpg')", backgroundSize: "cover", backgroundPosition: "center"}}>
                        
                     </div>
                 </div>
