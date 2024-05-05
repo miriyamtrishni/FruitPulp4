@@ -12,6 +12,7 @@ const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
 const LeaveModel = require('./models/Leaves')
+const SupplierdetailUserModel = require('./models/Supplierdetails')
 
 
 // Import the DeletedUserModel
@@ -538,39 +539,47 @@ app.get('/material-details', async (req, res) => {
 
         // Create a new PDF document
         const doc = new PDFDocument();
-      
+         
         // Set up styling
-        
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        doc.rect(50, 50, 520, 30).fill('green'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
+        doc.moveDown();
+        doc.moveDown();
         
-        doc.moveDown();
-        doc.moveDown();
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
         doc.moveDown();
         // Title
-        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Supplied Materials', { align: 'center', bold: true });
-        
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Supplied Materials Report', { align: 'center', bold: true });
+        doc.underline(170, doc.y + 2, 250, 3);
+       
+    
         // Add content to the PDF
-        doc.moveDown(); // Add some vertical space after the title
+        doc.moveDown(2); // Add some vertical space after the title
         
-
-
         // Display each material and its total quantity in a table-like format
         
-        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 450, align: 'left' , bold: true });
+        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 500, align: 'left' , bold: true });
         doc.font('Helvetica-Bold').text('Total Quantity', { width: 700, align: 'right', bold: true });
         doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
         doc.moveDown(); // Add some vertical space after the line
         doc.moveDown(); // Add some vertical space after the line
         
         for (const [materialname, quantitiy] of Object.entries(materialsQuantities)) {
-            doc.font('Helvetica').fontSize(12).text(materialname, { width: 450, align: 'left' , continued: true });
+            doc.font('Helvetica').fontSize(12).text(materialname, { width: 500, align: 'left' , continued: true });
             doc.font('Helvetica').text(quantitiy.toString(), { width: 700, align: 'right'  });
             doc.moveDown(); // Move to the next row
         }
@@ -594,6 +603,8 @@ app.get('/material-details', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
 
 
 
@@ -716,6 +727,63 @@ app.get('/searchDistributorByDid', (req, res) => {
 });
 
 
+
+
+app.get('/supplier-details' ,(req,res) => {
+    SupplierdetailUserModel.find({})
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.get('/getUsersi/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findById({_id:id})
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUsersi/:id',(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findByIdAndUpdate({_id:id} , {
+        namesi: req.body. namesi,
+        sidsi: req.body.sidsi ,
+        addressi: req.body. addressi,
+        emailsi: req.body.emailsi ,
+        contactsi: req.body.contactsi,
+       
+
+    })
+
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.delete('/deleteUsersi/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(supplierdetails))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUsersi", (req, res) =>{
+    SupplierdetailUserModel.create(req.body)
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+})
+
+
+// Search user by SID
+app.get('/searchSupplierBySids', (req, res) => {
+    const { sidsi } = req.query;
+   
+    SupplierdetailUserModel.find({sidsi }) // Find supplier orders with the specified SID
+        .then(supplierdetails => {
+            res.json(supplierdetails); // Return the matching supplier orders
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
 
 
 
