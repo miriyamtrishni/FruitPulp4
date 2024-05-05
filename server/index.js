@@ -387,15 +387,23 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
-        const text = 'ANAAWEI';
+        doc.rect(50, 50, 500, 30).fill('#148F77'); 
+        const text = 'Anaawei Holdings (PVT) LTD';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('#148F77').fontSize(10).text('Anaawei ', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
+        doc.moveDown();
         
         doc.moveDown();
-        doc.moveDown();
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
         doc.moveDown();
         // Add content to the PDF
 
