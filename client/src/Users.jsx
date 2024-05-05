@@ -187,7 +187,7 @@ function Users() {
                     <td style={{ border: "none" }}>{user.name}</td>
                     <td style={{ border: "none" }}>{user.eid}</td>
                    
-                    <td style={{ border: "none" }}>{age}</td>
+                    <td style={{ border: "none" }}>{user.age}</td>
                     <td style={{ border: "none" }}>{user.email}</td>
                     <td style={{ border: "none" }}>{user.jobtitle}</td>
                     <td style={{ border: "none" }}>{user.actualSalary}</td>

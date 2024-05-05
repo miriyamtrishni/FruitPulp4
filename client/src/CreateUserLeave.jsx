@@ -138,7 +138,7 @@ function CreateUserLeave() {
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-               EMPLOYEES Leave
+               EMPLOYEE  LEAVE
             </Link>
             </li>
 

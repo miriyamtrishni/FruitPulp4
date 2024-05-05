@@ -200,14 +200,14 @@ const Update = (e) => {
                         <label htmlFor="leavetype" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Leave Type</label>
                         <input type="text" placeholder="Enter leave type" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={leavetype}  onChange={(e) => handleChange(e, setLeavetype)} required />
+                        value={leavetype}  onChange={(e) => setLeavetype(e.target.value)} required />
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="leavetype" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Pay Details Of the leave</label>
                         <input type="text" placeholder="Enter leave type" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                         
-                        value={leavepay}  onChange={(e) => handleChange(e, setLeavePay)} required />
+                        value={leavepay}  onChange={(e) => setLeavePay(e.target.value)} required />
                     </div>
 
 
