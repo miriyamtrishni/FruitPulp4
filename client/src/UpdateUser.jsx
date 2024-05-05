@@ -56,7 +56,7 @@ function UpdateUser (){
 
     const Update = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:3001/updateUser/"+id, {name ,eid,nic,gender,age,address,email,jobtitle , salary,epf,etf,actualSalary})
+        axios.put("http://localhost:3001/updateUser/"+id, {name ,eid,nic,gender,age,address,email,jobtitle,overtimeHours,overtimeRate,bonus,salary,epf,etf,actualSalary})
         .then(result => {
             console.log(result)
             navigate('/')
