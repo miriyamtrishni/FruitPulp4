@@ -350,6 +350,7 @@ function CreateUser() {
 
                     <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
                 </div>
+                </div>
                 
                 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                     <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>ETF</label>
@@ -380,6 +381,7 @@ function CreateUser() {
                 </div>
             </div>
         </div>
+       
     )
 }
 
