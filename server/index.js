@@ -503,11 +503,11 @@ app.delete('/deleteUsersh/:id' ,(req,res) => {
     .then(res => res.json(suppliers))
     .catch(err => res.json(err))
 })
-
-app.post("/createUsersh", (req, res) =>{
+                                                        
+app.post("/createUsersh", (req, res) =>{                              
     SupplierUserModel.create(req.body)
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
+    .then(suppliers => res.json({ success: true, message: 'Supply  order added successfully', data: suppliers }))
+    .catch(err => res.json({ success: false, message: 'Error adding order', error: err }))
 })
 
 
@@ -543,6 +543,12 @@ app.get('/material-details', async (req, res) => {
             } else {
                 materialsQuantities[supplier.materialname] = supplier.quantitiy;
             }
+        });
+
+        let totalPrice = 0;
+
+        suppliers.forEach(supplier => {
+            totalPrice += supplier.price;
         });
 
         // Create a new PDF document
@@ -581,7 +587,7 @@ app.get('/material-details', async (req, res) => {
         // Display each material and its total quantity in a table-like format
         
         doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 500, align: 'left' , bold: true });
-        doc.font('Helvetica-Bold').text('Total Quantity', { width: 700, align: 'right', bold: true });
+        doc.font('Helvetica-Bold').text('Total Quantity (kg)', { width: 700, align: 'right', bold: true });
         doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
         doc.moveDown(); // Add some vertical space after the line
         doc.moveDown(); // Add some vertical space after the line
@@ -591,6 +597,9 @@ app.get('/material-details', async (req, res) => {
             doc.font('Helvetica').text(quantitiy.toString(), { width: 700, align: 'right'  });
             doc.moveDown(); // Move to the next row
         }
+
+        doc.moveDown(2); // Add some vertical space after the table-like content
+        doc.font('Helvetica-Bold').fontSize(12).text('Total Price (Rs) =  ' + totalPrice.toString(), { align: 'left' });
 
         // Finalize the PDF
         doc.end();

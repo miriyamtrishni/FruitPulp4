@@ -186,7 +186,7 @@ function UpdateUsersi (){
                     
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="contactsi" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Contact No</label>
-                        <input type="number" placeholder="Enter overtime hours" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
+                        <input type="text" placeholder="Enter Contact No" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                          value={contactsi}   onChange={(e) => setContact(e.target.value)} required />
                     </div>
                     
@@ -199,7 +199,7 @@ function UpdateUsersi (){
               
 
            </div>
-           <div style={{ flex: 1, backgroundImage: "url('/image/im4.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+           <div style={{ flex: 1, backgroundImage: "url('/image/b3.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
                     {/* Optional text or additional styling can be added here */}
                 </div>
 
