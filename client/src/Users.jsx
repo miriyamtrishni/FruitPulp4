@@ -34,8 +34,8 @@ function Users() {
   };
 
   return (
-    <div>
-      <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
+    <div >
+    <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900',  }}>
   <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
     <li style={{ marginRight: "25px" }}>
     <div style={{ 
@@ -98,7 +98,7 @@ function Users() {
             >
              EMPLOYEE ATTENDANCE
             </Link>
-            </li>
+          </li>
 
           <li style={{ marginRight: "10px" }}>
             <Link
@@ -116,10 +116,10 @@ function Users() {
               EMPLOYEE LEAVE
             </Link>
           </li>
-
+          
           <li style={{ marginRight: "10px" }}>
             <Link
-              to="/deleted-employees" // Path to navigate to the deleted employees table
+              to="/EmployeeDetailsReport" 
               style={{
                 color: "black",
                 textDecoration: "none",
@@ -130,12 +130,13 @@ function Users() {
               onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
               onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
             >
-            GENARATE REPORT
+              GENARATE REPORT
             </Link>
-              </li>
-            <li style={{ marginRight: "10px" }}>
+          </li>
+
+          <li style={{ marginRight: "10px" }}>
             <Link
-              to="/EmployeeDetailsReport" // Path to navigate to the deleted employees table
+              to="/deleted-employees" // Path to navigate to the deleted employees table
               style={{
                 color: "black",
                 textDecoration: "none",
@@ -153,7 +154,7 @@ function Users() {
       </nav>
 
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", fontFamily: 'Poppins, sans-serif', backgroundColor: "#FEF29B" }}>
-        <div style={{ border: "none", borderRadius: "5px", height: "90vh", width: '90vw', boxShadow: "0 4px 8px rgba(0,0,0,0.3)", backgroundColor: "#ffffff" }}>
+        <div style={{ border: "none", borderRadius: "5px", height: "90vh", width: '85vw', boxShadow: "0 4px 8px rgba(0,0,0,0.3)", backgroundColor: "#ffffff" }}>
 
           <Link to="/create" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none", marginBottom: "10px", display: "inline-block", marginLeft: "10px", marginTop: "20px" }}>ADD +</Link>
 
@@ -170,7 +171,7 @@ function Users() {
                 <th style={{ padding: "10px", border: "none", width: "10%" }}> EID </th>
                
                
-                <th style={{ padding: "10px", border: "none", width: "10%" }}> Age </th>
+                
                 
                 <th style={{ padding: "10px", border: "none", width: "15%" }}> Email </th>
                 <th style={{ padding: "10px", border: "none", width: "10%" }}> JobTitle </th>
@@ -187,7 +188,7 @@ function Users() {
                     <td style={{ border: "none" }}>{user.name}</td>
                     <td style={{ border: "none" }}>{user.eid}</td>
                    
-                    <td style={{ border: "none" }}>{user.age}</td>
+                   
                     <td style={{ border: "none" }}>{user.email}</td>
                     <td style={{ border: "none" }}>{user.jobtitle}</td>
                     <td style={{ border: "none" }}>{user.actualSalary}</td>
