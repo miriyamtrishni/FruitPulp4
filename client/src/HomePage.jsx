@@ -97,7 +97,7 @@ const HomePage = () => {
     width: '80%', // Adjust width for responsiveness
     marginLeft: '50px'
   }}>
-          <Link to="/production">
+          <Link to="/Productdashboard">
       <button style={{ 
         backgroundColor: '#F4BB29', 
         color: 'black', 
