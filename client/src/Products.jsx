@@ -39,6 +39,11 @@ const handleSearch = () => {
 
   };
   
+  const formattedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
+
 
   return (
 
@@ -209,8 +214,8 @@ const handleSearch = () => {
                 return (
                   <tr style={{ border: "none" ,height: "50px",fontWeight: "bold" }} key={product._id}>
                     <td style={{ border: "none" }}>{product.fruittype}</td>
-                    <td style={{ border: "none" }}>{product.manufacturedate}</td>
-                    <td style={{ border: "none" }}>{product.expiredate}</td>
+                    <td style={{ border: "none" }}>{formattedDate(product.manufacturedate)}</td>
+                    <td style={{ border: "none" }}>{formattedDate(product.expiredate)}</td>
                     <td style={{ border: "none" }}>{product.quantity}</td>
                     <td style={{ border: "none" }}>{product.price}</td>
                     
