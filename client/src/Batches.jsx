@@ -40,6 +40,10 @@ const handleSearch = () => {
 
   };
   
+  const formattedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  };
 
   return (
     
@@ -207,7 +211,7 @@ const handleSearch = () => {
                 return (
                   <tr style={{ border: "none" ,height: "50px",fontWeight: "bold"}} key={batch._id}>
                     <td style={{border: "none"  }}>{batch.fruittype}</td>
-                    <td style={{ border: "none" }}>{batch.manufacturedate}</td>
+                    <td style={{ border: "none" }}>{formattedDate(batch.manufacturedate)}</td>
                     <td style={{ border: "none"  }}>{batch.quantity}</td>
                   
                     
