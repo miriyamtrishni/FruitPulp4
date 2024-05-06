@@ -935,11 +935,11 @@ app.get('/searchBatchByFruitType', (req,res) =>  {
 
 app.get('/ProductDetailsReport', async (req, res) => {
     try {
-        // Fetch all employees from the database
+        // Fetch all products from the database
         const products = await ProductModel.find({});
 
        
-        // Get the total number of employees
+        // Get the total number of products
         const totalProducts = products.length;
 
         // Create a new PDF document
@@ -981,7 +981,7 @@ app.get('/ProductDetailsReport', async (req, res) => {
 
 
 
-        // Add total employees and total salaries to the document with different font sizes
+       
         doc.text(`\n\n`);
         doc.fontSize(17).fillColor('black').text(`Total Products: ${totalProducts}`, { align: 'left' });
        
@@ -1009,56 +1009,7 @@ app.get('/ProductDetailsReport', async (req, res) => {
 
 
 
-app.get('/BatchDetailsReport', async (req, res) => {
-    try {
-        // Fetch all employees from the database
-        const batchess = await BatchModel.find({});
 
-       
-        // Get the total number of employees
-        const totalbatches = batches.length;
-
-        // Create a new PDF document
-        const doc = new PDFDocument();
-      
-        // Pipe the PDF to a writable stream
-        const stream = doc.pipe(fs.createWriteStream('batch_report.pdf'));
-
-        // Add content to the PDF
-        doc.fontSize(20).fillColor('black').text('Batch Details Report\n\n');
-        batches.forEach(batch => {
-            doc.fontSize(10).text(`FruitType: ${batch.fruittype}`);
-            doc.text(`ManufactureDate: ${batch.manufacturedate}`);
-           doc.text(`Quantity: ${batch.quantity}`);
-          
-       
-        });
-
-        // Add
-        doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`Total Products: ${totalBatches}`, { align: 'left' });
-       // doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
-        
-
-        // Finalize the PDF
-        doc.end();
-
-        // Send the PDF file as a response
-        stream.on('finish', () => {
-            res.download('batch_report.pdf', 'batch_report.pdf', (err) => {
-                if (err) {
-                    console.error('Error downloading PDF:', err);
-                    res.status(500).json({ message: 'Error downloading PDF' });
-                }
-                // Delete the PDF file after it's sent
-                fs.unlinkSync('batch_report.pdf');
-            });
-        });
-    } catch (error) {
-        console.error('Error generating PDF report:', error);
-        res.status(500).json({ message: 'Error generating PDF report' });
-    }
-});
 
 
 
