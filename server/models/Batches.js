@@ -9,6 +9,7 @@ const BatchesSchema = new mongoose.Schema({
     manufacturedate:{
         type:Date,
         required:true,
+        get: v => v.toLocaleDateString() 
         
     },
 
