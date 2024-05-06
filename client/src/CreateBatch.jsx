@@ -157,9 +157,9 @@ function CreateBatch (){
 
 
 
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh",padding: "20px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B"}}>
-           <div style={{display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden" }}>
-           <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
+<div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh",padding: "16px" ,fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
+        <div style={{display: "flex", width: "65%", boxShadow: "0 4px 8px rgba(0,0,0,0.3)", borderRadius: "10px", overflow: "hidden"   }}>
+        <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f8f8" }}>
           
                 <form onSubmit={Submit} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                     <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add Batch</h2>
