@@ -41,7 +41,7 @@ import UpdateUserla from './UpdateUserla';
 import CreateUserds from './CreateUserds';
 import UpdateUserds from './UpdateUserds';
 
-import Productdashboard from './Productdashboard'
+
 import ProductHistory from './ProductHistory'
 import Products from './Products'
 import CreateProduct from './CreateProduct'
@@ -103,7 +103,7 @@ function App() {
             <Route path='/updateproduct/:id' element={<UpdateProduct />}></Route>
             <Route path="/HomePage" element={<HomePage/>} />
             <Route path="/WPage" element={<WPage/>} />
-            <Route path="/Productdashboard" element={<Productdashboard/>} />
+           
             <Route path="/ProductHistory"  element={<ProductHistory/>}/>
         
 
