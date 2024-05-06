@@ -232,7 +232,6 @@ app.get('/getUserLeave/:id' ,(req,res) => {
 
 
 
-})
 
 app.get('/getUserLeave/:id' ,(req,res) => {
     const id = req.params.id;
@@ -450,8 +449,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.text(`\n\n`);
 
         doc.fontSize(17).fillColor('black').text(`Total employees : ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' });
-=======
+        doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' })
         doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
 
