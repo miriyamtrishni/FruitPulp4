@@ -9,12 +9,14 @@ const ProductsSchema = new mongoose.Schema({
     manufacturedate:{
         type:Date,
         required:true,
+        get: v => v.toLocaleDateString() 
         
     },
 
     expiredate:{
         type:Date,
         required:true,
+        get: v => v.toLocaleDateString() 
        
     },
 
