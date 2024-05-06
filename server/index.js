@@ -17,8 +17,7 @@ const SupplierdetailUserModel = require('./models/Supplierdetails')
 
 
 
-const ProductModel = require('./models/Products')
-const BatchModel = require('./models/Batches')
+
 
 
 // Import the DeletedUserModel
@@ -450,9 +449,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         doc.fontSize(17).fillColor('black').text(`Total employees : ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' })
-        doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
-
+       
 
 
 
@@ -768,7 +765,7 @@ app.get('/searchDistributorByDid', (req, res) => {
         });
 });
 
-//functions for production managemnet
+
 
 
 
@@ -831,293 +828,10 @@ app.get('/searchSupplierBySids', (req, res) => {
 
 
 
-app.get('/products' ,(req,res) => {
 
 
-    // Querying the database to get products
-    ProductModel.find({})
-        .then(products => res.json(products))
-        .catch(err => res.json(err));
-});
 
 
-
-app.get('/batches' ,(req,res) => {
-    BatchModel.find({})
-    .then(batches => res.json(batches))
-    .catch(err => res.json(err))
-
-})
-
-app.get('/schedule' ,(req,res) => {
-    BatchModel.find({})
-    .then(schedule => res.json(schedule))
-    .catch(err => res.json(err))
-
-})
-
-
-
-
-
-app.get('/getProduct/:id' ,(req,res) => {
-    const id = req.params.id;
-    ProductModel.findById({_id:id})
-  
-    .then(products => res.json(products))
-    .catch(err => res.json(err))
-
-})
-
-app.get('/getBatch/:id' ,(req,res) => {
-    const id = req.params.id;
-    BatchModel.findById({_id:id})
-    .then(batches => res.json(batches))
-    .catch(err => res.json(err))
-
-})
-
-
-
-
-const str = "Fri Feb 08 2013 09:47:57 GMT +0530 (IST)";
-const date = new Date(str);
-
-
-const day = date.getDate(); 
-const month = date.getMonth(); 
-const year = date.getFullYear(); 
-
-console.log(`Extracted date: ${year}-${month + 1}-${day}`);
-
-
-
-
-
-app.put('/updateProduct/:id',(req,res) => {
-    const id = req.params.id;
-    ProductModel.findByIdAndUpdate({_id:id} , {
-        fruittype: req.body.fruittype,
-        manufacturedate: req.body.manufacturedate,
-        expiredate: req.body.  expiredate,
-        quantity: req.body.quantity ,
-        price: req.body.price,
-        
-    })
-    .then(products => res.json(products))
-    .catch(err => res.json(err))
-
-})
-
-app.put('/updateBatch/:id',(req,res) => {
-    const id = req.params.id;
-    BatchModel.findByIdAndUpdate({_id:id} , {
-        fruittype: req.body.fruittype,
-        manufacturedate: req.body.manufacturedate,
-        quantity: req.body.quantity ,
-        
-        
-    })
-    .then(batches => res.json(batches))
-    .catch(err => res.json(err))
-
-})
-
-app.put('/updateschedule/:id',(req,res) => {
-    const id = req.params.id;
-    ScheduleModel.findByIdAndUpdate({_id:id} , {
-        fruittype: req.body.fruittype,
-        date: req.body.date,
-        quantity: req.body.quantity ,
-        time:req.body.time,
-        
-        
-    })
-    .then(schedule => res.json(schedule))
-    .catch(err => res.json(err))
-
-})
-
-
-app.delete('/deleteProduct/:id' ,(req,res) => {
-    const id = req.params.id;
-    ProductModel.findByIdAndDelete({_id: id})
-    .then(res => res.json(s))
-    .catch(err => res.json(err))
-
-
-
-})
-
-app.delete('/deleteBatch/:id' ,(req,res) => {
-    const id = req.params.id;
-    BatchModel.findByIdAndDelete({_id: id})
-    .then(res => res.json(s))
-    .catch(err => res.json(err))
-
-
-
-})
-
-app.delete('/deleteschedule/:id' ,(req,res) => {
-    const id = req.params.id;
-    ScheduleModel.findByIdAndDelete({_id: id})
-    .then(res => res.json(s))
-    .catch(err => res.json(err))
-
-
-
-})
-
-
-
-app.post("/createProduct", (req, res) =>{
-    ProductModel.create(req.body)
-    .then(products => res.json(products))
-    .catch(err => res.json(err))
-
-})
-
-app.post("/createBatch", (req, res) =>{
-    BatchModel.create(req.body)
-    .then(batches => res.json(batches))
-    .catch(err => res.json(err))
-
-})
-
-app.post("/createschedule", (req, res) =>{
-    BatchModel.create(req.body)
-    .then(schedule => res.json(schedule))
-    .catch(err => res.json(err))
-
-})
-
-
-
-
-//Search  product by name
-
-app.get('/searchProductByFruitType', (req,res) =>  {
-  const {fruitype} = req.query;
-
-  ProductModel.find({ fruittype})  // find product by fruittype
-    .then(products => {
-      res.json(products);
-    })
-
-    .catch(err => {
-
-        res.status(500).json({ error: 'Server error'});
-    })
-
-
-
-})
-
-
-  // Search batch
-
- 
-
-app.get('/searchBatchByFruitType', (req,res) =>  {
-    const {fruitype} = req.query;
-  
-    ProductModel.find({ fruittype})  // find product by fruittype
-      .then(products => {
-        res.json(products);
-      })
-  
-      .catch(err => {
-  
-          res.status(500).json({ error: 'Server error'});
-      })
-  
-  
-  
-  })
-  
-
-
-
-
-
-
-
-
-
-app.get('/ProductDetailsReport', async (req, res) => {
-    try {
-        // Fetch all products from the database
-        const products = await ProductModel.find({});
-
-       
-        // Get the total number of products
-        const totalProducts = products.length;
-
-        // Create a new PDF document
-        const doc = new PDFDocument();
-      
-        // Pipe the PDF to a writable stream
-        const stream = doc.pipe(fs.createWriteStream('product_report.pdf'));
-        doc.rect(50, 50, 520, 30).fill('green'); 
-        const text = 'ANAAWEI';
-        const textWidth = doc.widthOfString(text);
-        const x = 50 + (100 - textWidth) / 2;
-        const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
-        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
-        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
-        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
-        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
-        doc.moveDown();
-        doc.moveDown();
-      
-
-        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
-        const dateText = `Date: ${currentDate}`;
-        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
-        doc.moveDown();
-
-        // Add content to the PDF
-        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Product Details Report\n\n',{ align: 'left', bold: true });
-        products.forEach(product => {
-            doc.fontSize(10).text(`FruitType: ${product.fruittype}`);
-            doc.text(`ManufactureDate: ${product.manufacturedate}`);
-            doc.text(`ExpireDate: ${product.expiredate}`);
-            doc.text(`Quantity: ${product.quantity}`);
-            doc.text(`Price: ${product.price}\n\n`);
-       
-        });
-      
-
-
-
-
-       
-        doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`Total Products: ${totalProducts}`, { align: 'left' });
-       
-        
-
-        // Finalize the PDF
-        doc.end();
-
-        // Send the PDF file as a response
-        stream.on('finish', () => {
-            res.download('product_report.pdf', 'product_report.pdf', (err) => {
-                if (err) {
-                    console.error('Error downloading PDF:', err);
-                    res.status(500).json({ message: 'Error downloading PDF' });
-                }
-                // Delete the PDF file after it's sent
-                fs.unlinkSync('product_report.pdf');
-            });
-        });
-    } catch (error) {
-        console.error('Error generating PDF report:', error);
-        res.status(500).json({ message: 'Error generating PDF report' });
-    }
-});
 
 
 

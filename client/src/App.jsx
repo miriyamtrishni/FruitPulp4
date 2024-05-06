@@ -42,15 +42,7 @@ import CreateUserds from './CreateUserds';
 import UpdateUserds from './UpdateUserds';
 
 
-import ProductHistory from './ProductHistory'
-import Products from './Products'
-import CreateProduct from './CreateProduct'
-import UpdateProduct from './UpdateProduct'
-import Batches from './Batches'
-import CreateBatch from './CreateBatch'
-import UpdateBatch from './UpdateBatch'
 
-import ProductReport from './ProductReport';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -98,23 +90,9 @@ function App() {
             <Route path='/createds' element={<CreateUserds />}></Route>
             <Route path='/updateds/:id' element={<UpdateUserds />}></Route>
             
-            <Route path='/productdetails' element={<Products />}></Route>
-            <Route path='/createproduct' element={<CreateProduct />}></Route>
-            <Route path='/updateproduct/:id' element={<UpdateProduct />}></Route>
-            <Route path="/HomePage" element={<HomePage/>} />
-            <Route path="/WPage" element={<WPage/>} />
+            
            
-            <Route path="/ProductHistory"  element={<ProductHistory/>}/>
-        
-
-            <Route path='/batchdetails' element={<Batches />}></Route>
-            <Route path='/createbatch' element={<CreateBatch />}></Route>
-            <Route path='/updatebatch/:id' element={<UpdateBatch />}></Route>
-
-          
-
-            <Route path="/ProductDetailsReport" element={<ProductReport />} />
-            //<Route path="/BatchDetailsReport" element={<ProductReport />} />
+            
 
           </Routes>
           
