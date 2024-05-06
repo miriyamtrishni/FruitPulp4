@@ -46,7 +46,8 @@ const attendanceSchema = new mongoose.Schema({
 
   date: {
     type: Date,
-    required: true
+    required: true,
+    get: v => v.toLocaleDateString() 
   }
 });
 

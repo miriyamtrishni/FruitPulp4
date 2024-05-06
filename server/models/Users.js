@@ -35,8 +35,6 @@ const UserSchema = new mongoose.Schema({
         required:true
     },
 
-   
-
     email:{
         type:String,
         required:true
@@ -63,8 +61,27 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0 // Default value is set to 0
     }
+,
+    dob: {
+        type: Date,
+        required: true
+      },
 
-   
+      epf: {
+        type: Number,
+        required: true
+    }
+      ,
+      etf: {
+        type: Number,
+        required: true
+    },
+    actualSalary:{
+        type:Number,
+        required: true
+
+    }
+
 
 })
 

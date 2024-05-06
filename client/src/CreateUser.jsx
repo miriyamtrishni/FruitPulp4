@@ -335,14 +335,21 @@ function CreateUser() {
 
                     {/* Add bonus */}
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>Bonus</label>
+                        <label htmlFor="bonus" style={{ width: "200px", marginRight: "10px" ,fontWeight: '700'}}>OT</label>
                       
                         <input type="number" placeholder="Enter bonus" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
                             onChange={(e) => setBonus(e.target.value)} required />
                     </div>
+
+
+                    <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+                    <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Basic Salary</label>
+
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                     <label htmlFor="salary" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+
                     <input type="number" placeholder="Enter salary" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={handleSalaryChange} required />
+                </div>
                 </div>
                 
                 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
@@ -356,7 +363,11 @@ function CreateUser() {
                 </div>
 
                 <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
+
+                    <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Salary</label>
+
                     <label style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Actual Salary</label>
+
                     <input type="text" value={actualSalary} className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} disabled />
                 </div>
 
@@ -370,6 +381,7 @@ function CreateUser() {
                 </div>
             </div>
         </div>
+       
     )
 }
 

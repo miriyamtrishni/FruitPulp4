@@ -11,9 +11,15 @@ const SupplierUserModel = require('./models/Suppliers')
 const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
-//const LeaveModel = require('./models/Leaves')
+
+const LeaveModel = require('./models/Leaves')
+const SupplierdetailUserModel = require('./models/Supplierdetails')
+
+
+
 const ProductModel = require('./models/Products')
 const BatchModel = require('./models/Batches')
+
 
 // Import the DeletedUserModel
 const DeletedUserModel = require('./models/DeletedUsers');
@@ -213,6 +219,7 @@ app.get('/leave' ,(req,res) => {
     .then(leaves => res.json(leaves))
     .catch(err => res.json(err))
 
+
 })
 
 app.get('/getUserLeave/:id' ,(req,res) => {
@@ -222,6 +229,18 @@ app.get('/getUserLeave/:id' ,(req,res) => {
     .catch(err => res.json(err))
 
 })
+
+
+
+
+app.get('/getUserLeave/:id' ,(req,res) => {
+    const id = req.params.id;
+    LeaveModel.findById({_id:id})
+    .then(leaves => res.json(leaves))
+    .catch(err => res.json(err))
+
+})
+
 
 app.put('/updateUserLeave/:id',(req,res) => {
     const id = req.params.id;
@@ -387,19 +406,29 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
-        const text = 'ANAAWEI';
+        doc.rect(50, 50, 500, 30).fill('#148F77'); 
+        const text = 'Anaawei Holdings (PVT) LTD';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
         
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('#148F77').fontSize(10).text('Anaawei ', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
         doc.moveDown();
-        doc.moveDown();
+        
+        
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'right' });
         doc.moveDown();
         // Add content to the PDF
-
-        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Employee Details Report', { align: 'center', bold: true });
+        doc.underline(170, doc.y + 2, 250, 3);
+        
         doc.moveDown();
 
         
@@ -418,8 +447,12 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Add total employees and total salaries to the document with different font sizes
         doc.text(`\n\n`);
+
+        doc.fontSize(17).fillColor('black').text(`Total employees : ${totalEmployees}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' })
         doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
         doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
+
 
 
 
@@ -495,11 +528,11 @@ app.delete('/deleteUsersh/:id' ,(req,res) => {
     .then(res => res.json(suppliers))
     .catch(err => res.json(err))
 })
-
-app.post("/createUsersh", (req, res) =>{
+                                                        
+app.post("/createUsersh", (req, res) =>{                              
     SupplierUserModel.create(req.body)
-    .then(suppliers => res.json(suppliers))
-    .catch(err => res.json(err))
+    .then(suppliers => res.json({ success: true, message: 'Supply  order added successfully', data: suppliers }))
+    .catch(err => res.json({ success: false, message: 'Error adding order', error: err }))
 })
 
 
@@ -537,44 +570,61 @@ app.get('/material-details', async (req, res) => {
             }
         });
 
+        let totalPrice = 0;
+
+        suppliers.forEach(supplier => {
+            totalPrice += supplier.price;
+        });
+
         // Create a new PDF document
         const doc = new PDFDocument();
-      
+         
         // Set up styling
-        
 
         const stream = doc.pipe(fs.createWriteStream('weekly_material_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        doc.rect(50, 50, 520, 30).fill('green'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
+        doc.moveDown();
+        doc.moveDown();
         
-        doc.moveDown();
-        doc.moveDown();
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
         doc.moveDown();
         // Title
-        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Supplied Materials', { align: 'center', bold: true });
-        
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Supplied Materials Report', { align: 'center', bold: true });
+        doc.underline(170, doc.y + 2, 250, 3);
+       
+    
         // Add content to the PDF
-        doc.moveDown(); // Add some vertical space after the title
+        doc.moveDown(2); // Add some vertical space after the title
         
-
-
         // Display each material and its total quantity in a table-like format
         
-        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 450, align: 'left' , bold: true });
-        doc.font('Helvetica-Bold').text('Total Quantity', { width: 700, align: 'right', bold: true });
+        doc.font('Helvetica-Bold').fontSize(12).text('Material Name', { continued: true,  width: 500, align: 'left' , bold: true });
+        doc.font('Helvetica-Bold').text('Total Quantity (kg)', { width: 700, align: 'right', bold: true });
         doc.moveTo(50, doc.y + 10).lineTo(550, doc.y + 10).stroke(); // Draw horizontal line under the title
         doc.moveDown(); // Add some vertical space after the line
         doc.moveDown(); // Add some vertical space after the line
         
         for (const [materialname, quantitiy] of Object.entries(materialsQuantities)) {
-            doc.font('Helvetica').fontSize(12).text(materialname, { width: 450, align: 'left' , continued: true });
+            doc.font('Helvetica').fontSize(12).text(materialname, { width: 500, align: 'left' , continued: true });
             doc.font('Helvetica').text(quantitiy.toString(), { width: 700, align: 'right'  });
             doc.moveDown(); // Move to the next row
         }
+
+        doc.moveDown(2); // Add some vertical space after the table-like content
+        doc.font('Helvetica-Bold').fontSize(12).text('Total Price (Rs) =  ' + totalPrice.toString(), { align: 'left' });
 
         // Finalize the PDF
         doc.end();
@@ -595,6 +645,8 @@ app.get('/material-details', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
 
 
 
@@ -720,7 +772,67 @@ app.get('/searchDistributorByDid', (req, res) => {
 
 
 
+
+app.get('/supplier-details' ,(req,res) => {
+    SupplierdetailUserModel.find({})
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.get('/getUsersi/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findById({_id:id})
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.put('/updateUsersi/:id',(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findByIdAndUpdate({_id:id} , {
+        namesi: req.body. namesi,
+        sidsi: req.body.sidsi ,
+        addressi: req.body. addressi,
+        emailsi: req.body.emailsi ,
+        contactsi: req.body.contactsi,
+       
+
+    })
+
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+
+})
+app.delete('/deleteUsersi/:id' ,(req,res) => {
+    const id = req.params.id;
+    SupplierdetailUserModel.findByIdAndDelete({_id: id})
+    .then(res => res.json(supplierdetails))
+    .catch(err => res.json(err))
+})
+
+app.post("/createUsersi", (req, res) =>{
+    SupplierdetailUserModel.create(req.body)
+    .then(supplierdetails => res.json(supplierdetails))
+    .catch(err => res.json(err))
+})
+
+
+// Search user by SID
+app.get('/searchSupplierBySids', (req, res) => {
+    const { sidsi } = req.query;
+   
+    SupplierdetailUserModel.find({sidsi }) // Find supplier orders with the specified SID
+        .then(supplierdetails => {
+            res.json(supplierdetails); // Return the matching supplier orders
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+
+
+
 app.get('/products' ,(req,res) => {
+
 
     // Querying the database to get products
     ProductModel.find({})

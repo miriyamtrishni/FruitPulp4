@@ -9,8 +9,8 @@ const SupplierSchema = new mongoose.Schema({
     sid:{
         type:String,
         required:true,
-        maxlength: 3,
-        minlength: 3
+        maxlength: 4,
+        minlength: 4
     },
 
     materialname:{
@@ -28,9 +28,10 @@ const SupplierSchema = new mongoose.Schema({
         required:true
     },
 
-    date:{
-        type:Date,
-        required:true
+    date: {
+        type: Date,
+        required: true,
+        get: v => v.toLocaleDateString() 
     }
 
    

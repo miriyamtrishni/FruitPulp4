@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 import SupplierReport from "./SupplierReport"
 
-function Suppliers() {
-  const [suppliers, setSuppliers] = useState([]);
+function Supplierdetails() {
+  const [supplierdetails, setSupplierdetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");//search
   const [searchResults, setSearchResults] = useState([]);//search
   
@@ -13,25 +13,22 @@ function Suppliers() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:3001/supplier").then((result) => setSuppliers(result.data)).catch((err) => console.log(err));
+    axios.get("http://localhost:3001/supplier-details").then((result) => setSupplierdetails(result.data)).catch((err) => console.log(err));
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete("http://localhost:3001/deleteUsersh/" + id).then((res) => {
+    axios.delete("http://localhost:3001/deleteUsersi/" + id).then((res) => {
       console.log(res);
       window.location.reload();
     }).catch((err) => console.log(err));
   };
 
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
-  };
+  
 
   // Function to filter users based on search term
   const handleSearch = () => {
-    const results = suppliers.filter((supplier) => supplier.sid === searchTerm);
+    const results = supplierdetails.filter((supplierdetail) => supplierdetail.sidsi === searchTerm);
     setSearchResults(results);
   };
 
@@ -41,10 +38,7 @@ function Suppliers() {
     setSearchTerm("");
   };
 
-  const formattedDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
-  };
+  
 
 
   
@@ -141,7 +135,7 @@ function Suppliers() {
       <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif',backgroundColor:"#FEF29B" }}>
         <div style={{ border: "none", borderRadius: "5px", height:"90vh",width: '90vw',boxShadow: "0 4px 8px rgba(0,0,0,0.3)",backgroundColor:"#ffffff" }}>
         
-          <Link to="/createsh" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
+          <Link to="/createsi" style={{ backgroundColor: "black", color: "white", border: "none", padding: "15px", borderRadius: "5px", textDecoration: "none",marginBottom: "10px", display: "inline-block",marginLeft:"10px",marginTop:"20px" }}>ADD +</Link>
          
           <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search by Sid" style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc", marginLeft: "5px", width: "200px" }}/>
           <button onClick={handleSearch}style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search</button>
@@ -153,28 +147,26 @@ function Suppliers() {
               <tr style={{ border: "none",background: "#B2BEB5" }}>
                 <th style={{ padding: "10px", border: "none",width: "10%"   }}> Name </th>
                 <th style={{ padding: "10px", border: "none",width: "10%"  }}> SID </th>
-                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Materialname </th>
-                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Quantity kg </th>
-                <th style={{ padding: "10px", border: "none",width: "10%"   }}> Price Rs </th>
-                <th style={{ padding: "10px", border: "none",width: "10%" }}> Date </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Address </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"  }}> Email </th>
+                <th style={{ padding: "10px", border: "none",width: "10%"   }}> Contact No </th>
                 <th style={{ padding: "10px", border: "none" ,width: "20%"}}> Action </th>
               </tr>
             </thead>
             <tbody>
-              { (searchResults.length > 0 ? searchResults :suppliers).map((supplier)  => {
+              { (searchResults.length > 0 ? searchResults :supplierdetails).map((supplierdetail)  => {
                 return (
-                  <tr style={{ border: "none" ,height: "50px",fontWeight: "bold"}} key={supplier._id}>
-                    <td style={{ border: "none" }}>{supplier.names}</td>
-                    <td style={{ border: "none" }}>{supplier.sid}</td>
-                    <td style={{ border: "none" }}>{supplier.materialname}</td>
-                    <td style={{ border: "none"  }}>{supplier.quantitiy}</td>
-                    <td style={{ border: "none"  }}>{supplier.price}</td>
-                    <td style={{ border: "none" }}>{formattedDate(supplier.date)}</td>
+                  <tr style={{ border: "none" ,height: "50px",fontWeight: "bold"}} key={supplierdetail._id}>
+                    <td style={{ border: "none" }}>{supplierdetail.namesi}</td>
+                    <td style={{ border: "none" }}>{supplierdetail.sidsi}</td>
+                    <td style={{ border: "none" }}>{supplierdetail.addressi}</td>
+                    <td style={{ border: "none"  }}>{supplierdetail.emailsi}</td>
+                    <td style={{ border: "none"  }}>{supplierdetail.contactsi}</td>
                     
                     <td >
                       
-                      <Link to={`/updatesh/${supplier._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none",fontWeight: "bold", }}>Update</Link>
-                      <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none" ,fontWeight: "bold",}} onClick={() => handleDelete(supplier._id)}>Delete</button>
+                      <Link to={`/updatesi/${supplierdetail._id}`} style={{ backgroundColor: "yellow", color: "black", border: "none", padding: "10px 10px", borderRadius: "5px", textDecoration: "none",fontWeight: "bold", }}>Update</Link>
+                      <button style={{ marginLeft: "5px", backgroundColor: "red", color: "white", border: "none", padding: "11px 15px", borderRadius: "5px", textDecoration: "none" ,fontWeight: "bold",}} onClick={() => handleDelete(supplierdetail._id)}>Delete</button>
                     </td>
                   </tr>
                 )
@@ -187,4 +179,4 @@ function Suppliers() {
   );
 }
 
-export default Suppliers;
+export default Supplierdetails;

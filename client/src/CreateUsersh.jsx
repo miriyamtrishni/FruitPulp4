@@ -12,6 +12,7 @@ function CreateUsersh (){
     const [quantitiy, setQuantity] =useState()
     const [price , setPrice] =useState()
     const[date,setDate] =useState()
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate()
 
     const Submit = (e) => {
@@ -28,7 +29,30 @@ function CreateUsersh (){
 
 
     }
+    const handleDateChange = (e) => {
+        
+        const selectedDate = new Date(e.target.value);
+        const formattedDate = selectedDate.toLocaleDateString();
+        setDate(formattedDate);
+    };
 
+    const handleChange3 = (e) => {
+      let value = e.target.value.toUpperCase(); // Convert input to uppercase
+      // Replace any characters that are not 'S' or numbers with an empty string
+      value = value.replace(/[^S0-9]/g, "");
+      // Limit the length to 4 characters
+      value = value.slice(0, 4);
+      // Update the input value
+      setSid(value);
+      
+      if (value.length > 4) {
+          setErrorMessage("Maximum length is 4 characters");
+      } else if (!value.match(/^S[0-9]{3}$/)) {
+          setErrorMessage("Please enter 'S' followed by  3 numbers");
+      } else {
+          setErrorMessage("");
+      }
+  };
 
     return(
         
@@ -143,9 +167,11 @@ function CreateUsersh (){
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                         <label htmlFor="sid" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>SID</label>
                         <input type="text" placeholder="Enter Supplier id" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        maxLength="3" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
+                        maxLength="4" pattern="[A-Za-z0-9]*" // Allow only letters (both uppercase and lowercase) and numbers
                         title="Please enter only letters and numbers for Sid"
-                        onChange={(e) => setSid(e.target.value)} required />
+                        value={sid}
+                          onChange={handleChange3} required />
+                          {errorMessage && <div style={{ backgroundColor: "#f8d7da", border: "1px solid #f5c6cb", color: "black", padding: "10px", marginLeft: "10px", borderRadius: "10px", fontFamily: 'Poppins, sans-serif',fontWeight: '700',marginBottom: "5px" }}>{errorMessage}</div>}
                     </div>
 
                     <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
@@ -182,11 +208,10 @@ function CreateUsersh (){
                     </div>
 
                     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                        <label htmlFor="date" style={{ width: "130px", marginRight: "10px",fontWeight: '700' }}>Date</label>
-                        <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%",padding: "8px", margin: "5px 0 15px" }} 
-                        
-                        onChange={(e) => setDate(e.target.value)} required />
-                    </div>
+                                <label htmlFor="date" style={{ width: "130px", marginRight: "10px", fontWeight: '700' }}>Date</label>
+                                <input type="date" placeholder="Enter date" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                    onChange={handleDateChange} required />
+                            </div>
 
                     
 
