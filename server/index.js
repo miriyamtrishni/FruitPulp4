@@ -11,7 +11,7 @@ const SupplierUserModel = require('./models/Suppliers')
 const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
-const LeaveModel = require('./models/Leaves')
+//const LeaveModel = require('./models/Leaves')
 const ProductModel = require('./models/Products')
 const BatchModel = require('./models/Batches')
 
@@ -947,15 +947,23 @@ app.get('/ProductDetailsReport', async (req, res) => {
       
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('product_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#F4BB29'); 
+        doc.rect(50, 50, 520, 30).fill('green'); 
         const text = 'ANAAWEI';
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
-        
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
         doc.moveDown();
         doc.moveDown();
+      
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
         doc.moveDown();
 
         // Add content to the PDF
@@ -965,7 +973,7 @@ app.get('/ProductDetailsReport', async (req, res) => {
             doc.text(`ManufactureDate: ${product.manufacturedate}`);
             doc.text(`ExpireDate: ${product.expiredate}`);
             doc.text(`Quantity: ${product.quantity}`);
-            doc.text(`Price: ${product.price}`);
+            doc.text(`Price: ${product.price}\n\n`);
        
         });
       
@@ -976,7 +984,7 @@ app.get('/ProductDetailsReport', async (req, res) => {
         // Add total employees and total salaries to the document with different font sizes
         doc.text(`\n\n`);
         doc.fontSize(17).fillColor('black').text(`Total Products: ${totalProducts}`, { align: 'left' });
-       // doc.fontSize(17).fillColor('black').text(`Total Salaries: Rs. ${totalSalaries}`, { align: 'left' });
+       
         
 
         // Finalize the PDF

@@ -4,22 +4,9 @@ import {BrowserRouter ,Routes,Route} from 'react-router-dom'
 //import 'bootstrap/dist/css/bootstrap.min.css'
 import HomePage from './HomePage';
 import WPage from './WPage';
-<<<<<<< HEAD
-import Productdashboard from './Productdashboard'
-import ProductHistory from './ProductHistory'
 
 
-import Products from './Products'
 
-import CreateProduct from './CreateProduct'
-import UpdateProduct from './UpdateProduct'
-
-import Batches from './Batches'
-import CreateBatch from './CreateBatch'
-import UpdateBatch from './UpdateBatch'
-
-import ProductReport from './ProductReport';
-=======
 import Users from './Users'
 import Suppliers from './Suppliers'     
 import Attendances from './Attendances'
@@ -47,7 +34,16 @@ import UpdateUserla from './UpdateUserla';
 import CreateUserds from './CreateUserds';
 import UpdateUserds from './UpdateUserds';
 
->>>>>>> 3061403c9cdc886aa3d10d3b3e666bb015424436
+import Productdashboard from './Productdashboard'
+import ProductHistory from './ProductHistory'
+import Products from './Products'
+import CreateProduct from './CreateProduct'
+import UpdateProduct from './UpdateProduct'
+import Batches from './Batches'
+import CreateBatch from './CreateBatch'
+import UpdateBatch from './UpdateBatch'
+
+import ProductReport from './ProductReport';
 
 function App() {
   const [count, setCount] = useState(0)
