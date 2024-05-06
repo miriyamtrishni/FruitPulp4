@@ -392,6 +392,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
+        
         doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
         doc.font('Helvetica-Bold').fillColor('#148F77').fontSize(10).text('Anaawei ', 50, 90);
         doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
@@ -399,15 +400,16 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
         doc.moveDown();
         
-        doc.moveDown();
+        
 
         const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
         const dateText = `Date: ${currentDate}`;
-        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'right' });
         doc.moveDown();
         // Add content to the PDF
-
-        doc.font('Helvetica-Bold').fontSize(20).fillColor('black').text('Employee Details Report', { align: 'left', bold: true });
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Employee Details Report', { align: 'center', bold: true });
+        doc.underline(170, doc.y + 2, 250, 3);
+        
         doc.moveDown();
 
         
@@ -426,8 +428,8 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
 
         // Add total employees and total salaries to the document with different font sizes
         doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`The total number of employees : ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`The sum of the total salaries : Rs. ${totalSalaries}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`Total employees : ${totalEmployees}`, { align: 'left' });
+        doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' });
 
 
 
