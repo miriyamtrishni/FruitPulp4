@@ -11,7 +11,7 @@ const SupplierUserModel = require('./models/Suppliers')
 const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
-//const LeaveModel = require('./models/Leaves')
+const LeaveModel = require('./models/Leaves')
 const ProductModel = require('./models/Products')
 const BatchModel = require('./models/Batches')
 
