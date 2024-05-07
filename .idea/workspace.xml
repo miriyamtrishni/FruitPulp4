@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcb58cbe-1c94-423c-b779-4471fd81ae6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/public/image/im80.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/image/im81.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/image/im82.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/image/im83.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/image/im84.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/CreateMT.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/StockReport.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/StocksMT.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/UpdateMT.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/Stock.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/CreateSM.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/MovementReport.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/StocksSM.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/UpdateSM.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/Moves.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/CreateUserds.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/CreateUserds.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Distributors.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Distributors.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/UpdateUserds.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/UpdateUserds.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/CreateMT.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/CreateMT.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/StockReport.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/StockReport.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/StocksMT.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/StocksMT.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/UpdateMT.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/UpdateMT.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

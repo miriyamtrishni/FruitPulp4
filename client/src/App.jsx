@@ -34,13 +34,17 @@ import UpdateUserds from './UpdateUserds';
 import CreateMT from "./CreateMT";
 import UpdateMT from "./UpdateMT.jsx";
 import StocksMT from "./StocksMT.jsx";
-import StockReport from "./StockReport"
+import StockReport from "./StockReport";
+
+import CreateSM from "./CreateSM.jsx";
+import MovementReport from "./MovementReport.jsx";
+import UpdateSM from "./UpdateSM.jsx";
+import StocksSM from "./StocksSM.jsx";
+
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div>
           <BrowserRouter>
@@ -81,9 +85,15 @@ function App() {
             <Route path='/distributor' element={<Distributors />}></Route>
             <Route path='/createds' element={<CreateUserds />}></Route>
             <Route path='/updateds/:id' element={<UpdateUserds />}></Route>
-            
 
-            
+
+            <Route path='/stocksSM' element={<StocksSM/>}></Route>
+            <Route path='/CreateSM' element={<CreateSM/>}></Route>
+            <Route path='/updatesm/:id' element={<UpdateSM/>}></Route>
+            <Route path="/movement-details" element={<MovementReport/>}/>
+
+
+
           </Routes>
           
           </BrowserRouter>

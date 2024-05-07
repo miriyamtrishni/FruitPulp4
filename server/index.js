@@ -5,6 +5,7 @@ const fs = require('fs');
 const PDFDocument = require('pdfkit');
 
 const UserModelm = require('./models/Stock')
+const UserModelsm = require('./models/Moves')
 const UserModel = require('./models/Users')
 const AttendanceModel = require('./models/Attendances')
 const SupplierUserModel = require('./models/Suppliers')
@@ -689,6 +690,8 @@ app.get('/searchItemByCode', (req, res) => {
             res.status(500).json({ error: 'Server error' });
         });
 });
+
+
 //report
 
 app.get('/stock-details', async (req, res) => {
@@ -705,6 +708,8 @@ app.get('/stock-details', async (req, res) => {
         // Create a new PDF document
         const doc = new PDFDocument();
 
+
+
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('monthly-stock-report.pdf'));
         doc.rect(50, 50, 500, 30).fill('#F4BB29');
@@ -712,34 +717,91 @@ app.get('/stock-details', async (req, res) => {
         const textWidth = doc.widthOfString(text);
         const x = 50 + (100 - textWidth) / 2;
         const y = 60;
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'left'});
+        //---
 
+        //
+
+
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
         doc.moveDown();
         doc.moveDown();
+
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
         doc.moveDown();
+        // Title
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Stock Summery Report', { align: 'center'  });
+        doc.underline(170, doc.y + 2, 250, 3);
+
+
+        //---
+
+
         // Add content to the PDF
 
-        doc.font('Helvetica-Bold').fontSize(15).fillColor('black').text('Item Details ', { align: 'left', bold: true });
+        doc.moveDown();
         doc.moveDown();
 
 
 
+
+        // Define an object to store totals for each code
+        const codeTotals = {};
+
+// Loop through the stocksMT array to calculate totals
         stocksMT.forEach(stocks => {
+            // If the code is not already in codeTotals, initialize it with quantity 0
+            if (!codeTotals[stocks.code]) {
+                codeTotals[stocks.code] = 0;
+            }
+            // Add the quantity of the current stock to the total for its code
+            codeTotals[stocks.code] += stocks.qty;
 
-            doc.fontSize(10).text(`Code: ${stocks.code}`);
-            doc.fontSize(10).text(`Name: ${stocks.namem}`);
-            doc.text(`Description: ${stocks.des}`);
-            doc.text(`Type: ${stocks.type}`);
-            doc.text(`Quantity: ${stocks.qty}`);
-            doc.text(`\n\n`);
+//--
 
 
+            //--
+            // Print individual stock information
+            //doc.fontSize(10).text(`Code: ${stocks.code}`);
+            //doc.fontSize(10).text(`Name: ${stocks.namem}`);
+            //doc.text(`Type: ${stocks.type}`);
+           /// doc.text(`Quantity: ${stocks.qty}`);
+            //doc.text(`\n\n`);
         });
 
-        // Add total employees and total salaries to the document with different font sizes
-        doc.text(`\n\n`);
-        doc.fontSize(15).fillColor('black').text(`Total Items: ${totalItems}`, { align: 'left' });
-        doc.fontSize(15).fillColor('black').text(`Total :   ${Total} Kg` , { align: 'left' });
+// Now codeTotals object contains totals for each code
+// Loop through codeTotals to calculate overall total and print
+        let overallTotal = 0;
+        for (const code in codeTotals) {
+            overallTotal += codeTotals[code];
+
+            // Find the name associated with the code
+            // Find the name associated with the code
+            const stock = stocksMT.find(stock => stock.code === code);
+            const namem = stock ? stock.namem : 'Unknown';
+
+            doc.moveDown();
+
+            // Calculate the width of the text
+            const nameWidth = doc.widthOfString(`Total for ${namem}:`);
+            const totalWidth = doc.widthOfString(`${codeTotals[code]} Kg`);
+
+            // Calculate the x-coordinate for the total text
+            const totalX = 450 - totalWidth; // Assuming the total width of the page is 600 and there is some margin
+
+            // Print the text with appropriate alignment
+            doc.fontSize(12).fillColor('black').text(`quantity of ${namem}:`, 50, doc.y, { align: 'left', width: nameWidth });
+            doc.text(`${codeTotals[code]} Kg`, totalX, doc.y, { align: 'right', width: totalWidth });
+
+            // Move to the next line
+        }
         doc.text(`\n\n`);
 
 
@@ -765,6 +827,294 @@ app.get('/stock-details', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
+
+
+//////////////movement section
+app.get("/stocksSM" , (req,res) => {
+    UserModelsm.find({})
+        .then(stocksM => res.json(stocksM))
+        .catch(err => res.json(err))
+})
+app.get('/getstockSM/:id' , (req,res) =>{
+    const id = req.params.id;
+    UserModelsm.findById({_id:id})
+        .then(stocksM => res.json(stocksM))
+        .catch(err => res.json(err))
+})
+app.put('/updatesm/:id' , (req,res) => {
+    const id = req.params.id;
+    UserModelsm.findByIdAndUpdate({_id:id},{
+        code:req.body.code ,
+        date:req.body.date,
+        mqty:req.body.mqty,
+        cqty:req.body.cqty,
+        type:req.body.type })
+
+        .then(stocksM => res.json(stocksM))
+        .catch(err => res.json(err))
+})
+
+app.delete('/deleteitemsm/:id' , (req,res) =>{
+    const id = req.params.id;
+    UserModelsm.findByIdAndDelete({_id:id})
+        .then(res => res.json(res))
+        .catch(err => res.json(err))
+
+
+
+})
+app.post("/CreateSM" , (req,res) => {
+    UserModelsm.create(req.body)
+        .then(stocksM => res.json(stocksM))
+        .catch(err => res.json(err))
+})
+
+app.get('/searchItemByCode', (req, res) => {
+    const {code } = req.query;
+
+    UserModelsm.find({code}) // Find users with the specified EID
+        .then(stocksM => {
+            res.json(stocksM); // Return the matching users
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'Server error' });
+        });
+});
+app.get('/movement-details', async (req, res) => {
+    try {
+        // Fetch all movements from the database
+        const movements = await UserModelsm.find({});
+
+        // Define an object to store total moved quantity for each code
+        const codeTotals = {};
+
+        // Loop through the movements array to calculate totals
+        movements.forEach(movement => {
+            // If the code is not already in codeTotals, initialize it with quantity 0
+            if (!codeTotals[movement.code]) {
+                codeTotals[movement.code] = 0;
+            }
+            // Add the moved quantity of the current movement to the total for its code
+            codeTotals[movement.code] += movement.mqty;
+        });
+
+        // Create a new PDF document
+        const doc = new PDFDocument();
+
+        // Pipe the PDF to a writable stream
+        const stream = doc.pipe(fs.createWriteStream('monthly-movement-report.pdf'));
+        doc.rect(50, 50, 500, 30).fill('#F4BB29');
+        const text = 'ANAAWEI';
+        const textWidth = doc.widthOfString(text);
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+
+        // Add content to the PDF
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
+        doc.moveDown();
+        doc.moveDown();
+
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
+        doc.moveDown();
+        // Title
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Stock Movement Report', { align: 'center'  });
+        doc.underline(170, doc.y + 2, 250, 3);
+        doc.moveDown();
+        doc.moveDown();
+
+        // Add your content here...
+
+        // Loop through codeTotals to print total moved quantity for each code
+        for (const code in codeTotals) {
+            // Find the name associated with the code
+            const movement = movements.find(movement => movement.code === code);
+            const name = movement ? movement.namem : 'Unknown';
+
+            // Calculate the width of the text
+            const nameWidth = doc.widthOfString(`Total moved quantity of ${name}:`);
+            const totalWidth = doc.widthOfString(`${codeTotals[code]} Kg`);
+
+            // Calculate the x-coordinate for the total text
+            const totalX = 550 - totalWidth; // Assuming the total width of the page is 600 and there is some margin
+
+            // Print the text with appropriate alignment
+            doc.fontSize(12).fillColor('black').text(`Total moved quantity of ${code}:`, 50, doc.y, { align: 'left', width: nameWidth });
+            doc.text(`${codeTotals[code]} Kg`, totalX, doc.y, { align: 'right', width: totalWidth });
+
+            // Move to the next line
+            doc.moveDown();
+        }
+
+        // Finalize the PDF
+        doc.end();
+
+        // Send the PDF file as a response
+        stream.on('finish', () => {
+            res.download('monthly-movement-report.pdf', 'monthly-movement-report.pdf', (err) => {
+                if (err) {
+                    console.error('Error downloading PDF:', err);
+                    res.status(500).json({ message: 'Error downloading PDF' });
+                }
+                // Delete the PDF file after it's sent
+                fs.unlinkSync('monthly-movement-report.pdf');
+            });
+        });
+    } catch (error) {
+        console.error('Error generating PDF report:', error);
+        res.status(500).json({ message: 'Error generating PDF report' });
+    }
+});
+
+
+
+
+//report
+
+app.get('/movement-details', async (req, res) => {
+    try {
+        // Fetch all employees from the database
+        const stocksM = await UserModelsm.find({});
+
+        // Calculate total salaries
+        const Total = stocksM.reduce((total, stocksM) => total + stocksM.cqty, 0);
+        const Total2 = stocksM.reduce((total, stocksM) => total + stocksM.mqty, 0);
+
+        // Get the total number of employees
+        const totalItems = stocksM.length;
+
+        // Create a new PDF document
+        const doc = new PDFDocument();
+
+
+
+        // Pipe the PDF to a writable stream
+        const stream = doc.pipe(fs.createWriteStream('monthly-stock-report.pdf'));
+        doc.rect(50, 50, 500, 30).fill('#F4BB29');
+        const text = 'ANAAWEI';
+        const textWidth = doc.widthOfString(text);
+        const x = 50 + (100 - textWidth) / 2;
+        const y = 60;
+        //---
+
+        //
+
+
+        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
+        doc.font('Helvetica-Bold').fillColor('green').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
+        doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
+        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
+        doc.moveDown();
+        doc.moveDown();
+
+
+        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
+        const dateText = `Date: ${currentDate}`;
+
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'left' });
+        doc.moveDown();
+        // Title
+        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Stock Summery Report', { align: 'center'  });
+        doc.underline(170, doc.y + 2, 250, 3);
+
+
+        //---
+
+
+        // Add content to the PDF
+
+        doc.moveDown();
+        doc.moveDown();
+
+
+
+
+        // Define an object to store totals for each code
+        const codeTotals = {};
+
+// Loop through the stocksMT array to calculate totals
+        stocksM.forEach(stocksM => {
+            // If the code is not already in codeTotals, initialize it with quantity 0
+            if (!codeTotals[stocksM.code]) {
+                codeTotals[stocksM.code] = 0;
+            }
+            // Add the quantity of the current stock to the total for its code
+            codeTotals[stocksM.code] += stocksM.qty;
+
+//--
+
+
+            //--
+            // Print individual stock information
+            //doc.fontSize(10).text(`Code: ${stocks.code}`);
+            //doc.fontSize(10).text(`Name: ${stocks.namem}`);
+            //doc.text(`Type: ${stocks.type}`);
+            /// doc.text(`Quantity: ${stocks.qty}`);
+            //doc.text(`\n\n`);
+        });
+
+// Now codeTotals object contains totals for each code
+// Loop through codeTotals to calculate overall total and print
+        let overallTotal = 0;
+        for (const code in codeTotals) {
+            overallTotal += codeTotals[code];
+
+            // Find the name associated with the code
+            // Find the name associated with the code
+            const stock = stocksMT.find(stock => stock.code === code);
+            const namem = stock ? stock.namem : 'Unknown';
+
+            doc.moveDown();
+
+            // Calculate the width of the text
+            const nameWidth = doc.widthOfString(`Total for ${namem}:`);
+            const totalWidth = doc.widthOfString(`${codeTotals[code]} Kg`);
+
+            // Calculate the x-coordinate for the total text
+            const totalX = 450 - totalWidth; // Assuming the total width of the page is 600 and there is some margin
+
+            // Print the text with appropriate alignment
+            doc.fontSize(12).fillColor('black').text(`quantity of ${namem}:`, 50, doc.y, { align: 'left', width: nameWidth });
+            doc.text(`${codeTotals[code]} Kg`, totalX, doc.y, { align: 'right', width: totalWidth });
+
+            // Move to the next line
+        }
+        doc.text(`\n\n`);
+
+
+
+
+        // Finalize the PDF
+        doc.end();
+
+
+        // Send the PDF file as a response
+        stream.on('finish', () => {
+            res.download('monthly-stock-report.pdf', 'monthly-stock-report.pdf', (err) => {
+                if (err) {
+                    console.error('Error downloading PDF:', err);
+                    res.status(500).json({ message: 'Error downloading PDF' });
+                }
+                // Delete the PDF file after it's sent
+                fs.unlinkSync('monthly-stock-report.pdf');
+            });
+        });
+    } catch (error) {
+        console.error('Error generating PDF report:', error);
+        res.status(500).json({ message: 'Error generating PDF report' });
+    }
+});
+
+
 
 
 

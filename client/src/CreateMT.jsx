@@ -21,6 +21,8 @@ function CreateMT(){
             .catch(err => console.log(err))
     }
 
+
+
     return (
 
         <div>
@@ -89,7 +91,7 @@ function CreateMT(){
                         </li>
                         <li style={{marginRight: "40px"}}>
                             <Link
-                                to="/createmt"
+                                to="/stocksSM"
                                 style={{
                                     color: "black",
                                     textDecoration: "none",
@@ -100,7 +102,7 @@ function CreateMT(){
                                 onMouseOver={(e) => (e.currentTarget.style.color = "#F4BB29")} // Change text color on hover
                                 onMouseOut={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover out
                             >
-                                ADD NEW ITEM
+                                STOCK MOVEMENTS
                             </Link>
                         </li>
                         <li>

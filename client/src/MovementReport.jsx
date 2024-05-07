@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 
 
-const StockReport = () => {
+const MovementReport = () => {
     const buttonStyle2 = {
         padding: '15px 30px',
         fontSize: '18px',
@@ -53,31 +53,6 @@ const StockReport = () => {
         objectFit: 'cover' // Ensures the image covers the designated area
     };
 
-    const handleDownload2 = () => {
-        axios({
-            url: "http://localhost:3001/stock-details", // Endpoint to download the file
-            method: 'GET',
-            responseType: 'blob', // Important: Set responseType to 'blob' to handle binary data
-        }).then(response => {
-            // Create a blob object from the response data
-            const blob = new Blob([response.data], { type: response.headers['content-type'] });
-
-            // Create a temporary anchor element to trigger the download
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'monthly-stock-report.pdf'; // Set the file name
-            document.body.appendChild(a);
-            a.click();
-
-            // Clean up
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        }).catch(error => {
-            console.error('Error downloading file:', error);
-            // Handle error
-        });
-    };
     const handleDownload20 = () => {
         axios({
             url: "http://localhost:3001/movement-details", // Endpoint to download the file
@@ -112,8 +87,8 @@ const StockReport = () => {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
             <nav style={{ backgroundColor: "white", padding: "10px 0", width: "100%", fontSize: "15px",boxShadow: "0 2px 4px rgba(0, 0, 0, 0.5)",fontFamily: 'Poppins, sans-serif', fontWeight: '900' }}>
-                <ul style={{listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center"}}>
-                    <li style={{marginRight: "40px"}}>
+                <ul style={{ listStyleType: "none", margin: 0, padding: 0, display: "flex", justifyContent: "center" }}>
+                    <li style={{ marginRight: "40px" }}>
 
                         <div style={{
                             position: 'absolute',
@@ -124,7 +99,7 @@ const StockReport = () => {
                             fontFamily: 'Poppins, sans-serif',
 
                             color: '#F4BB29',
-                            marginLeft: '20px'
+                            marginLeft:'20px'
                         }}>
                             FRUIT PULP
                         </div>
@@ -143,7 +118,7 @@ const StockReport = () => {
                             HOME
                         </Link>
                     </li>
-                    <li style={{marginRight: "40px"}}>
+                    <li style={{ marginRight: "40px" }}>
                         <Link
                             to="/stocksmt"
                             style={{
@@ -196,7 +171,7 @@ const StockReport = () => {
 
             <div style={{
                 display: 'flex',
-                backgroundColor: "#FEF29B",
+                backgroundColor:"#FEF29B",
                 minHeight: "100vh",
                 justifyContent: 'center', // Center vertically
                 // Align to the left
@@ -206,26 +181,19 @@ const StockReport = () => {
 
                 <div style={boxStyle}>
 
-                    <img src="/image/im84.jpg" alt="Item Summery" style={imageStyle}/>
+                    <img src="/image/im84.jpg" alt="Item Summery" style={imageStyle} />
                     <div>
                         <p style={textStyle}>Item Summery Report.</p>
-                        <button onClick={handleDownload2} style={buttonStyle2}>
-                            <i className="fa fa-download"></i> Download
-                        </button>
-                    </div>
-
-                    <div>
-                        <p style={textStyle}>Stock Movement Report.</p>
                         <button onClick={handleDownload20} style={buttonStyle2}>
-                        <i className="fa fa-download"></i> Download
-                        </button>
+                            <i className="fa fa-download"></i> Download</button>
                     </div>
                 </div>
             </div>
+
 
 
         </div>
     );
 };
 
-export default StockReport;
+export default MovementReport;

@@ -4,21 +4,21 @@ import axios from "axios";
 
 
 
-function StocksMT(){
+function StocksSM(){
 
-    const [stocksMT, setStocksMT] = useState([])
+    const [stocksSM, setStocksSM] = useState([])
 
 
 
     useEffect(() => {
-        axios.get('http://localhost:3001/stocksMT')
-            .then(result => setStocksMT(result.data)) //display users
+        axios.get('http://localhost:3001/stocksSM')
+            .then(result => setStocksSM(result.data)) //display users
             .catch(err => console.log(err))
     }, []);
 
 
     const handleDelete = (id) => {
-        axios.delete("http://localhost:3001/deleteitem/" + id)
+        axios.delete("http://localhost:3001/deleteitemsm/" + id)
             .then(res => {console.log(res)
                 window.location.reload()
             })
@@ -26,11 +26,22 @@ function StocksMT(){
 
     }
 
+    const formatDate = (dateString) => {
+        const date = new date(dateString);
+        return date.toLocaleDateString();
+    };
+
+    const formattedDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0];
+    };
+
+
     const [searchTerm, setSearchTerm] = useState("");//search
     const [searchResults, setSearchResults] = useState([]);//search
     // Function to filter users based on search term
     const handleSearch = () => {
-        const results = stocksMT.filter((stocks) => stocks.code === searchTerm);
+        const results = stocksSM.filter((stocksSM) => stocksSM.code === searchTerm);
         setSearchResults(results);
     };
 
@@ -42,7 +53,7 @@ function StocksMT(){
 
     return(
         <div style={{
-           // backgroundImage: 'url("/image/im83.jpg")',
+            // backgroundImage: 'url("/image/im83.jpg")',
             backgroundSize: 'cover',
 
         }}>
@@ -144,12 +155,7 @@ function StocksMT(){
             </nav>
 
 
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "100vh",
-                fontFamily: 'Poppins, sans-serif'
+            <div style={{ display:"flex", justifyContent: "center", alignItems: "center", minHeight:"100vh",fontFamily: 'Poppins, sans-serif'
             }}>
 
 
@@ -163,17 +169,16 @@ function StocksMT(){
 
 
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh"}}>
-                        <div style={{
-                            border: "none",
+                        <div style={{ border: "none",
                             borderRadius: "5px",
                             height:"80vh",
                             width: '80vw',
 
                             //backgroundColor:"#FFFFE1",
-                           // boxShadow: "0 4px 8px rgba(0,0,0,0.3)"
+                            // boxShadow: "0 4px 8px rgba(0,0,0,0.3)"
                         }}>
 
-                            <Link to="/createmt" style={{
+                            <Link to="/CreateSM" style={{
                                 backgroundColor: "black",
                                 color: "white",
                                 border: "none",
@@ -199,7 +204,7 @@ function StocksMT(){
                                        border: "1px solid #ccc",
                                        marginLeft: "5px",
                                        width: "200px"
-                            }}
+                                   }}
                             />
                             <button onClick={handleSearch} style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", marginLeft: "10px", cursor: "pointer" }}>Search
                             </button>
@@ -222,50 +227,59 @@ function StocksMT(){
                                 <thead>
                                 <tr style={{border: "none", background: "#B2BEB5"}}>
                                     <th style={{padding: "10px", border: "1px solid"}}>Code</th>
-                                    <th style={{padding: "10px", border: "1px solid"}}>Name</th>
-                                    <th style={{padding: "10px", border: "1px solid"}}>Stock Movement</th>
-                                    <th style={{padding: "10px", border: "1px solid"}}>Quantity</th>
-                                    <th style={{padding: "10px", border: "1px solid"}}>Material Type</th>
+                                    <th style={{padding: "10px", border: "1px solid"}}>Date</th>
+                                     <th style={{padding: "10px", border: "1px solid"}}>Moved Quantity</th>
+                                    <th style={{padding: "10px", border: "1px solid"}}>Current Quantity</th>
+                                    <th style={{padding: "10px", border: "1px solid"}}>Type</th>
                                     <th style={{padding: "10px", border: "1px solid"}}>Action</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {
-                                    (searchResults.length > 0 ? searchResults : stocksMT).map((stocks) => {
+                                    (searchResults.length > 0 ? searchResults : stocksSM).map((stocksM) => {
 
                                         return (
-                                            <tr style={{ border: "none" ,height: "50px",fontWeight: "bold"}} key={stocks._id}>
+                                            <tr style={{border: "none", height: "50px", fontWeight: "bold"}}
+                                                key={stocksM._id}>
 
-                                                <td style={{border: "1px solid"}}>{stocks.code}</td>
-                                                <td style={{border: "1px solid"}}>{stocks.namem}</td>
-                                                <td style={{padding: "20px",textAlign:'left'  ,border: "1px solid"}}>{stocks.des}</td>
-                                                <td style={{border: "1px solid"}}>{stocks.qty}</td>
-                                                <td style={{border: "1px solid"}}>{stocks.type}</td>
+                                                <td style={{border: "1px solid"}}>{stocksM.code}</td>
+
+                                                <td style={{border: "1px solid"}}>{formattedDate(stocksM.date)}</td>
+                                                <td style={{
+                                                    padding: "20px",
+                                                    textAlign: 'left',
+                                                    border: "1px solid"
+                                                }}>{stocksM.mqty}</td>
+                                                <td style={{border: "1px solid"}}>{stocksM.cqty}</td>
+                                                <td style={{border: "1px solid"}}>{stocksM.type}</td>
                                                 <td style={{border: "1px solid"}}>
-                                                    <Link to={`/updatemt/${stocks._id}`} style={{ backgroundColor: "yellow",
+                                                    <Link to={`/updatesm/${stocksM._id}`} style={{
+                                                        backgroundColor: "yellow",
                                                         color: "black",
                                                         border: "none",
                                                         padding: "10px 10px",
                                                         borderRadius: "5px",
                                                         textDecoration: "none",
-                                                        fontWeight: "bold", }}
+                                                        fontWeight: "bold",
+                                                    }}
 
                                                           onMouseOver={(e) => (e.currentTarget.style.color = "lightblue")} // Change text color on hover
                                                           onMouseOut={(e) => (e.currentTarget.style.color = "black")}>Update</Link>
 
-                                                    <button style={{ marginLeft: "5px",
+                                                    <button style={{
+                                                        marginLeft: "5px",
                                                         backgroundColor: "red",
                                                         color: "white",
                                                         border: "none",
                                                         padding: "11px 15px",
                                                         borderRadius: "5px",
-                                                        textDecoration: "none" ,
+                                                        textDecoration: "none",
                                                         fontWeight: "bold"
                                                     }}
                                                             onMouseOver={(e) => (e.currentTarget.style.color = "black")} // Change text color on hover
                                                             onMouseOut={(e) => (e.currentTarget.style.color = "white")} // Change text color on hover out
-                                                            onClick={() => handleDelete(stocks._id)}>Delete
+                                                            onClick={() => handleDelete(stocksM._id)}>Delete
 
                                                     </button>
 
@@ -287,4 +301,4 @@ function StocksMT(){
     )
 }
 
-export default StocksMT;
+export default StocksSM;
