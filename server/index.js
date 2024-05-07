@@ -16,9 +16,6 @@ const LoginModel = require('./models/Login')
 const MachineUserModel = require('./models/Machines')
 const DistributorUserModel = require('./models/Distributors')
 
-const LeaveModel = require('./models/Leaves')
-const SupplierdetailUserModel = require('./models/Supplierdetails')
-
 
 
 

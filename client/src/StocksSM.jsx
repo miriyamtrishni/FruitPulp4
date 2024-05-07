@@ -26,10 +26,7 @@ function StocksSM(){
 
     }
 
-    const formatDate = (dateString) => {
-        const date = new date(dateString);
-        return date.toLocaleDateString();
-    };
+
 
     const formattedDate = (dateString) => {
         const date = new Date(dateString);
