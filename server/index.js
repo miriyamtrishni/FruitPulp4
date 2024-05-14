@@ -384,59 +384,57 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         // Create a new PDF document
         const doc = new PDFDocument();
 
-
         // Pipe the PDF to a writable stream
         const stream = doc.pipe(fs.createWriteStream('employee_report.pdf'));
-        doc.rect(50, 50, 500, 30).fill('#148F77'); 
-        const text = 'Anaawei Holdings (PVT) LTD';
-        const textWidth = doc.widthOfString(text);
-        const x = 50 + (100 - textWidth) / 2;
-        const y = 60;
-        
-        doc.font('Helvetica-BoldOblique').fillColor('white').fontSize(16).text(text, x, y, { align: 'center'});
-        doc.font('Helvetica-Bold').fillColor('#148F77').fontSize(10).text('Anaawei ', 50, 90);
+
+        // Header
+         // Header
+         doc.rect(50, 50, 500, 30).fill('#148F77');
+         const headerText = 'Employee Details Report';
+         const headerTextWidth = doc.widthOfString(headerText);
+         const headerX = 50 + (500 - headerTextWidth) / 2; // Adjusted to center align
+         doc.font('Helvetica-Bold').fillColor('white').fontSize(16).text(headerText, headerX, 60, { align: 'center' }); // Aligned center
+ 
+        // Anaawei Holdings (PVT) LTD Details
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(10).text('Anaawei Holdings (PVT) LTD', 50, 90);
         doc.font('Helvetica-Bold').fontSize(10).text('288/5, Kiralabokkagama, Moragollagama', 50, 105);
-        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777',50, 120);
-        doc.font('Helvetica-Bold').fontSize(10).text('info@anaawei.com ',50, 135);
-        doc.moveDown();
-        
-        
+        doc.font('Helvetica-Bold').fontSize(10).text('+94 769 850 663 / +94 719 267 777', 50, 120);
 
-        const currentDate = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' });
-        const dateText = `Date: ${currentDate}`;
-        doc.font('Helvetica-Bold').fillColor('black').fontSize(12).text(dateText, 50, doc.y, { align: 'right' });
-        doc.moveDown();
-        // Add content to the PDF
-        doc.font('Helvetica-Bold').fontSize(18).fillColor('black').text('Employee Details Report', { align: 'center', bold: true });
-        doc.underline(170, doc.y + 2, 250, 3);
-        
-        doc.moveDown();
 
-        
+        doc.moveDown();
+        doc.moveDown();
+        // Table Headers
+        const headers = ['Name', 'EID', 'Job Title', 'Salary']; // Removed 'Email' header
+        const cellWidth = 125; // Adjusted cell width to accommodate the removed field
+        const startY = 150; // Adjusted starting Y position
+        const startX = 50;
+        let currentY = startY;
 
-        users.forEach(user => {
-            doc.fontSize(10).text(`Name: ${user.name}`);
-            doc.text(`EID: ${user.eid}`);
-            doc.text(`NIC: ${user.nic}`);
-            doc.text(`Gender: ${user.gender}`);
-            doc.text(`Age: ${user.age}`);
-            doc.text(`Address: ${user.address}`);
-            doc.text(`Email: ${user.email}`);
-            doc.text(`Job Title: ${user.jobtitle}`);
-            doc.text(`Salary: ${user.actualSalary}\n\n`);
+        headers.forEach((header, index) => {
+            const x = startX + index * cellWidth;
+            doc.font('Helvetica-Bold').fillColor('#148F77').fontSize(10).text(header, x, currentY);
         });
 
-        // Add total employees and total salaries to the document with different font sizes
-        doc.text(`\n\n`);
-        doc.fontSize(17).fillColor('black').text(`Total employees : ${totalEmployees}`, { align: 'left' });
-        doc.fontSize(17).fillColor('black').text(`Total salary amount (Rs.) : ${totalSalaries}`, { align: 'left' });
+        // Table Rows
+        currentY += 20;
+        users.forEach(user => {
+            doc.fontSize(10).fillColor('black');
+            doc.text(user.name, startX, currentY);
+            doc.text(user.eid, startX + cellWidth, currentY);
+            // Removed email field as per your request
+            doc.text(user.jobtitle, startX + 2 * cellWidth, currentY);
+            doc.text(user.actualSalary.toString(), startX + 3 * cellWidth, currentY);
+            currentY += 15;
+        });
 
-
+        // Total Employees and Total Salary
+        currentY += 30;
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(10).text(`Total employees: ${totalEmployees}`, startX, currentY);
+        doc.font('Helvetica-Bold').fillColor('black').fontSize(10).text(`Total salary amount (Rs.): ${totalSalaries}`, startX + 250, currentY);
 
         // Finalize the PDF
         doc.end();
 
-        
         // Send the PDF file as a response
         stream.on('finish', () => {
             res.download('employee_report.pdf', 'employee_report.pdf', (err) => {
@@ -453,6 +451,7 @@ app.get('/EmployeeDetailsReport', async (req, res) => {
         res.status(500).json({ message: 'Error generating PDF report' });
     }
 });
+
 
 
 

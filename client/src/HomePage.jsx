@@ -47,7 +47,7 @@ const HomePage = () => {
       color: '#F4BB29',
       marginLeft:'20px'
     }}>
-       <span style={{color: 'black'}}>FRUIT</span> PULP
+       <span style={{color: 'black'}}></span> 
     </div>
       <div style={{ 
        display: 'flex', 

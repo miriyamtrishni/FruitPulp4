@@ -99,6 +99,15 @@ function CreateUser() {
     setActualSalary(actualSalaryValue); // Update actualSalary state
 };
 
+const handleChangeName = (e) => {
+  const value = e.target.value;
+  if (/^[a-zA-Z\s]*$/.test(value)) {
+      setName(value);
+      setErrorMessage("");
+  } else {
+      setErrorMessage("Please enter alphabetic characters only");
+  }
+};
 
 
     return (
@@ -230,9 +239,17 @@ function CreateUser() {
                             <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Add Employee</h2>
                              
                             <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
-                                <label htmlFor="name" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Name</label>
-                                <input type="text" placeholder="Enter name" className="form-control" style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }} onChange={(e) => setName(e.target.value)} required />
-                            </div>
+                                  <label htmlFor="name" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Name</label>
+                                  <input
+                                      type="text"
+                                      placeholder="Enter name"
+                                      className="form-control"
+                                      style={{ width: "100%", padding: "8px", margin: "5px 0 15px" }}
+                                      value={name}
+                                      onChange={handleChangeName}
+                                      required
+                                    />
+                               </div>
 
                             <div style={{ marginBottom: "2px", display: "flex", alignItems: "center" }}>
                    <label htmlFor="eid" style={{ width: "200px", marginRight: "10px", fontWeight: '700' }}>Eid</label>
